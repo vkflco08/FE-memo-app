@@ -3,14 +3,14 @@ import CalendarHeader from './CalendarHeader';
 import CalendarDay from './CalendarDay';
 import { format, startOfMonth, endOfMonth, addMonths, subMonths, startOfWeek, endOfWeek, eachDayOfInterval, isToday, isSameDay } from 'date-fns';
 
-function Calendar({ memos, onDateSelect }) {
+function Calendar({ memos = {}, onDateSelect }) { 
     const [currentDate, setCurrentDate] = useState(new Date());
     const [days, setDays] = useState([]);
 
     useEffect(() => {
         const start = startOfMonth(currentDate);
         const end = endOfMonth(currentDate);
-        const startWeek = startOfWeek(start, { weekStartsOn: 0 }); // Week starts on Sunday
+        const startWeek = startOfWeek(start, { weekStartsOn: 0 });
         const endWeek = endOfWeek(end, { weekStartsOn: 0 });
         const daysArray = eachDayOfInterval({ start: startWeek, end: endWeek });
         setDays(daysArray);
@@ -40,7 +40,7 @@ function Calendar({ memos, onDateSelect }) {
                             key={dayString}
                             day={format(day, 'd')}
                             isToday={isToday(day) && isSameDay(day, new Date())}
-                            hasMemo={!!memos[dayString]}
+                            hasMemo={!!memos[dayString]} 
                             onClick={() => onDateSelect(day)}
                         />
                     );
