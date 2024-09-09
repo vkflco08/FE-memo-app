@@ -15,11 +15,7 @@ const Login = () => {
       const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/member/login`, {
         loginId: username,
         password: password,
-      }, {
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
+      });
 
       if (response.data.resultCode === 'SUCCESS') {
         const { accessToken, refreshToken } = response.data.data;

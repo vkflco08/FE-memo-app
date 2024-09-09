@@ -1,5 +1,5 @@
-import axios from 'axios';
 import React, { createContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
 export const AuthContext = createContext();
 
@@ -12,7 +12,7 @@ export const AuthProvider = ({ children }) => {
     if (accessToken) {
       setIsAuthenticated(true);
     }
-    setIsLoading(false);
+    setIsLoading(false); // 로딩 상태를 false로 설정
   }, []);
 
   const login = (accessToken, refreshToken) => {
@@ -28,14 +28,14 @@ export const AuthProvider = ({ children }) => {
         console.error('No access token found');
         return;
       }
-      
+
       const response = await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/api/member/logout`, {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${accessToken}`
         },
       });
-  
+
       if (response.status === 200) {
         console.log('Logout successful');
         setIsAuthenticated(false);
@@ -47,7 +47,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.error('There was a problem with the logout request:', error);
     }
-  };   
+  };
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, isLoading, login, logout }}>
