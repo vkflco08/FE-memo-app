@@ -18,7 +18,7 @@ function SignUp() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post(`/api/member/signup`, {
+            const response = await axios.post(`https://api.devjsb.store/api/member/signup`, {
                 loginId,
                 password,
                 name,
