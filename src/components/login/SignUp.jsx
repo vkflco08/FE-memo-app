@@ -12,13 +12,13 @@ function SignUp() {
     const navigate = useNavigate();
 
     const handleLoginRedirect = () => {
-        navigate('/login'); 
+        navigate('/login');
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post(`https://api.devjsb.store/api/member/signup`, {
+            const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/member/signup`, {
                 loginId,
                 password,
                 name,
