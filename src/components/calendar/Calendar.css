@@ -1,0 +1,45 @@
+.calendar {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f7f7f7;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border-top: 1px solid #ccc;
+}
+
+.day-names {
+    display: contents; /* Use grid display for day names */
+}
+
+.day-name {
+    text-align: center;
+    font-weight: bold;
+    padding: 5px;
+    background-color: #f0f0f0;
+}
+
+.calendar-day {
+    width:auto;
+    text-align: center;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.calendar-day:hover {
+    background-color: #e0e0e0;
+}
+
+.has-memo {
+    background-color: #d4edda;
+}

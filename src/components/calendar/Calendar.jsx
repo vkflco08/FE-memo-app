@@ -1,53 +1,59 @@
-import React, { useState, useEffect } from 'react';
-import CalendarHeader from './CalendarHeader';
-import CalendarDay from './CalendarDay';
-import { format, startOfMonth, endOfMonth, addMonths, subMonths, startOfWeek, endOfWeek, eachDayOfInterval, isToday, isSameDay } from 'date-fns';
+import React, { useState } from 'react';
+import './Calendar.css';
 
-function Calendar({ memos = {}, onDateSelect }) { 
-    const [currentDate, setCurrentDate] = useState(new Date());
-    const [days, setDays] = useState([]);
+const Calendar = ({ memos, onDateClick }) => {
+    const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
+    const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
 
-    useEffect(() => {
-        const start = startOfMonth(currentDate);
-        const end = endOfMonth(currentDate);
-        const startWeek = startOfWeek(start, { weekStartsOn: 0 });
-        const endWeek = endOfWeek(end, { weekStartsOn: 0 });
-        const daysArray = eachDayOfInterval({ start: startWeek, end: endWeek });
-        setDays(daysArray);
-    }, [currentDate]);
+    const handlePrevMonth = () => {
+        if (currentMonth === 0) {
+            setCurrentMonth(11);
+            setCurrentYear(currentYear - 1);
+        } else {
+            setCurrentMonth(currentMonth - 1);
+        }
+    };
 
-    const handlePreviousMonth = () => setCurrentDate(subMonths(currentDate, 1));
-    const handleNextMonth = () => setCurrentDate(addMonths(currentDate, 1));
+    const handleNextMonth = () => {
+        if (currentMonth === 11) {
+            setCurrentMonth(0);
+            setCurrentYear(currentYear + 1);
+        } else {
+            setCurrentMonth(currentMonth + 1);
+        }
+    };
+
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const dates = Array.from({ length: daysInMonth }, (_, i) => {
+        const date = new Date(currentYear, currentMonth, i + 1).toISOString().split('T')[0];
+        return { date, hasMemo: memos.some(memo => memo.date === date) };
+    });
 
     return (
         <div className="calendar">
-            <CalendarHeader
-                month={format(currentDate, 'MMMM')}
-                year={format(currentDate, 'yyyy')}
-                onPreviousMonth={handlePreviousMonth}
-                onNextMonth={handleNextMonth}
-            />
-            <div className="calendar-days-of-week">
-                {['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map(day => (
-                    <div key={day} className="calendar-day-of-week">{day}</div>
-                ))}
+            <div className="calendar-header">
+                <button onClick={handlePrevMonth}>&lt;</button>
+                <h2>{`${currentYear}-${String(currentMonth + 1).padStart(2, '0')}`}</h2>
+                <button onClick={handleNextMonth}>&gt;</button>
             </div>
             <div className="calendar-days">
-                {days.map(day => {
-                    const dayString = format(day, 'yyyy-MM-dd');
-                    return (
-                        <CalendarDay
-                            key={dayString}
-                            day={format(day, 'd')}
-                            isToday={isToday(day) && isSameDay(day, new Date())}
-                            hasMemo={!!memos[dayString]} 
-                            onClick={() => onDateSelect(day)}
-                        />
-                    );
-                })}
+                <div className="day-names">
+                    {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
+                        <div key={day} className="day-name">{day}</div>
+                    ))}
+                </div>
+                {dates.map(({ date, hasMemo }) => (
+                    <div
+                        key={date}
+                        className={`calendar-day ${hasMemo ? 'has-memo' : ''}`}
+                        onClick={() => onDateClick(date)}
+                    >
+                        {new Date(date).getDate()}
+                    </div>
+                ))}
             </div>
         </div>
     );
-}
+};
 
 export default Calendar;
