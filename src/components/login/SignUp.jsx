@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axiosInstance from '../common/AxiosInstance';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './login.css'; 
@@ -18,7 +18,7 @@ function SignUp() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/member/signup`, {
+            const response = await axiosInstance.post(`/api/member/signup`, {
                 loginId,
                 password,
                 name,

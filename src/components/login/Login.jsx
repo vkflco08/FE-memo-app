@@ -1,18 +1,18 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom'; 
 import { AuthContext } from '../../contexts/AuthContext';
-import axios from 'axios'; 
+import axiosInstance from '../common/AxiosInstance';
 import './login.css'; 
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const { login } = useContext(AuthContext);
+  const { login, logout } = useContext(AuthContext);
   const navigate = useNavigate(); 
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/member/login`, {
+      const response = await axiosInstance.post(`/api/member/login`, {
         loginId: username,
         password: password,
       });
@@ -29,6 +29,7 @@ const Login = () => {
         alert(response.data.message);
       }
     } catch (error) {
+      logout()
       console.error('로그인 오류:', error);
       alert('로그인 실패. 다시 시도해주세요.');
     }

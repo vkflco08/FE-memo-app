@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './MemoInput.css';
-import axios from 'axios';
+import axiosInstance from '../common/AxiosInstance';
 
 const MemoInput = ({ date, currentMemo, setCurrentMemo }) => {
     const [title, setTitle] = useState(currentMemo.title);
@@ -14,14 +14,10 @@ const MemoInput = ({ date, currentMemo, setCurrentMemo }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/memo/new`, {
+            const response = await axiosInstance.post(`${process.env.REACT_APP_API_BASE_URL}/api/memo/new`, {
                 title: title,
                 content: content,
                 date: date,
-            }, {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-                },
             });
 
             if (response.status === 200) { // Check if the response is OK

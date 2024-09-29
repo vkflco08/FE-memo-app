@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Calendar from './calendar/Calendar';
 import MemoInput from './memo/MemoInput';
-import axios from 'axios'; 
+import axiosInstance from './common/AxiosInstance';
 import './MemoApp.css';
 
 const MemoApp = () => {
@@ -15,11 +15,7 @@ const MemoApp = () => {
 
     const fetchMemos = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/memo/all`, {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-                },
-            });
+            const response = await axiosInstance.get(`/api/memo/all`);
             const memos = response.data.data;
             setMemos(Array.isArray(memos) ? memos : []); // Set memos
             setCurrentMemo(memos.find(memo => memo.date === selectedDate) || { title: selectedDate, content: '' }); // Set memo for today
@@ -38,14 +34,10 @@ const MemoApp = () => {
     const handleMemoSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/memo/new`, {
+            await axiosInstance.post(`/api/memo/new`, {
                 title: currentMemo.title,
                 content: currentMemo.content,
                 date: selectedDate,
-            }, {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('accessToken')}`,
-                },
             });
             fetchMemos(); // Refresh memos after submission
             setCurrentMemo({ title: '', content: '' }); // Reset current memo
@@ -56,7 +48,6 @@ const MemoApp = () => {
 
     return (
         <div className="memo-app">
-            <h1>메모 애플리케이션</h1>
             <MemoInput
                 date={selectedDate}
                 currentMemo={currentMemo}
