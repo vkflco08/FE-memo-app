@@ -30,7 +30,7 @@ const Login = () => {
       }
     } catch (error) {
       logout()
-      console.error('로그인 오류:', error);
+      // console.error('로그인 오류:', error);
       alert('로그인 실패. 다시 시도해주세요.');
     }
   };

@@ -2,14 +2,31 @@
     display: flex;
     flex-direction: column;
     margin: 20px 0;
+    width: 600px; /* 가로 길이를 고정 */
+    max-width: 100%; /* 반응형으로 가로 길이 제한 */
+    margin-left: auto;  /* 중앙 정렬 */
+    margin-right: auto; /* 중앙 정렬 */
 }
 
-.memo-input-form input,
+.memo-input-form input {
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%; /* 입력창 가로를 form에 맞추기 */
+    box-sizing: border-box; /* padding 포함하여 width 계산 */
+}
+
 .memo-input-form textarea {
     margin: 5px 0;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    height: 200px;
+    resize: vertical; /* Allow only vertical resizing */
+    width: 100%; /* Set a fixed width */
+    max-height: calc(100vh - 200px); /* Limit height based on viewport size */
+    box-sizing: border-box; /* Ensure padding is included in the width */
 }
 
 .memo-input-form button {
