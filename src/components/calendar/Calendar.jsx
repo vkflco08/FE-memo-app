@@ -4,6 +4,7 @@ import './Calendar.css';
 const Calendar = ({ memos, onDateClick }) => {
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
+    const today = new Date().toISOString().split('T')[0]; // 오늘 날짜 (YYYY-MM-DD 형식)
 
     const handlePrevMonth = () => {
         if (currentMonth === 0) {
@@ -45,7 +46,8 @@ const Calendar = ({ memos, onDateClick }) => {
                 {dates.map(({ date, hasMemo }) => (
                     <div
                         key={date}
-                        className={`calendar-day ${hasMemo ? 'has-memo' : ''}`}
+                        className={`calendar-day ${hasMemo ? 'has-memo' : ''} ${date === today ? 'today' : ''}`} // 오늘 날짜 클래스 추가
+                        data-date={new Date(date).getDate()} // data-date 속성 추가
                         onClick={() => onDateClick(date)}
                     >
                         {new Date(date).getDate()}
