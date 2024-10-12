@@ -1,32 +1,68 @@
 .memo-app {
     font-family: Arial, sans-serif;
-    max-width: 600px;
-    margin: 0 auto;
-    margin-top: 15px;
-    margin-bottom: 15px;
+    max-width: 900px; /* Adjust the max width for wider layout */
+    margin: 80px auto 0; /* Ensure the top margin accounts for the fixed navbar height */
     padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    display: flex;
+    gap: 20px; /* Space between the memo and user note sections */
+    flex-wrap: wrap; /* Ensure the sections wrap on small screens */
+}
+
+.memo-app-container {
+    display: flex;
+    flex-direction: column; /* 기본적으로 세로 배치 */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.memo-section {
+    flex-grow: 1;
+    padding: 20px;
+    min-width: 700px; /* 최소 너비 설정 */
+    margin-bottom: 20px;
+    margin-top: 40px;
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
 }
 
-.month-navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.user-note-section {
+    width: 700px; /* 고정된 너비 */
+    min-width: 700px; /* 최소 너비 설정 */
+    padding: 20px;
     margin-bottom: 20px;
+    margin-top: 40px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
 }
 
-button {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
+/* 화면이 넓을 때 가로로 배치 */
+@media (min-width: 768px) {
+    .memo-app {
+        flex-direction: column;
+    }
+    .memo-app-container {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 20px;
+    }
+    .user-note-section {
+        margin-bottom: 0;
+    }
 }
 
-button:hover {
-    background-color: #0056b3;
+/* 화면이 좁아질 때 user-note-section 아래로 배치 */
+@media (max-width: 600px) {
+    .memo-app-container {
+        flex-direction: column;
+    }
 }

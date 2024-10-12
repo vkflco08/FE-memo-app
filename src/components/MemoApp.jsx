@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Calendar from './calendar/Calendar';
 import MemoInput from './memo/MemoInput';
+import UserNote from './usernote/UserNote';
 import axiosInstance from './common/AxiosInstance';
 import './MemoApp.css';
 
@@ -11,7 +12,7 @@ const MemoApp = () => {
 
     useEffect(() => {
         fetchMemos();
-    }, []); // Fetch memos on initial render
+    }, []);
 
     const fetchMemos = async () => {
         try {
@@ -47,15 +48,20 @@ const MemoApp = () => {
     };
 
     return (
-        <div className="memo-app">
-            <MemoInput
-                date={selectedDate}
-                currentMemo={currentMemo}
-                setCurrentMemo={setCurrentMemo}
-                onMemoSubmit={handleMemoSubmit}
-                fetchMemos={fetchMemos} 
-            />
-            <Calendar memos={memos} onDateClick={handleDateClick} />
+        <div className="memo-app-container">
+            <div className="memo-section">
+                <MemoInput
+                    date={selectedDate}
+                    currentMemo={currentMemo}
+                    setCurrentMemo={setCurrentMemo}
+                    onMemoSubmit={handleMemoSubmit}
+                    fetchMemos={fetchMemos}
+                />
+                <Calendar memos={memos} onDateClick={handleDateClick} />
+            </div>
+            <div className="user-note-section">
+                <UserNote />
+            </div>
         </div>
     );
 };
