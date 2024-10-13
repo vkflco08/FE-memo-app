@@ -1,68 +1,68 @@
 .memo-app {
     font-family: Arial, sans-serif;
-    max-width: 900px; /* Adjust the max width for wider layout */
-    margin: 80px auto 0; /* Ensure the top margin accounts for the fixed navbar height */
+    max-width: 1200px; /* 전체 최대 가로폭을 좀 더 크게 설정 */
+    margin: 80px auto 0;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     display: flex;
-    gap: 20px; /* Space between the memo and user note sections */
-    flex-wrap: wrap; /* Ensure the sections wrap on small screens */
+    gap: 20px;
+    flex-wrap: wrap;
 }
 
 .memo-app-container {
     display: flex;
-    flex-direction: column; /* 기본적으로 세로 배치 */
-    max-width: 1200px;
-    margin-left: 15px;
+    flex-direction: column;
+    margin: 0 auto;
     padding: 20px;
     background-color: #f9f9f9;
+    width: 100%; /* 컨테이너가 전체 가로폭을 차지하도록 설정 */
 }
 
 .memo-section {
-    flex-grow: 1;
+    flex-basis: 48%; /* 각 섹션이 화면의 48%를 차지 */
     padding: 20px;
-    min-width: 700px; /* 최소 너비 설정 */
     margin-bottom: 20px;
     margin-top: 60px;
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
+    box-sizing: border-box; /* padding과 border를 포함한 크기 계산 */
 }
 
 .user-note-section {
-    width: 700px; /* 고정된 너비 */
-    min-width: 700px; /* 최소 너비 설정 */
+    flex-basis: 48%;
+    height: 797px;
     padding: 20px;
     margin-bottom: 20px;
     margin-top: 60px;
+    margin-right: 40px;
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
+    box-sizing: border-box;
 }
 
 /* 화면이 넓을 때 가로로 배치 */
 @media (min-width: 768px) {
-    .memo-app {
-        flex-direction: column;
-    }
     .memo-app-container {
         flex-direction: row;
         justify-content: space-between;
         gap: 20px;
     }
-    .user-note-section {
-        margin-bottom: 0;
-    }
 }
 
 /* 화면이 좁아질 때 user-note-section 아래로 배치 */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .memo-app-container {
         flex-direction: column;
+    }
+
+    .memo-section, .user-note-section {
+        flex-basis: 100%; /* 작은 화면에서는 각 섹션이 100% 너비를 차지 */
     }
 }
