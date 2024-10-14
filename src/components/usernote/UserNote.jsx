@@ -15,13 +15,12 @@ const UserNote = () => {
         setLoading(true); 
         try {
             const response = await axiosInstance.get(`/api/memo/user_note`);
-            console.log(response.data.data.content);
             if (response.data && response.data.data.content) {
                 // 응답 데이터의 유효성 확인 후 상태 업데이트
                 setUserNote({ content: response.data.data.content });
             } else {
                 // 예상과 다른 응답일 경우 기본값 설정
-                setUserNote({ content: 'Write your note here...' });
+                setUserNote({ content: '여기에 적어놔라...' });
             }
         } catch (error) {
             console.error("오류가 발생했습니다:", error);
@@ -43,7 +42,7 @@ const UserNote = () => {
             await axiosInstance.post(`/api/memo/user_note`, {
                 content: userNote.content
             });
-            alert("정상적으로 저장되었습니다.");
+            window.location.reload();
         } catch (error) {
             console.error("오류가 발생했습니다:", error);
             alert("노트를 저장하는 중 오류가 발생했습니다. 다시 시도해 주세요.");
@@ -58,7 +57,7 @@ const UserNote = () => {
                     name="content"
                     value={userNote.content}
                     onChange={handleNoteChange}
-                    placeholder="Write your note here..."
+                    placeholder="여기에 적어놔라..."
                     className="note-content"
                 />
                 <button type="submit" className="save-button">Save Note</button>

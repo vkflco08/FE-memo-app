@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import Loading from '../loading/Loading'; // Loading 컴포넌트를 불러옵니다.
+import Loading from '../loading/Loading'; 
 import './MemoInput.css';
 import axiosInstance from '../common/AxiosInstance';
 
 const MemoInput = ({ date, currentMemo, setCurrentMemo }) => {
     const [title, setTitle] = useState(currentMemo.title);
     const [content, setContent] = useState(currentMemo.content);
-    const [loading, setLoading] = useState(false); // 로딩 상태 추가
+    const [loading, setLoading] = useState(false); 
 
     useEffect(() => {
         setTitle(currentMemo.title || date); // Default to date
@@ -15,7 +15,7 @@ const MemoInput = ({ date, currentMemo, setCurrentMemo }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true); // 로딩 시작
+        setLoading(true); 
 
         try {
             const response = await axiosInstance.post(`${process.env.REACT_APP_API_BASE_URL}/api/memo/new`, {
@@ -33,7 +33,7 @@ const MemoInput = ({ date, currentMemo, setCurrentMemo }) => {
         } catch (error) {
             console.error("Failed to submit memo:", error);
         } finally {
-            setLoading(false); // 로딩 끝
+            setLoading(false); 
         }
     };
 
@@ -51,10 +51,10 @@ const MemoInput = ({ date, currentMemo, setCurrentMemo }) => {
                 <textarea
                     value={content}
                     onChange={(e) => setContent(e.target.value)}
-                    placeholder="내용"
+                    placeholder="여기에 적어놔라..."
                     required
                 />
-                <button type="submit">저장</button>
+                <button type="submit">Save Memo</button>
             </form>
         </>
     );
