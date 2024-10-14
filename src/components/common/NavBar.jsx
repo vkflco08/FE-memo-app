@@ -9,7 +9,7 @@ const NavBar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-container">
-        <Link to="/" className="navbar-brand">DailyMemo</Link>
+        <Link to="/" className="navbar-brand">적어놔라</Link>
         <div className="navbar-menu">
           {isAuthenticated ? (
             <>

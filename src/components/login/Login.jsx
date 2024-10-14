@@ -10,7 +10,8 @@ const Login = () => {
   const { login, logout } = useContext(AuthContext);
   const navigate = useNavigate(); 
 
-  const handleLogin = async () => {
+  const handleLogin = async (e) => {
+    e.preventDefault(); // 폼 제출 시 페이지 리로드 방지
     try {
       const response = await axiosInstance.post(`/api/member/login`, {
         loginId: username,
@@ -29,8 +30,7 @@ const Login = () => {
         alert(response.data.message);
       }
     } catch (error) {
-      logout()
-      // console.error('로그인 오류:', error);
+      logout();
       alert('로그인 실패. 다시 시도해주세요.');
     }
   };
@@ -41,8 +41,8 @@ const Login = () => {
 
   return (
     <div className="auth-container">
-      <form className="auth-form">
-        <h2>Login</h2>
+      <form className="auth-form" onSubmit={handleLogin}>
+        <h2>적어놔라</h2>
         <div className="form-group">
           <label htmlFor="username">Username:</label>
           <input
@@ -65,7 +65,7 @@ const Login = () => {
             required
           />
         </div>
-        <button type="button" className="login_button" onClick={handleLogin}>Login</button>
+        <button type="submit" className="login_button">Login</button>
         <div className="form-link">
           <span onClick={handleSignUpRedirect}>Don't have an account? Sign Up</span>
         </div>
