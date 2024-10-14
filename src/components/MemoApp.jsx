@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Calendar from './calendar/Calendar';
 import MemoInput from './memo/MemoInput';
 import UserNote from './usernote/UserNote';
+import Loading from './common/Loading'; 
 import axiosInstance from './common/AxiosInstance';
 import './MemoApp.css';
 
@@ -9,12 +10,14 @@ const MemoApp = () => {
     const [memos, setMemos] = useState([]);
     const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
     const [currentMemo, setCurrentMemo] = useState({ title: '', content: '' });
+    const [loading, setLoading] = useState(false); 
 
     useEffect(() => {
         fetchMemos();
     }, []);
 
     const fetchMemos = async () => {
+        setLoading(true); 
         try {
             const response = await axiosInstance.get(`/api/memo/all`);
             const memos = response.data.data;
@@ -23,6 +26,8 @@ const MemoApp = () => {
         } catch (error) {
             console.error("Failed to fetch memos:", error);
             setMemos([]); // Error handling
+        } finally {
+            setLoading(false); 
         }
     };
 
@@ -49,6 +54,7 @@ const MemoApp = () => {
 
     return (
         <div className="memo-app-container">
+            {loading && <Loading />} {/* 로딩 화면 표시 */}
             <div className="memo-section">
                 <MemoInput
                     date={selectedDate}

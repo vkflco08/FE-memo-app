@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../common/AxiosInstance';
+import Loading from '../loading/Loading'; 
 import './UserNote.css';
 
 const UserNote = () => {
     const [userNote, setUserNote] = useState({ content: '' });
+    const [loading, setLoading] = useState(false); 
 
     useEffect(() => {
         fetchUserNote();
     }, []);
 
     const fetchUserNote = async () => {
+        setLoading(true); 
         try {
             const response = await axiosInstance.get(`/api/memo/user_note`);
             console.log(response.data.data.content);
@@ -24,6 +27,8 @@ const UserNote = () => {
             console.error("오류가 발생했습니다:", error);
             // 에러 발생 시 기본 노트 내용 설정
             setUserNote({ content: 'Error fetching note. Please try again.' });
+        } finally {
+            setLoading(false); 
         }
     };
 
@@ -46,16 +51,19 @@ const UserNote = () => {
     };
 
     return (
-        <form onSubmit={handleNoteSubmit}>
-            <textarea
-                name="content"
-                value={userNote.content}
-                onChange={handleNoteChange}
-                placeholder="Write your note here..."
-                className="note-content"
-            />
-            <button type="submit" className="save-button">Save Note</button>
-        </form>
+        <div>
+            {loading && <Loading />} {/* 로딩 화면 표시 */}
+            <form onSubmit={handleNoteSubmit}>
+                <textarea
+                    name="content"
+                    value={userNote.content}
+                    onChange={handleNoteChange}
+                    placeholder="Write your note here..."
+                    className="note-content"
+                />
+                <button type="submit" className="save-button">Save Note</button>
+            </form>
+        </div>
     );
 };
 
