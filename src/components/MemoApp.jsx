@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Calendar from './calendar/Calendar';
 import MemoInput from './memo/MemoInput';
 import UserNote from './usernote/UserNote';
-import Loading from './common/Loading'; 
+import Loading from './loading/Loading'; 
 import axiosInstance from './common/AxiosInstance';
 import './MemoApp.css';
 
