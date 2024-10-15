@@ -64,5 +64,6 @@
 
     .memo-section, .user-note-section {
         flex-basis: 100%; /* 작은 화면에서는 각 섹션이 100% 너비를 차지 */
+        margin-right: 0;
     }
 }

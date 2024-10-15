@@ -11,14 +11,17 @@ const NavBar = () => {
       <div className="navbar-container">
         <Link to="/" className="navbar-brand">ㅈㅇㄴㄹ</Link>
         <div className="navbar-menu">
+          {isAuthenticated && (
+            <Link to="/all-memos" className="memo-link">모든 메모 보기</Link>
+          )}
           {isAuthenticated ? (
             <>
-              <Link to="/" className="navbar-link" onClick={logout}>Logout</Link>
+              <Link to="/" className="auth-link" onClick={logout}>Logout</Link>
             </>
           ) : (
             <>
-              <Link to="/login" className="navbar-link">Login</Link>
-              <Link to="/signup" className="navbar-link">Sign Up</Link>
+              <Link to="/login" className="auth-link">Login</Link>
+              <Link to="/signup" className="auth-link">Sign Up</Link>
             </>
           )}
         </div>

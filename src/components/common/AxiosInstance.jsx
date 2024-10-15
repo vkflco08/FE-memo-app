@@ -1,6 +1,4 @@
 import axios from 'axios';
-import { useContext } from 'react';
-import { AuthContext } from '../../contexts/AuthContext';
 
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({

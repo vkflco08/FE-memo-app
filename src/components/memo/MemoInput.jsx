@@ -18,7 +18,7 @@ const MemoInput = ({ date, currentMemo, setCurrentMemo }) => {
         setLoading(true); 
 
         try {
-            const response = await axiosInstance.post(`${process.env.REACT_APP_API_BASE_URL}/api/memo/new`, {
+            const response = await axiosInstance.post(`/api/memo/new`, {
                 title: title,
                 content: content,
                 date: date,
