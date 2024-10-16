@@ -1,44 +1,70 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import './Calendar.css';
 
 const Calendar = ({ memos, onDateClick }) => {
     const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
     const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
-    const today = new Date().toISOString().split('T')[0]; // 오늘 날짜 (YYYY-MM-DD 형식)
+    
+    const UTCtoday = new Date();
+    UTCtoday.setHours(UTCtoday.getHours() + 9); 
+    const today = UTCtoday.toISOString().split('T')[0]; 
 
-    const handlePrevMonth = () => {
+    // 특정 연도와 월의 일수를 반환하는 함수
+    const getDaysInMonth = (year, month) => {
+        return new Date(year, month + 1, 0).getDate();
+    };
+
+    // 해당 월의 첫 번째 날의 요일을 반환하는 함수
+    const getFirstDayOfMonth = (year, month) => {
+        return new Date(year, month, 1).getDay();
+    };
+
+    // 해당 월의 마지막 날의 요일을 반환하는 함수
+    const getLastDayOfMonth = (year, month) => {
+        return new Date(year, month + 1, 0).getDay();
+    };
+
+    const handlePrevMonth = useCallback(() => {
         if (currentMonth === 0) {
             setCurrentMonth(11);
             setCurrentYear(currentYear - 1);
         } else {
             setCurrentMonth(currentMonth - 1);
         }
-    };
+    }, [currentMonth, currentYear]);
 
-    const handleNextMonth = () => {
+    const handleNextMonth = useCallback(() => {
         if (currentMonth === 11) {
             setCurrentMonth(0);
             setCurrentYear(currentYear + 1);
         } else {
             setCurrentMonth(currentMonth + 1);
         }
+    }, [currentMonth, currentYear]);
+
+    // 서울 시간을 기준으로 날짜를 YYYY-MM-DD 형식으로 변환하는 함수
+    const formatKSTDate = (year, month, day) => {
+        const date = new Date(year, month, day);
+        date.setHours(date.getHours() + 9); // UTC+9 시간대 적용
+        return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
     };
 
-    // 현재 월의 일수와 1일의 요일을 계산
-    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-    const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
-
-    // 요일을 월요일 기준으로 맞추기 위한 계산
-    const adjustedFirstDay = (firstDayOfMonth + 6) % 7; // 일요일을 6으로, 월요일을 0으로
+    // 현재 월의 일수와 첫 번째 날 및 마지막 날의 요일을 계산
+    const daysInMonth = useMemo(() => getDaysInMonth(currentYear, currentMonth), [currentYear, currentMonth]);
+    const firstDayOfMonth = useMemo(() => getFirstDayOfMonth(currentYear, currentMonth), [currentYear, currentMonth]);
+    const lastDayOfMonth = useMemo(() => getLastDayOfMonth(currentYear, currentMonth), [currentYear, currentMonth]);
 
     // 해당 월의 날짜 리스트 생성
-    const dates = Array.from({ length: daysInMonth }, (_, i) => {
-        const date = new Date(currentYear, currentMonth, i + 1).toISOString().split('T')[0];
+    const dates = useMemo(() => Array.from({ length: daysInMonth }, (_, i) => {
+        const date = formatKSTDate(currentYear, currentMonth, i + 1); // 서울 시간 기준으로 YYYY-MM-DD 형식의 날짜 생성
         return { date, hasMemo: memos.some(memo => memo.date === date) };
-    });
+    }), [currentYear, currentMonth, daysInMonth, memos]);
 
-    // 달력 그리드의 첫 주에 빈 칸을 추가
-    const emptyDays = Array.from({ length: adjustedFirstDay }, () => null);
+    // 달력의 빈 칸 처리 (해당 월의 1일이 시작하는 요일만큼 빈 칸을 추가)
+    const emptyDaysBefore = useMemo(() => Array.from({ length: firstDayOfMonth }, () => null), [firstDayOfMonth]);
+
+    // 해당 월이 끝나고 남은 빈 칸 처리 (토요일까지 빈 칸을 채움)
+    const emptyDaysAfter = useMemo(() => Array.from({ length: 6 - lastDayOfMonth }, () => null), [lastDayOfMonth]);
 
     return (
         <div className="calendar">
@@ -49,11 +75,12 @@ const Calendar = ({ memos, onDateClick }) => {
             </div>
             <div className="calendar-days">
                 <div className="day-names">
-                    {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day) => (
+                    {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
                         <div key={day} className="day-name">{day}</div>
                     ))}
                 </div>
-                {[...emptyDays, ...dates].map((day, index) => {
+                {/* 빈 칸과 날짜를 합쳐서 달력 출력 */}
+                {[...emptyDaysBefore, ...dates, ...emptyDaysAfter].map((day, index) => {
                     if (!day) {
                         return <div key={index} className="calendar-day empty"></div>; // 빈 칸 처리
                     }
@@ -62,7 +89,6 @@ const Calendar = ({ memos, onDateClick }) => {
                         <div
                             key={date}
                             className={`calendar-day ${hasMemo ? 'has-memo' : ''} ${date === today ? 'today' : ''}`}
-                            data-date={new Date(date).getDate()}
                             onClick={() => onDateClick(date)}
                         >
                             {new Date(date).getDate()}
