@@ -51,10 +51,6 @@ const MemoDetail = () => {
     }
   };
 
-  if (!memo) {
-    return <p>메모를 불러올 수 없습니다.</p>;
-  }
-
   return (
     <div className="memo-detail-container">
       {loading && <Loading />} {/* 로딩 화면 표시 */}
@@ -72,7 +68,7 @@ const MemoDetail = () => {
           onChange={handleInputChange}
           className="memo-content-textarea"
         />
-        <button onClick={handleSaveEdit} className="save-btn">저장</button>
+        <button onClick={handleSaveEdit} className="save-btn">수정</button>
       </div>
     </div>
   );

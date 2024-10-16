@@ -24,11 +24,21 @@ const Calendar = ({ memos, onDateClick }) => {
         }
     };
 
+    // 현재 월의 일수와 1일의 요일을 계산
     const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+
+    // 요일을 월요일 기준으로 맞추기 위한 계산
+    const adjustedFirstDay = (firstDayOfMonth + 6) % 7; // 일요일을 6으로, 월요일을 0으로
+
+    // 해당 월의 날짜 리스트 생성
     const dates = Array.from({ length: daysInMonth }, (_, i) => {
         const date = new Date(currentYear, currentMonth, i + 1).toISOString().split('T')[0];
         return { date, hasMemo: memos.some(memo => memo.date === date) };
     });
+
+    // 달력 그리드의 첫 주에 빈 칸을 추가
+    const emptyDays = Array.from({ length: adjustedFirstDay }, () => null);
 
     return (
         <div className="calendar">
@@ -39,20 +49,26 @@ const Calendar = ({ memos, onDateClick }) => {
             </div>
             <div className="calendar-days">
                 <div className="day-names">
-                    {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
+                    {["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map((day) => (
                         <div key={day} className="day-name">{day}</div>
                     ))}
                 </div>
-                {dates.map(({ date, hasMemo }) => (
-                    <div
-                        key={date}
-                        className={`calendar-day ${hasMemo ? 'has-memo' : ''} ${date === today ? 'today' : ''}`} // 오늘 날짜 클래스 추가
-                        data-date={new Date(date).getDate()} // data-date 속성 추가
-                        onClick={() => onDateClick(date)}
-                    >
-                        {new Date(date).getDate()}
-                    </div>
-                ))}
+                {[...emptyDays, ...dates].map((day, index) => {
+                    if (!day) {
+                        return <div key={index} className="calendar-day empty"></div>; // 빈 칸 처리
+                    }
+                    const { date, hasMemo } = day;
+                    return (
+                        <div
+                            key={date}
+                            className={`calendar-day ${hasMemo ? 'has-memo' : ''} ${date === today ? 'today' : ''}`}
+                            data-date={new Date(date).getDate()}
+                            onClick={() => onDateClick(date)}
+                        >
+                            {new Date(date).getDate()}
+                        </div>
+                    );
+                })}
             </div>
         </div>
     );
