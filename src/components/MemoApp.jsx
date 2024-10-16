@@ -8,7 +8,12 @@ import './MemoApp.css';
 
 const MemoApp = () => {
     const [memos, setMemos] = useState([]);
-    const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split('T')[0]);
+
+    const UTCtoday = new Date();
+    UTCtoday.setHours(UTCtoday.getHours() + 9); 
+    const today = UTCtoday.toISOString().split('T')[0]; 
+
+    const [selectedDate, setSelectedDate] = useState(today);
     const [currentMemo, setCurrentMemo] = useState({ title: '', content: '' });
     const [loading, setLoading] = useState(false); 
 
