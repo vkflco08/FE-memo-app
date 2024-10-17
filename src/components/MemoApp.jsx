@@ -7,71 +7,58 @@ import axiosInstance from './common/AxiosInstance';
 import './MemoApp.css';
 
 const MemoApp = () => {
-    const [memos, setMemos] = useState([]);
-
     const UTCtoday = new Date();
     UTCtoday.setHours(UTCtoday.getHours() + 9); 
     const today = UTCtoday.toISOString().split('T')[0]; 
 
+    const [memos, setMemos] = useState([]);
     const [selectedDate, setSelectedDate] = useState(today);
     const [currentMemo, setCurrentMemo] = useState({ title: '', content: '' });
-    const [loading, setLoading] = useState(false); 
+    const [loading, setLoading] = useState(false);
+    const [notification, setNotification] = useState('');
 
     useEffect(() => {
         fetchMemos();
     }, []);
 
+    useEffect(() => {
+        const memoForSelectedDate = memos.find(memo => memo.date === selectedDate);
+        setCurrentMemo(memoForSelectedDate || { title: '', content: '' });
+    }, [selectedDate, memos]);
+
     const fetchMemos = async () => {
         setLoading(true); 
         try {
             const response = await axiosInstance.get(`/api/memo/all`);
-            const memos = response.data.data;
-            setMemos(Array.isArray(memos) ? memos : []); // Set memos
-            setCurrentMemo(memos.find(memo => memo.date === selectedDate) || { title: selectedDate, content: '' }); // Set memo for today
+            setMemos(response.data.data || []);
         } catch (error) {
             console.error("Failed to fetch memos:", error);
-            setMemos([]); // Error handling
         } finally {
             setLoading(false); 
         }
     };
 
-    const handleDateClick = (date) => {
-        setSelectedDate(date);
-        const memo = memos.find(memo => memo.date === date);
-        setCurrentMemo(memo || { title: date, content: '' }); // Update current memo based on selected date
-    };
-
-    const handleMemoSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            await axiosInstance.post(`/api/memo/new`, {
-                title: currentMemo.title,
-                content: currentMemo.content,
-                date: selectedDate,
-            });
-            fetchMemos(); // Refresh memos after submission
-            setCurrentMemo({ title: '', content: '' }); // Reset current memo
-        } catch (error) {
-            console.error("Failed to submit memo:", error);
-        }
+    const showNotification = (message) => {
+        setNotification(message);
+        setTimeout(() => setNotification(''), 2000); // Clear notification after 2 seconds
     };
 
     return (
         <div className="memo-app-container">
-            {loading && <Loading />} {/* 로딩 화면 표시 */}
+            {loading && <Loading />}
             <div className="memo-section">
                 <MemoInput
                     date={selectedDate}
                     currentMemo={currentMemo}
-                    setCurrentMemo={setCurrentMemo}
-                    onMemoSubmit={handleMemoSubmit}
-                    fetchMemos={fetchMemos}
+                    showNotification={showNotification} 
                 />
-                <Calendar memos={memos} onDateClick={handleDateClick} />
+                <Calendar memos={memos} onDateClick={setSelectedDate} />
             </div>
             <div className="user-note-section">
-                <UserNote />
+                <UserNote 
+                    showNotification={showNotification} 
+                />
+                {notification && <div className="saved-notification">{notification}</div>}
             </div>
         </div>
     );

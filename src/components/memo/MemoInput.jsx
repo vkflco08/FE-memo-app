@@ -1,46 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import Loading from '../loading/Loading'; 
-import './MemoInput.css';
 import axiosInstance from '../common/AxiosInstance';
+import './MemoInput.css';
 
-const MemoInput = ({ date, currentMemo, setCurrentMemo }) => {
+const MemoInput = ({ date, currentMemo, showNotification }) => {
     const [title, setTitle] = useState(currentMemo.title);
     const [content, setContent] = useState(currentMemo.content);
-    const [loading, setLoading] = useState(false); 
 
     useEffect(() => {
-        setTitle(currentMemo.title || date); // Default to date
+        setTitle(currentMemo.title || date); 
         setContent(currentMemo.content);
     }, [currentMemo, date]);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true); 
+    useEffect(() => {
+        const timeoutId = setTimeout(() => {
+            handleAutoSave();
+        }, 1000);
 
+        return () => clearTimeout(timeoutId);
+    }, [title, content]);
+
+    const handleAutoSave = async () => {
         try {
-            const response = await axiosInstance.post(`/api/memo/new`, {
-                title: title,
-                content: content,
-                date: date,
+            await axiosInstance.post(`/api/memo/new`, {
+                title,
+                content,
+                date,
             });
-
-            if (response.status === 200) {
-                setCurrentMemo({ title: '', content: '' }); // Reset current memo
-                window.location.reload();
-            } else {
-                console.error("Failed to submit memo:", response.statusText);
-            }
+            showNotification("일일메모가 저장되었습니다"); 
         } catch (error) {
-            console.error("Failed to submit memo:", error);
-        } finally {
-            setLoading(false); 
+            console.error("Failed to auto-save memo:", error);
         }
     };
 
     return (
-        <>
-            {loading && <Loading />} {/* 로딩 화면 표시 */}
-            <form onSubmit={handleSubmit} className="memo-input-form">
+        <div className="memo-input-container">
+            <form className="memo-input-form">
                 <input
                     type="text"
                     value={title}
@@ -54,9 +48,8 @@ const MemoInput = ({ date, currentMemo, setCurrentMemo }) => {
                     placeholder="여기에 적어놔라..."
                     required
                 />
-                <button type="submit">Save Memo</button>
             </form>
-        </>
+        </div>
     );
 };
 
