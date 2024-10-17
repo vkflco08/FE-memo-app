@@ -40,7 +40,18 @@ const MemoApp = () => {
 
     const showNotification = (message) => {
         setNotification(message);
-        setTimeout(() => setNotification(''), 2000); // Clear notification after 2 seconds
+        setTimeout(() => {
+            setNotification(''); // 알림 초기화
+        }, 2000); // 2초 후에 알림 제거
+    
+        // 알림에 show 클래스를 추가
+        const notificationElement = document.querySelector('.saved-notification');
+        if (notificationElement) {
+            notificationElement.classList.add('show'); // show 클래스 추가
+            setTimeout(() => {
+                notificationElement.classList.remove('show'); // show 클래스 제거
+            }, 2000); // 2초 후에 show 클래스 제거
+        }
     };
 
     return (
@@ -58,7 +69,11 @@ const MemoApp = () => {
                 <UserNote 
                     showNotification={showNotification} 
                 />
-                {notification && <div className="saved-notification">{notification}</div>}
+               {notification && (
+                <div className={`saved-notification ${notification ? 'show' : ''}`}>
+                {notification}
+                </div>
+            )}
             </div>
         </div>
     );

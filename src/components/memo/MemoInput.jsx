@@ -20,15 +20,17 @@ const MemoInput = ({ date, currentMemo, showNotification }) => {
     }, [title, content]);
 
     const handleAutoSave = async () => {
-        try {
-            await axiosInstance.post(`/api/memo/new`, {
-                title,
-                content,
-                date,
-            });
-            showNotification("일일메모가 저장되었습니다"); 
-        } catch (error) {
-            console.error("Failed to auto-save memo:", error);
+        if (content.trim()) {
+            try {
+                await axiosInstance.post(`/api/memo/new`, {
+                    title,
+                    content,
+                    date,
+                });
+                showNotification("메모가 저장되었습니다"); 
+            } catch (error) {
+                console.error("Failed to auto-save memo:", error);
+            }
         }
     };
 
