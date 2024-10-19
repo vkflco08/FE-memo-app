@@ -66,6 +66,22 @@ const AllMemos = () => {
     navigate(`/memo/${date}`);
   };
 
+  // 메모 삭제 함수
+  const handleDeleteMemo = async (formattedMonth) => {
+    if (window.confirm("정말로 이 메모를 삭제하시겠습니까?")) {
+      setLoading(true); 
+      try {
+        await axiosInstance.delete(`/api/memo/${formattedMonth}`);
+        // 삭제 후 메모 목록을 새로고침
+        window.location.reload(); // 페이지 새로고침
+      } catch (error) {
+        console.error("메모 삭제 실패:", error);
+      } finally {
+        setLoading(false); 
+      }
+    }
+  };
+
   // 스크롤 이벤트 리스너 등록
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
@@ -81,11 +97,22 @@ const AllMemos = () => {
       <ul className="memo-list">
         {memos.length > 0 ? (
           memos.map((memo) => (
+            <div class="content-container">
             <li key={memo.date} className="memo-item" onClick={() => handleMemoClick(memo.date)}>
               <h3>{memo.title}</h3>
               <p>{truncateContent(memo.content, 100)}</p> {/* 내용 일부만 표시 */}
               <div className="memo-date">{memo.date}</div> {/* 날짜 표시 */}
+              <button 
+                className="delete-button" 
+                onClick={(e) => {
+                  e.stopPropagation(); // 메모 클릭 이벤트 전파 방지
+                  handleDeleteMemo(memo.date); // formattedMonth로 date를 사용
+                }}
+              >
+                X
+              </button>
             </li>
+            </div>
           ))
         ) : (
           <p>저장된 메모가 없습니다.</p>
