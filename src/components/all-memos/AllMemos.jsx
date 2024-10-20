@@ -93,7 +93,6 @@ const AllMemos = () => {
   return (
     <div className="all-memos-container">
       {loading && <Loading />}
-      <h2>모든 메모 보기</h2>
       <ul className="memo-list">
         {memos.length > 0 ? (
           memos.map((memo) => (
@@ -115,7 +114,7 @@ const AllMemos = () => {
             </div>
           ))
         ) : (
-          <p>저장된 메모가 없습니다.</p>
+          <p></p>
         )}
       </ul>
       {loading && <Loading />} {/* 추가적인 로딩 표시 */}

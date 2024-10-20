@@ -46,6 +46,7 @@ const Login = () => {
         <div className="form-group">
           <label htmlFor="username">Username:</label>
           <input
+            className="auth-input"
             type="text"
             id="username"
             value={username}
@@ -57,6 +58,7 @@ const Login = () => {
         <div className="form-group">
           <label htmlFor="password">Password:</label>
           <input
+            className="auth-input"
             type="password"
             id="password"
             value={password}

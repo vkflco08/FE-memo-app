@@ -1,17 +1,15 @@
 /* Light Mode Styles */
 .all-memos-container {
-  padding: 20px;
-  max-width: 800px;
-  margin: auto;
-  font-family: 'Arial', sans-serif;
-  background-color: #ffffff; /* Light mode background */
-  color: #333; /* Default text color */
-}
+  height: 100vh; /* 전체 화면 높이 */
+  display: flex; /* Flexbox로 자식 요소 정렬 */
+  justify-content: center; /* 가로 방향 중앙 정렬 */
+  align-items: center; /* 세로 방향 중앙 정렬 */
+  padding: 100px; /* 내부 여백 */
+  background-color: #f8f9fa; /* 기본 배경색 */
+  border-radius: 8px; /* 모서리 둥글게 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
 
-h2 {
-  text-align: center;
-  color: #333;
-  margin-bottom: 20px;
+  flex-direction: column;
 }
 
 .memo-list {
@@ -75,12 +73,12 @@ h2 {
 
 /* Dark Mode Styles */
 [data-theme="dark"] .all-memos-container {
-  background-color: #121212; /* Dark mode background */
+  background-color: #444; /* Dark mode background */
   color: #e0e0e0; /* Default text color */
 }
 
 [data-theme="dark"] .memo-item {
-  background-color: #1e1e1e; /* Darker item background */
+  background-color: #333; /* Darker item background */
   border: 1px solid #333; /* Darker border for items */
 }
 
@@ -93,7 +91,7 @@ h2 {
 }
 
 [data-theme="dark"] .memo-item p {
-  color: #b0b0b0; /* Lighter text color */
+  color: rgb(200, 200, 200); /* Lighter text color */
 }
 
 [data-theme="dark"] .memo-date {
@@ -101,7 +99,7 @@ h2 {
 }
 
 [data-theme="dark"] .delete-button {
-  background-color: #333; /* Darker button background */
+  background-color: #444; /* Darker button background */
   color: #ff5f5f; /* Red color for delete button */
 }
 

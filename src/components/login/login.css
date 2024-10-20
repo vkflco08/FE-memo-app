@@ -32,9 +32,8 @@
 }
 
 .form-group input {
-    width: 100%;
+    width: 96%;
     padding: 0.5rem;
-    border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 1rem;
 }
@@ -43,7 +42,7 @@
 .register_button {
     width: 100%;
     padding: 0.75rem;
-    background-color: #4CAF50;
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 5px;
@@ -54,7 +53,7 @@
 
 .login_button:hover,
 .register_button:hover {
-    background-color: #45a049;
+    background-color: #0056b3;
 }
 
 .form-link {
@@ -67,4 +66,30 @@
 
 .form-link:hover {
     text-decoration: underline;
+}
+
+/* 다크 모드 스타일 */
+[data-theme="dark"] .auth-container {
+    background-color: #444; /* 어두운 배경 */
+    color: #e0e0e0; /* 텍스트 색상 */
+}
+
+[data-theme="dark"] .auth-form {
+    background-color: #1e1e1e; /* 어두운 배경 */
+    color: #e0e0e0; /* 텍스트 색상 */
+    border: 1px solid #444; /* 어두운 테두리 */
+}
+
+[data-theme="dark"] .auth-input {
+border: 1px solid #555; /* 어두운 테두리 색상 */
+background-color: #222; /* 어두운 입력 배경 */
+color: #e0e0e0; /* 텍스트 색상 */
+}
+
+[data-theme="dark"] .auth-input:focus {
+border-color: #c0c0c0; /* 포커스 시 밝은 테두리 색상 */
+}
+
+[data-theme="dark"] .form-group label {
+    color: #999; /* 포커스 시 밝은 테두리 색상 */
 }

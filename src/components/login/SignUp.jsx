@@ -53,6 +53,7 @@ function SignUp() {
                 <div className="form-group">
                     <label htmlFor="name">Name:</label>
                     <input
+                        className="auth-input"
                         type="text"
                         id="name"
                         value={name}
@@ -63,6 +64,7 @@ function SignUp() {
                 <div className="form-group">
                     <label htmlFor="loginId">Login ID:</label>
                     <input
+                        className="auth-input"
                         type="text"
                         id="loginId"
                         value={loginId}
@@ -73,6 +75,7 @@ function SignUp() {
                 <div className="form-group">
                     <label htmlFor="email">Email:</label>
                     <input
+                        className="auth-input"
                         type="email"
                         id="email"
                         value={email}
@@ -83,6 +86,7 @@ function SignUp() {
                 <div className="form-group">
                     <label htmlFor="password">Password:</label>
                     <input
+                    className="auth-input"
                         type="password"
                         id="password"
                         value={password}

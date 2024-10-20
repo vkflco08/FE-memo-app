@@ -69,12 +69,12 @@
 
 /* 다크 모드 스타일 */
 [data-theme="dark"] .memo-detail-container {
-  background-color: #121212; /* 어두운 배경 */
+  background-color: #444; /* 어두운 배경 */
   color: #e0e0e0; /* 텍스트 색상 */
 }
 
 [data-theme="dark"] .memo-detail {
-  background-color: #1e1e1e; /* 어두운 배경 */
+  background-color: #292929; /* 어두운 배경 */
   color: #e0e0e0; /* 텍스트 색상 */
   border: 1px solid #444; /* 어두운 테두리 */
 }
