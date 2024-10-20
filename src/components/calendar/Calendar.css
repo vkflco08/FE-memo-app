@@ -1,7 +1,12 @@
 .calendar {
-    border: 1px solid #ccc;
+    border: 1px solid #ccc; /* 기본 테두리 색 */
     border-radius: 5px;
     overflow: hidden;
+}
+
+/* 다크 모드 */
+[data-theme="dark"] .calendar {
+    border: 1px solid #444; /* 어두운 모드 테두리 색 */
 }
 
 .calendar-header {
@@ -9,24 +14,56 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    background-color: #f7f7f7;
+    background-color: #f7f7f7; /* 기본 배경색 */
+    color: #333; /* 기본 텍스트 색 */
+}
+
+/* 다크 모드 */
+[data-theme="dark"] .calendar-header {
+    background-color: #555; /* 어두운 모드 배경색 */
+    color: #eee; /* 다크 모드 텍스트 색 */
+}
+
+.calendar-title {
+    font-size: 24px; /* 제목 폰트 크기 */
+    font-weight: bold; /* 제목 두께 */
+    color: #333; /* 기본 텍스트 색상 */
+    text-align: center; /* 중앙 정렬 */
+    margin: 15px 20px; /* 버튼과의 간격을 위한 여백 */
+}
+
+/* 다크 모드에서 제목 색상 */
+[data-theme="dark"] .calendar-title {
+    color: #eee; /* 어두운 모드에서 텍스트 색상 */
 }
 
 .calendar-days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #ccc; /* 기본 테두리 색 */
+}
+
+/* 다크 모드 */
+[data-theme="dark"] .calendar-days {
+    border-top: 1px solid #666; /* 어두운 모드 테두리 색 */
 }
 
 .day-names {
     display: contents; /* Use grid display for day names */
 }
 
+/* 각 요일 이름 스타일 */
 .day-name {
     text-align: center;
     font-weight: bold;
     padding: 5px;
-    background-color: #f0f0f0;
+    background-color: #f0f0f0; /* 기본 배경색 */
+}
+
+/* 다크 모드 */
+[data-theme="dark"] .day-name {
+    background-color: #444; /* 어두운 모드 배경색 */
+    color: #eee; /* 다크 모드 텍스트 색 */
 }
 
 .calendar-day {
@@ -34,23 +71,42 @@
     text-align: center;
     padding: 20px;
     cursor: pointer;
-    position: relative; /* Position relative for absolute children */
+    position: relative; 
+    box-sizing: border-box;
+    transition: background-color 0.3s;
+    border: 1px solid #ddd; /* 기본 테두리 색 */
+}
+
+/* 다크 모드 */
+[data-theme="dark"] .calendar-day {
+    color: #eee; /* 다크 모드 텍스트 색 */
+    border: 1px solid #666; /* 어두운 모드에서 테두리 색 */
 }
 
 .calendar-day:hover {
-    background-color: #e0e0e0;
+    background-color: #e0e0e0; /* 기본 호버 색상 */
+}
+
+/* 다크 모드 호버 상태 */
+[data-theme="dark"] .calendar-day:hover {
+    background-color: #666; /* 어두운 모드 호버 색상 */
 }
 
 .has-memo {
-    background-color: #d4edda;
+    background-color: #ccffcc; /* 기본 메모 있음 상태 */
+}
+
+/* 다크 모드 */
+[data-theme="dark"] .has-memo {
+    background-color: #3c763d; /* 어두운 모드에서 메모 있음 상태 */
 }
 
 .calendar-day.today {
-    background-color: #007bff; 
+    background-color: #007bff; /* 기본 오늘 날짜 색상 */
     color: white;              
     font-weight: bold;
     border-radius: 50%;  
-    top:16%;   
+    top: 16%;   
     width: 40px;          
     height: 40px;         
     display: flex;            
@@ -59,6 +115,68 @@
     margin: 0 auto;        
 }
 
+/* 다크 모드 */
+[data-theme="dark"] .calendar-day.today {
+    background-color: #339af0; /* 어두운 모드에서 오늘 날짜 색상 */
+}
+
 .calendar-day.today:hover {
-    background-color: skyblue;
+    background-color: skyblue; /* 기본 오늘 날짜 호버 색상 */
+}
+
+/* 다크 모드 호버 상태 */
+[data-theme="dark"] .calendar-day.today:hover {
+    background-color: #85b45f; 
+}
+
+.arrow-button {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #007bff; /* 기본 화살표 버튼 색상 */
+}
+
+/* 다크 모드 화살표 버튼 색상 */
+[data-theme="dark"] .arrow-button {
+    color: #66b3ff; /* 어두운 모드에서 화살표 색상 */
+}
+
+.calendar-days-of-week {
+    display: flex;
+    background-color: #f0f0f0; /* 기본 배경색 */
+    border-bottom: 1px solid #ddd; /* 기본 테두리 색 */
+}
+
+/* 다크 모드 */
+[data-theme="dark"] .calendar-days-of-week {
+    background-color: #555; /* 어두운 모드 배경색 */
+    border-bottom: 1px solid #666; /* 어두운 모드 테두리 색 */
+}
+
+.calendar-day-of-week {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    color: #666; /* 기본 텍스트 색 */
+}
+
+/* 다크 모드 */
+[data-theme="dark"] .calendar-day-of-week {
+    color: #eee; /* 다크 모드 텍스트 색 */
+}
+
+/* 다크 모드 메모 있음 상태 */
+[data-theme="dark"] .calendar-day.has-memo {
+    background-color: #3c763d; /* 어두운 모드에서 메모 있음 상태 */
+}
+
+.calendar-day:hover {
+    background-color: #e0e0e0; /* 기본 호버 색상 */
+}
+
+/* 다크 모드 호버 상태 */
+[data-theme="dark"] .calendar-day:hover {
+    background-color: #666; /* 어두운 모드 호버 색상 */
 }

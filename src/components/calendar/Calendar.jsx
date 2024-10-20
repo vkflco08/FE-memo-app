@@ -48,9 +48,9 @@ const Calendar = ({ memos, onDateClick, onMonthChange, currentMonth, currentYear
     return (
         <div className="calendar">
             <div className="calendar-header">
-                <button onClick={handlePrevMonth}>&lt;</button>
-                <h2>{`${currentYear}-${String(currentMonth + 1).padStart(2, '0')}`}</h2>
-                <button onClick={handleNextMonth}>&gt;</button>
+                <button className="arrow-button" onClick={handlePrevMonth}>&lt;</button>
+                <h2 className="calendar-title">{`${currentYear}-${String(currentMonth + 1).padStart(2, '0')}`}</h2>
+                <button className="arrow-button" onClick={handleNextMonth}>&gt;</button>
             </div>
             <div className="calendar-days">
                 <div className="day-names">
