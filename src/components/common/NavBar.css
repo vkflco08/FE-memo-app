@@ -79,3 +79,16 @@
 .auth-link:active {
   transform: scale(0.95);
 }
+
+/* 모바일 환경에 맞춘 검색창 스타일 */
+@media (max-width: 437px) {
+  .navbar-brand {
+    font-size: 1.5rem;
+  }
+  .memo-link {
+    font-size: 0.7rem;
+  }
+  .auth-link {
+    font-size: 0.7rem;
+  }
+}
