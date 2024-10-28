@@ -1,10 +1,11 @@
 /* 라이트 모드 스타일 */
 .memo-detail-container {
-  height: 100vh; /* 전체 화면 높이 */
+  height: 90vh; /* 전체 화면 높이 */
   display: flex; /* Flexbox로 자식 요소 정렬 */
   justify-content: center; /* 가로 방향 중앙 정렬 */
   align-items: center; /* 세로 방향 중앙 정렬 */
-  padding: 20px; /* 내부 여백 */
+  padding: 20px;
+  padding-top: 75px;
   background-color: #f8f9fa; /* 기본 배경색 */
   border-radius: 8px; /* 모서리 둥글게 */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */

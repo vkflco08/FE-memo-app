@@ -4,6 +4,7 @@
     padding: 20px;
     overflow: hidden;
     margin: 15px auto;
+    margin-bottom: 0;
     width: 600px;
     background-color: rgb(250, 250, 250); 
 }

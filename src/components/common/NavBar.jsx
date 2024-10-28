@@ -26,7 +26,6 @@ const NavBar = ({ theme, toggleTheme }) => {
           )}
           {/* 다크 모드 토글 버튼 */}
           <button className="theme-toggle-button" onClick={() => {
-            console.log('Theme toggle button clicked'); // 이 로그가 출력되는지 확인
             toggleTheme(); 
           }}>
             {theme === 'light' ? '🌙' : '☀️'}

@@ -114,7 +114,8 @@ const AllMemos = () => {
             </div>
           ))
         ) : (
-          <p></p>
+          <div class="content-container">
+          </div>
         )}
       </ul>
       {loading && <Loading />} {/* 추가적인 로딩 표시 */}

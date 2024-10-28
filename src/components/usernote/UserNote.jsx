@@ -30,10 +30,12 @@ const UserNote = ({ showNotification }) => {
 
     const handleAutoSave = async () => {
         try {
-            await axiosInstance.post(`/api/memo/user_note`, {
-                content: userNote.content
-            });
-            showNotification("노트가 저장되었습니다");
+            if (userNote.content.trim()) {
+                await axiosInstance.post(`/api/memo/user_note`, {
+                    content: userNote.content
+                });
+                showNotification("노트가 저장되었습니다");
+            }
         } catch (error) {
             console.error("Failed to auto-save note:", error);
         }
