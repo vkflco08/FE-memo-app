@@ -1,10 +1,9 @@
 /* Light Mode Styles */
 .all-memos-container {
   display: flex;
-  justify-content: center; /* 가로 방향 중앙 정렬 */
   align-items: center; /* 세로 방향 중앙 정렬 */
-  padding: 20px;
-  padding-top: 75px;
+  padding: 10px;
+  padding-top: 90px;
   background-color: #f8f9fa; /* 기본 배경색 */
   border-radius: 8px; /* 모서리 둥글게 */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
@@ -15,16 +14,22 @@
 .memo-list {
   list-style-type: none;
   padding: 0;
+  width: 100%; /* 100% 너비로 설정 */
+  max-width: 700px; /* 최대 너비 */
+  margin: 0 auto; /* 중앙 정렬 */
 }
 
 .memo-item {
+  width: 100%; /* 부모의 너비에 맞춤 */
   background-color: #f9f9f9;
   border: 1px solid #e0e0e0;
   border-radius: 8px;
   padding: 15px;
-  margin-bottom: 15px;
+  margin: 10px 0; /* 위아래 여백만 추가 */
   cursor: pointer;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
+  box-sizing: border-box; /* padding과 border 포함 */
+  position: relative; /* 삭제 버튼을 절대 위치시킬 기준 요소로 설정 */
 }
 
 .memo-item:hover {
@@ -40,8 +45,13 @@
 
 .memo-item p {
   margin: 10px 0;
-  width: auto;
+  width: 100%; /* 부모의 너비에 맞춤 */
   color: #666;
+  white-space: normal; /* 긴 내용은 자동으로 줄바꿈 */
+  overflow: hidden; /* 내용이 요소를 벗어나지 않도록 */
+  text-overflow: ellipsis; /* 넘친 텍스트는 말줄임(...) 표시 */
+  max-height: 4.5em; /* 최대 높이 설정 (약 세 줄 정도) */
+  line-height: 1.5em; /* 줄 간격 설정 */
 }
 
 .memo-date {
@@ -108,10 +118,70 @@
   background-color: #444; /* Darker on hover */
 }
 
-/* Responsive adjustments */
-@media (max-width: 600px) {
+.dots-loading {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.dot {
+  font-size: 1.5rem;
+  animation: blink 1s infinite alternate;
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* 검색창 스타일 */
+.search-input {
+  width: 90%;
+  max-width: 500px; /* 최대 너비 */
+  padding: 10px 15px;
+  margin: 10px auto; /* 중앙 정렬 */
+  font-size: 16px;
+  border: 1px solid #e0e0e0; /* 기본 테두리 */
+  border-radius: 8px;
+  outline: none;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* 입력창 그림자 */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #007bff; /* 포커스 시 테두리 색상 */
+  box-shadow: 0px 4px 12px rgba(0, 123, 255, 0.3); /* 포커스 시 그림자 강조 */
+}
+
+/* 다크 모드 검색창 스타일 */
+[data-theme="dark"] .search-input {
+  background-color: #333; /* 다크 모드 배경색 */
+  color: #e0e0e0; /* 다크 모드 텍스트 색상 */
+  border: 1px solid #555; /* 다크 모드 테두리 */
+}
+
+[data-theme="dark"] .search-input:focus {
+  border-color: #66aaff; /* 다크 모드 포커스 색상 */
+  box-shadow: 0px 4px 12px rgba(102, 170, 255, 0.3); /* 다크 모드 포커스 그림자 */
+}
+
+/* 모바일 환경에 맞춘 검색창 스타일 */
+@media (max-width: 437px) {
   .all-memos-container {
     padding: 10px; /* Reduce padding on smaller screens */
+    padding-top: 100px;
   }
 
   .memo-item {
@@ -125,4 +195,12 @@
   .memo-date {
     font-size: 12px; /* Smaller date font */
   }
+}
+
+.no-results {
+  display: flex; /* flexbox 사용 */
+  justify-content: center; /* 수평 중앙 정렬 */
+  align-items: center; /* 수직 중앙 정렬 */
+  height: 100%; /* 부모의 전체 높이를 사용 */
+  font-size: 16px; /* 글자 크기 조정 */
 }

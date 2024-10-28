@@ -1,13 +1,14 @@
 .navbar {
   background: linear-gradient(90deg, #4e54c8, #8f94fb); /* 그라데이션 추가 */
   color: #fff;
-  padding: 15px 30px;
+  padding: 15px 10px; /* 수평 padding 제거 */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 100%;
   position: fixed;
   top: 0;
   z-index: 1000;
   transition: background-color 0.3s ease;
+  box-sizing: border-box; 
 }
 
 .navbar-container {
@@ -15,8 +16,12 @@
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
-  width: 90%;
+  padding: 0 15px; 
+  width: 100%;
+  max-width: 1200px; 
+  box-sizing: border-box;
 }
+
 
 .navbar-brand {
   font-size: 1.75rem;
