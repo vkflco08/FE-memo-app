@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
-    width: 600px; /* 가로 길이를 고정 */
+    /* width: 600px; 가로 길이를 고정 */
     max-width: 100%; /* 반응형으로 가로 길이 제한 */
     margin: 15px auto;
     margin-top: 0;

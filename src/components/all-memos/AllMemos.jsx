@@ -18,18 +18,22 @@ const AllMemos = () => {
   };
 
   useEffect(() => {
+    fetchMemos(true); // 초기 메모 로드
+  }, []);
+
+  useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      setPage(0);
-      setMemos([]);
-      setHasMore(true);
-      fetchMemos(true);
+      setPage(0); // 페이지 초기화
+      setMemos([]); // 이전 메모 초기화
+      setHasMore(true); // 더 가져올 메모가 있는지 초기화
+      fetchMemos(true); // 새로운 검색에 대한 메모 불러오기
     }, 500);
 
     return () => clearTimeout(delayDebounceFn);
   }, [searchKeyword]);
 
   const handleScroll = () => {
-    const bottom = window.innerHeight + window.scrollY >= document.documentElement.offsetHeight;
+    const bottom = window.innerHeight + window.scrollY >= document.documentElement.offsetHeight - 1;
     if (bottom && !loading && hasMore) {
       setPage(prevPage => prevPage + 1); 
     }
@@ -85,7 +89,8 @@ const AllMemos = () => {
       setLoading(true); 
       try {
         await axiosInstance.delete(`/api/memo/${formattedMonth}`);
-        window.location.reload(); 
+        // 메모 삭제 후 상태 업데이트
+        setMemos(prevMemos => prevMemos.filter(memo => memo.date !== formattedMonth));
       } catch (error) {
         console.error("메모 삭제 실패:", error);
       } finally {
@@ -120,7 +125,7 @@ const AllMemos = () => {
       <ul className="memo-list">
         {memos.length > 0 ? (
           memos.map((memo) => (
-            <div class="content-container" key={memo.date}>
+            <div className="content-container" key={memo.date}>
               <li className="memo-item" onClick={() => handleMemoClick(memo.date)}>
                 <h3>{memo.title}</h3>
                 <p>{truncateContent(memo.content, 100)}</p>
@@ -138,7 +143,7 @@ const AllMemos = () => {
             </div>
           ))
         ) : (
-          !searchLoading && <div class="no-results">검색 결과가 없습니다.</div>
+          !searchLoading && <div className="no-results">검색 결과가 없습니다.</div>
         )}
       </ul>
       {loading && <Loading />}
