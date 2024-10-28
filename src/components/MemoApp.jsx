@@ -55,6 +55,54 @@ const MemoApp = () => {
         setTimeout(() => setNotification(''), 2000); // 2초 후에 알림 제거
     };
 
+    // 자정 새로 고침
+    useEffect(() => {
+        const checkForMidnightRefresh = () => {
+            const now = new Date();
+            const nextMidnight = new Date(now);
+            nextMidnight.setDate(now.getDate() + 1);
+            nextMidnight.setHours(0, 0, 0, 0); // 다음 자정으로 설정
+
+            const timeUntilMidnight = nextMidnight - now;
+
+            setTimeout(() => {
+                window.location.reload();
+            }, timeUntilMidnight);
+        };
+
+        checkForMidnightRefresh();
+    }, []);
+
+    // 마지막 활동 확인 후 새로 고침
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            const now = new Date();
+            const lastActivity = localStorage.getItem('lastActivity');
+            const timeoutDuration = 30 * 60 * 1000; // 30분
+
+            if (lastActivity && (now - new Date(lastActivity) > timeoutDuration)) {
+                window.location.reload();
+            }
+        }, 1000 * 60); // 매 분마다 확인
+
+        return () => clearInterval(intervalId);
+    }, []);
+
+    // 마지막 활동 시간 업데이트
+    useEffect(() => {
+        const updateLastActivity = () => {
+            localStorage.setItem('lastActivity', new Date().toISOString());
+        };
+
+        window.addEventListener('mousemove', updateLastActivity);
+        window.addEventListener('keypress', updateLastActivity);
+
+        return () => {
+            window.removeEventListener('mousemove', updateLastActivity);
+            window.removeEventListener('keypress', updateLastActivity);
+        };
+    }, []);
+
     return (
         <div className="memo-app-container">
             {loading && <Loading />}
