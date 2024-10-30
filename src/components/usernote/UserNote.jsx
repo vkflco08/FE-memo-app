@@ -61,6 +61,7 @@ const UserNote = ({ showNotification }) => {
             }
         } catch (error) {
             console.error("Failed to auto-save note:", error);
+            alert("유저노트 저장에 실패했습니다.", error);
         }
     };
 
