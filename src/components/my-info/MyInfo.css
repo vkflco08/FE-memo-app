@@ -1,0 +1,20 @@
+.coming-soon-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* 페이지 전체 높이 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    background-color: #f8f9fa; /* 배경 색상 */
+    color: #343a40; /* 텍스트 색상 */
+  }
+  
+  h1 {
+    font-size: 3rem; /* 제목 크기 */
+    margin-bottom: 20px; /* 제목 아래 여백 */
+  }
+  
+  p {
+    font-size: 1.25rem; /* 본문 크기 */
+  }
+  

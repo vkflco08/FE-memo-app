@@ -7,6 +7,8 @@ import NavBar from './components/common/NavBar';
 import MemoApp from './components/MemoApp'; 
 import AllMemos from './components/all-memos/AllMemos'; 
 import MemoDetail from './components/memo-detail/MemoDetail'; 
+import MyInfo from './components/my-info/MyInfo';
+import Statistics from './components/statistics/Statistics'
 import './styles.css'; // 전역 스타일
 
 const ProtectedLayout = ({ children, theme, toggleTheme }) => (
@@ -49,6 +51,12 @@ function App() {
 
                     {/* 메모 상세보기 페이지 */}
                     <Route path="/memo/:date" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><MemoDetail /></ProtectedLayout>} />
+
+                    {/* 메모 분석 페이지 */}
+                    <Route path="/statistics" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><Statistics /></ProtectedLayout>} />
+                    
+                    {/* 메모 분석 페이지 */}
+                    <Route path="/my-info" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><MyInfo /></ProtectedLayout>} />
                 </Routes>
             </div>
         </Router>

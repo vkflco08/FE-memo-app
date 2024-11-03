@@ -18,7 +18,7 @@ const UserNote = ({ showNotification }) => {
                     [{ header: [1, 2, false] }],
                     ['bold', 'italic', 'underline'],
                     [{ list: 'ordered' }, { list: 'bullet' }],
-                    ['clean'] // 포맷팅 제거 버튼
+                    ['clean'], // 포맷팅 제거 버튼
                 ]
             }
         });
