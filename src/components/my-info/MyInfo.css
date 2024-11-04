@@ -9,12 +9,12 @@
     color: #343a40; /* 텍스트 색상 */
   }
   
-  h1 {
+  .comming-soon-title {
     font-size: 3rem; /* 제목 크기 */
     margin-bottom: 20px; /* 제목 아래 여백 */
   }
   
-  p {
+  .comming-soon-content {
     font-size: 1.25rem; /* 본문 크기 */
   }
   
