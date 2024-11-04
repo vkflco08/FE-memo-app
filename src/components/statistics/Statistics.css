@@ -1,20 +1,66 @@
-.coming-soon-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* 페이지 전체 높이 */
-    text-align: center; /* 텍스트 중앙 정렬 */
-    background-color: #f8f9fa; /* 배경 색상 */
-    color: #343a40; /* 텍스트 색상 */
-  }
-  
-  h1 {
-    font-size: 3rem; /* 제목 크기 */
-    margin-bottom: 20px; /* 제목 아래 여백 */
-  }
-  
-  p {
-    font-size: 1.25rem; /* 본문 크기 */
-  }
-  
+.user-statistics {
+    max-width: 800px; /* 전체 컨테이너의 최대 너비 설정 */
+    margin: 0 auto; /* 중앙 정렬 */
+    text-align: center;
+    padding: 20px; /* 여백 추가 */
+    margin-top: 80px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9; /* Light background */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+}
+
+/* Dark mode styles */
+[data-theme="dark"] .user-statistics {
+    background-color: #444; /* Dark background */
+    color: #eee; /* Light text */
+}
+
+/* 차트 박스 스타일 */
+.chart-box {
+    border: 1px solid #ddd; /* 박스 테두리 */    
+    width: 80%;
+    border-radius: 10px; /* 둥근 모서리 */
+    padding: 20px; /* 안쪽 여백 */
+    background-color: #fff; /* 배경색 */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    max-width: 100%; /* 박스의 최대 너비를 100%로 설정하여 반응형 유지 */
+    height: 300px;
+    position: relative; /* 자식 요소의 위치 설정 */
+    margin: 0 auto; /* 중앙 정렬 */
+}
+
+/* Dark mode for chart boxes */
+[data-theme="dark"] .chart-box {
+    background-color: #555; /* Dark box */
+    border: 1px solid #777; /* Border color */
+    color: #eee; /* Light text color for better visibility */
+}
+
+/* 가로 구분선 스타일 */
+.divider {
+    border: none;
+    border-top: 1px solid #ddd; /* 구분선 색상 */
+    margin: 30px 0; /* 여백 */
+}
+
+/* Dark mode for dividers */
+[data-theme="dark"] .divider {
+    border-top: 1px solid #777; /* Dark mode 구분선 색상 */
+}
+
+/* Progress bar 스타일 */
+.progress-container {
+    background-color: #ddd;
+    border-radius: 10px;
+    height: 20px;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.progress-bar {
+    background-color: #4CAF50;
+    height: 100%;
+    max-width: 100%;
+    border-radius: 10px;
+}
