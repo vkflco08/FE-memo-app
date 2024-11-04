@@ -129,12 +129,19 @@
   font-family: Arial, sans-serif; /* 기본 폰트 설정 */
 }
 
+.sidebar-divider {
+  border: none; /* 기본 경계 제거 */
+  border-top: 1px solid #444; /* 상단 경계선 추가 */
+  margin: 5px 0; /* 상하 여백 추가 */
+}
+
 /* 링크 스타일 */
 .sidebar-link {
   display: block; /* 블록 형태로 표시 */
   color: #fff; /* 링크 색상 */
   text-decoration: none; /* 링크 기본 스타일 제거 */
-  padding: 10px 0; /* 패딩 추가 */
+  padding: 10px 15px;
+  margin: 15px 0;
   transition: background-color 0.3s ease; /* 배경색 전환 효과 */
   border-radius: 4px; /* 둥근 모서리 */
 }

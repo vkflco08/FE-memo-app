@@ -27,22 +27,22 @@ const NavBar = ({ theme, toggleTheme }) => {
 
       {/* 사이드바 */}
       <div className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
-        <button className="close-sidebar-button" onClick={toggleSidebar}>✖</button>
+        <button className="close-sidebar-button" onClick={toggleSidebar}>x</button>
         <div className="sidebar-content">
           {isAuthenticated ? (
             <>
               <Link to="/all-memos" className="sidebar-link" onClick={toggleSidebar}>모든 메모 보기</Link>
-              <hr className="divider" /> {/* 가로선 추가 */}
+              <hr className="sidebar-divider" /> {/* 가로선 추가 */}
               <Link to="/my-info" className="sidebar-link" onClick={toggleSidebar}>내 정보 보기</Link>
               <Link to="/statistics" className="sidebar-link" onClick={toggleSidebar}>통계 보기</Link>
-              <hr className="divider" /> {/* 가로선 추가 */}
+              <hr className="sidebar-divider" /> {/* 가로선 추가 */}
               <Link to="/" className="sidebar-link" onClick={logout}>Logout</Link>
             </>
           ) : (
             <>
               <Link to="/login" className="sidebar-link" onClick={toggleSidebar}>Login</Link>
               <Link to="/signup" className="sidebar-link" onClick={toggleSidebar}>Sign Up</Link>
-              <hr className="divider" /> {/* 가로선 추가 */}
+              <hr className="sidebar-divider" /> {/* 가로선 추가 */}
               <p className="sidebar-note">로그인 후 이용 가능합니다.</p>
             </>
           )}
