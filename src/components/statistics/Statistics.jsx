@@ -40,8 +40,6 @@ const Statistics = () => {
     const probability = statisticsData.data.memoCreationProbability;
     const memoLengths = statisticsData.data.memoLengthStats;
 
-    console.log(probability)
-
     return (
         <div className="user-statistics">
             <MemoCreationProbabilityGraph probability={probability} />
