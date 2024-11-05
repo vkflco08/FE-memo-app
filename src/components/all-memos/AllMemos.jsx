@@ -9,7 +9,7 @@ const AllMemos = () => {
   const [loading, setLoading] = useState(false); 
   const [searchLoading, setSearchLoading] = useState(false); 
   const [page, setPage] = useState(0); 
-  const [hasMore, setHasMore] = useState(true); 
+  const [totalPages, setTotalPages] = useState(0); // 전체 페이지 수 추가
   const [searchKeyword, setSearchKeyword] = useState(''); 
   const navigate = useNavigate();
 
@@ -25,23 +25,15 @@ const AllMemos = () => {
     const delayDebounceFn = setTimeout(() => {
       setPage(0); // 페이지 초기화
       setMemos([]); // 이전 메모 초기화
-      setHasMore(true); // 더 가져올 메모가 있는지 초기화
       fetchMemos(true); // 새로운 검색에 대한 메모 불러오기
     }, 500);
 
     return () => clearTimeout(delayDebounceFn);
   }, [searchKeyword]);
 
-  const handleScroll = () => {
-    const bottom = window.innerHeight + window.scrollY >= document.documentElement.offsetHeight - 1;
-    if (bottom && !loading && hasMore) {
-      setPage(prevPage => prevPage + 1); 
-    }
-  };
-
   useEffect(() => {
-    if (page > 0) {
-      fetchMemos(false);
+    if (page >= 0) {
+      fetchMemos(false); // 페이지 변경 시 메모 가져오기
     }
   }, [page]);
 
@@ -55,19 +47,17 @@ const AllMemos = () => {
     try {
       const apiUrl = searchKeyword ? `/api/memo/search` : `/api/memo/all`;
       const params = searchKeyword 
-        ? { page, size: 10, keyword: searchKeyword } 
-        : { page, size: 10 };
+        ? { page, size: 5, keyword: searchKeyword } 
+        : { page, size: 5 };
 
       const response = await axiosInstance.get(apiUrl, { params });
       const newMemos = response.data.data.content;
+      setTotalPages(response.data.data.totalPages); // 전체 페이지 수 계산
 
       if (Array.isArray(newMemos)) {
-        setMemos(prevMemos => (page === 0 ? newMemos : [...prevMemos, ...newMemos]));
+        setMemos(newMemos); // 이전 메모와 합치지 않고 해당 페이지의 메모만 설정
       }
 
-      if (newMemos.length < 10) {
-        setHasMore(false);
-      }
     } catch (error) {
       console.error("Failed to fetch memos:", error);
       setMemos([]);
@@ -99,12 +89,17 @@ const AllMemos = () => {
     }
   };
 
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  const handleNextPage = () => {
+    if (page < totalPages - 1) { // 전체 페이지를 넘지 않도록 조건 추가
+      setPage(prevPage => prevPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (page > 0) {
+      setPage(prevPage => prevPage - 1);
+    }
+  };
 
   return (
     <div className="all-memos-container">
@@ -147,8 +142,26 @@ const AllMemos = () => {
         )}
       </ul>
       {loading && <Loading />}
+      
+      <div className="pagination">
+        <button 
+          className="pagination-button" // 이전 버튼 클래스 추가
+          onClick={handlePreviousPage} 
+          disabled={page === 0}
+        >
+          이전
+        </button>
+        <span className="pagination-info">{`현재 페이지: ${page + 1} / 총 페이지: ${totalPages}`}</span> {/* 현재 페이지 및 총 페이지 표시 */}
+        <button 
+          className="pagination-button" // 다음 버튼 클래스 추가
+          onClick={handleNextPage} 
+          disabled={page >= totalPages - 1}
+        >
+          다음
+        </button>
+      </div>
     </div>
-  );
+  );  
 };
 
 export default AllMemos;

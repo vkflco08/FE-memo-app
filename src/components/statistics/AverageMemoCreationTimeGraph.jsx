@@ -34,23 +34,23 @@ const AverageMemoCreationTimeGraph = ({ averageTime }) => {
         scales: {
             x: {
                 ticks: {
-                    color: '#eee', // X축 글씨 색상 (다크 모드)
+                    color: '#111', // X축 글씨 색상 (다크 모드)
                 },
             },
             y: {
                 ticks: {
-                    color: '#eee', // Y축 글씨 색상 (다크 모드)
+                    color: '#111', // Y축 글씨 색상 (다크 모드)
                 },
             },
         },
         plugins: {
             legend: {
                 labels: {
-                    color: '#eee', // Legend 텍스트 색상 (다크 모드)
+                    color: '#111', // Legend 텍스트 색상 (다크 모드)
                 },
             },
             tooltip: {
-                backgroundColor: '#333', // Tooltip 배경 색상
+                backgroundColor: '#111', // Tooltip 배경 색상
                 titleColor: '#eee', // Tooltip 제목 색상
                 bodyColor: '#eee', // Tooltip 본문 색상
             },
@@ -64,6 +64,7 @@ const AverageMemoCreationTimeGraph = ({ averageTime }) => {
             <div className="chart-box">
                 <Line data={data} options={options} />
             </div>
+            <p className="description">사용자가 메모를 처음 작성한 시간을 기준으로 측정합니다.</p>
         </section>
     );
 };

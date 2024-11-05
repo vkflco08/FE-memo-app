@@ -12,8 +12,8 @@
 
 /* Dark mode styles */
 [data-theme="dark"] .user-statistics {
-    background-color: #444; /* Dark background */
-    color: #eee; /* Light text */
+    background-color: #444; /* Darker background */
+    color: #fff; /* Bright text */
 }
 
 /* 차트 박스 스타일 */
@@ -32,9 +32,9 @@
 
 /* Dark mode for chart boxes */
 [data-theme="dark"] .chart-box {
-    background-color: #555; /* Dark box */
-    border: 1px solid #777; /* Border color */
-    color: #eee; /* Light text color for better visibility */
+    background-color: #444; /* Darker box */
+    border: 1px solid #666; /* Border color */
+    color: #fff; /* Bright text color for better visibility */
 }
 
 /* 가로 구분선 스타일 */
@@ -46,7 +46,7 @@
 
 /* Dark mode for dividers */
 [data-theme="dark"] .divider {
-    border-top: 1px solid #777; /* Dark mode 구분선 색상 */
+    border-top: 1px solid #666; /* Darker mode 구분선 색상 */
 }
 
 /* Progress bar 스타일 */
@@ -59,8 +59,27 @@
 }
 
 .progress-bar {
-    background-color: #4CAF50;
+    background-color: #4CAF50; /* Progress bar color */
     height: 100%;
     max-width: 100%;
     border-radius: 10px;
+}
+
+/* Dark mode for progress bars */
+[data-theme="dark"] .progress-container {
+    background-color: #666; /* Darker background for progress container */
+}
+
+[data-theme="dark"] .progress-bar {
+    background-color: #76c7c0; /* Lighter color for progress bar */
+}
+
+.description {
+    color: #aaa; /* 회색으로 설정 */
+    font-size: 0.9em; /* 글자 크기 조정 */
+}
+
+/* Dark mode for description text */
+[data-theme="dark"] .description {
+    color: #ccc; /* Slightly lighter gray for better visibility */
 }
