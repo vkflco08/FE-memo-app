@@ -29,7 +29,8 @@ const MemoInput = ({ date, currentMemo, showNotification }) => {
                 });
                 showNotification("메모가 저장되었습니다"); 
             } catch (error) {
-                console.error("Failed to auto-save memo:", error);
+                // console.error("Failed to auto-save note:", error);
+                alert("메모 저장에 실패했습니다.", error);
             }
         }
     };

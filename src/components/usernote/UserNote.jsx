@@ -39,7 +39,7 @@ const UserNote = ({ showNotification }) => {
                 quillRef.current.root.innerHTML = response.data.data.content; // Quill 에디터에 초기 내용 설정
             }
         } catch (error) {
-            console.error("오류가 발생했습니다:", error);
+            // console.error("오류가 발생했습니다:", error);
             alert("유저노트를 가져오는데 실패했습니다.", error);
         }
     };
@@ -61,7 +61,7 @@ const UserNote = ({ showNotification }) => {
                 showNotification("노트가 저장되었습니다");
             }
         } catch (error) {
-            console.error("Failed to auto-save note:", error);
+            // console.error("Failed to auto-save note:", error);
             alert("유저노트 저장에 실패했습니다.", error);
         }
     };

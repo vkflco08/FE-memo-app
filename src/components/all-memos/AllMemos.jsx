@@ -33,9 +33,38 @@ const AllMemos = () => {
 
   useEffect(() => {
     if (page >= 0) {
-      fetchMemos(false); // 페이지 변경 시 메모 가져오기
+      fetchMemos(false);
     }
   }, [page]);
+
+  // 페이지 이동 핸들러
+  const handleNextPage = () => {
+    if (page < totalPages - 1) {
+      setPage(prevPage => prevPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (page > 0) {
+      setPage(prevPage => prevPage - 1);
+    }
+  };
+
+  // 키보드 이벤트 리스너 추가
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if (event.key === 'ArrowRight') {
+        handleNextPage();
+      } else if (event.key === 'ArrowLeft') {
+        handlePreviousPage();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [page, totalPages]); // 페이지와 전체 페이지가 바뀔 때마다 이벤트 핸들러 새로 설정
 
   const fetchMemos = async (isSearch) => {
     if (isSearch) {
@@ -89,18 +118,6 @@ const AllMemos = () => {
     }
   };
 
-  const handleNextPage = () => {
-    if (page < totalPages - 1) { // 전체 페이지를 넘지 않도록 조건 추가
-      setPage(prevPage => prevPage + 1);
-    }
-  };
-
-  const handlePreviousPage = () => {
-    if (page > 0) {
-      setPage(prevPage => prevPage - 1);
-    }
-  };
-
   return (
     <div className="all-memos-container">
       <input 
@@ -145,15 +162,15 @@ const AllMemos = () => {
       
       <div className="pagination">
         <button 
-          className="pagination-button" // 이전 버튼 클래스 추가
+          className="pagination-button"
           onClick={handlePreviousPage} 
           disabled={page === 0}
         >
           이전
         </button>
-        <span className="pagination-info">{`현재 페이지: ${page + 1} / 총 페이지: ${totalPages}`}</span> {/* 현재 페이지 및 총 페이지 표시 */}
+        <span className="pagination-info">{`현재 페이지: ${page + 1} / 총 페이지: ${totalPages}`}</span>
         <button 
-          className="pagination-button" // 다음 버튼 클래스 추가
+          className="pagination-button"
           onClick={handleNextPage} 
           disabled={page >= totalPages - 1}
         >

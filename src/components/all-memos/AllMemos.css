@@ -51,6 +51,7 @@
   text-overflow: ellipsis; /* 넘친 텍스트는 말줄임(...) 표시 */
   max-height: 4.5em; /* 최대 높이 설정 (약 세 줄 정도) */
   line-height: 1.5em; /* 줄 간격 설정 */
+  white-space: pre-line; /* 개행을 유지하도록 설정 */
 }
 
 .memo-date {

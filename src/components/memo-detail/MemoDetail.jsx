@@ -23,7 +23,7 @@ const MemoDetail = () => {
       setMemo(memoData);
       setEditedMemo({ title: memoData.title, content: memoData.content, date: memoData.date });
     } catch (error) {
-      console.error("Failed to fetch memo:", error);
+      // console.error("Failed to fetch memo:", error);
       alert("메모를 불러오던 중 오류가 발생했습니다.")
       navigate('/all-memos');
     } finally {
@@ -45,7 +45,8 @@ const MemoDetail = () => {
       await axiosInstance.post(`/api/memo/new`, editedMemo);
       navigate('/all-memos'); // 수정 후 메인 페이지로 이동
     } catch (error) {
-      console.error("Failed to update memo:", error.response.data);
+      // console.error("Failed to update memo:", error.response.data);
+      alert("메모 저장에 실패했습니다.", error);
     } finally {
         setLoading(false);
     }

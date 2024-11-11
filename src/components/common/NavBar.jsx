@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 import './NavBar.css';
@@ -9,6 +9,23 @@ const NavBar = ({ theme, toggleTheme }) => {
 
   // 사이드바 열기/닫기 토글 함수
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // sidebar가 열려 있고 클릭한 곳이 sidebar와 sidebar-toggle-button이 아닌 경우
+      if (sidebarOpen && !event.target.closest('.sidebar') && !event.target.closest('.sidebar-toggle-button')) {
+        setSidebarOpen(false);
+      }
+    };
+
+    // 마운트 시 이벤트 리스너 추가
+    document.addEventListener('mousedown', handleClickOutside);
+
+    // 언마운트 시 이벤트 리스너 제거
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [sidebarOpen]);
 
   return (
     <>
