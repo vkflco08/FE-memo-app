@@ -22,7 +22,7 @@ function TopicList() {
 
   const handleUpdateTopicName = async (topicId, newName) => {
     try {
-      const response = await axiosInstance.put('/api/topic/edit', {
+        await axiosInstance.put('/api/topic/edit', {
         topicId: topicId,
         topicName: newName,
       });

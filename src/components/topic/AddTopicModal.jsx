@@ -12,7 +12,6 @@ function AddTopicModal({ isOpen, onClose, setTopics }) {
       await axiosInstance.post(`/api/topic/new/${topicName}`);
       const response = await axiosInstance.get('/api/topic/member'); // 새로 추가된 목록으로 업데이트
       setTopics(response.data.data);
-      console.log(response.data.data)
       setTopicName(null)
       onClose();
     } catch (error) {
