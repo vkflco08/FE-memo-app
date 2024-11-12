@@ -9,6 +9,7 @@ import AllMemos from './components/all-memos/AllMemos';
 import MemoDetail from './components/memo-detail/MemoDetail'; 
 import MyInfo from './components/my-info/MyInfo';
 import Statistics from './components/statistics/Statistics'
+import TopicList from './components/topic/TopicList'
 import './styles.css'; // 전역 스타일
 
 const ProtectedLayout = ({ children, theme, toggleTheme }) => (
@@ -57,6 +58,9 @@ function App() {
                     
                     {/* 메모 분석 페이지 */}
                     <Route path="/my-info" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><MyInfo /></ProtectedLayout>} />
+
+                    {/* 주제 리스트 */}
+                    <Route path="/topic-list" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><TopicList /></ProtectedLayout>} />
                 </Routes>
             </div>
         </Router>
