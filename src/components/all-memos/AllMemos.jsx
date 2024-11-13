@@ -159,7 +159,6 @@ const AllMemos = () => {
         )}
       </ul>
       {loading && <Loading />}
-      
       <div className="pagination">
         <button 
           className="pagination-button"
