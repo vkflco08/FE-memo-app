@@ -26,7 +26,7 @@ const MemoApp = () => {
             setMemos(response.data.data || []);
         } catch (error) {
             console.error("Failed to fetch memos:", error);
-            alert("메모를 가져오는데 실패했습니다.", error)
+            alert("메모를 가져오는데 실패했습니다.", error);
         } finally {
             setLoading(false);
         }
@@ -34,36 +34,50 @@ const MemoApp = () => {
 
     // Fetch memos for the initial selected month
     useEffect(() => {
-        fetchMemosByMonth(selectedDate.slice(0, 7)); // YYYY-MM 형식으로 전달
-    }, []); // Empty dependency array to run only on mount
+        fetchMemosByMonth(selectedDate.slice(0, 7));
+    }, []);
 
-    // Use effect to set the current memo whenever the selected date changes
     useEffect(() => {
         const memoForSelectedDate = memos.find(memo => memo.date === selectedDate);
         setCurrentMemo(memoForSelectedDate || { title: '', content: '' });
     }, [selectedDate, memos]);
 
-    // Handle month change from Calendar
     const handleMonthChange = (newMonth, newYear) => {
         setCurrentMonth(newMonth);
         setCurrentYear(newYear);
         const formattedMonth = `${newYear}-${String(newMonth + 1).padStart(2, '0')}`;
-        fetchMemosByMonth(formattedMonth); // Fetch memos for the new month
+        fetchMemosByMonth(formattedMonth);
     };
 
     const showNotification = (message) => {
         setNotification(message);
-        setTimeout(() => setNotification(''), 2000); // 2초 후에 알림 제거
+        setTimeout(() => setNotification(''), 2000);
     };
 
-    // 자정 새로 고침
+    const handleSaveMemo = (newMemo) => {
+        setMemos((prevMemos) => {
+            // 새 메모의 날짜와 같은 날짜의 메모가 이미 존재하는지 확인
+            const memoIndex = prevMemos.findIndex((memo) => memo.date === newMemo.date);
+
+            if (memoIndex !== -1) {
+                // 기존 메모가 있는 경우, 해당 메모를 업데이트
+                const updatedMemos = [...prevMemos];
+                updatedMemos[memoIndex] = newMemo;
+                return updatedMemos;
+            } else {
+                // 기존 메모가 없는 경우, 새로운 메모를 추가
+                return [...prevMemos, newMemo];
+            }
+        });
+        setCurrentMemo(newMemo);
+    };
+
     useEffect(() => {
         const checkForMidnightRefresh = () => {
             const now = new Date();
             const nextMidnight = new Date(now);
             nextMidnight.setDate(now.getDate() + 1);
-            nextMidnight.setHours(0, 0, 0, 0); // 다음 자정으로 설정
-
+            nextMidnight.setHours(0, 0, 0, 0);
             const timeUntilMidnight = nextMidnight - now;
 
             setTimeout(() => {
@@ -74,22 +88,20 @@ const MemoApp = () => {
         checkForMidnightRefresh();
     }, []);
 
-    // 마지막 활동 확인 후 새로 고침
     useEffect(() => {
         const intervalId = setInterval(() => {
             const now = new Date();
             const lastActivity = localStorage.getItem('lastActivity');
-            const timeoutDuration = 30 * 60 * 1000; // 30분
+            const timeoutDuration = 30 * 60 * 1000;
 
             if (lastActivity && (now - new Date(lastActivity) > timeoutDuration)) {
                 window.location.reload();
             }
-        }, 1000 * 60); // 매 분마다 확인
+        }, 1000 * 60);
 
         return () => clearInterval(intervalId);
     }, []);
 
-    // 마지막 활동 시간 업데이트
     useEffect(() => {
         const updateLastActivity = () => {
             localStorage.setItem('lastActivity', new Date().toISOString());
@@ -108,9 +120,10 @@ const MemoApp = () => {
         <div className="memo-app-container">
             {loading && <Loading />}
             <div className="memo-section">
-                <MemoInput
+            <MemoInput
                     date={selectedDate}
                     currentMemo={currentMemo}
+                    onSave={handleSaveMemo}
                     showNotification={showNotification}
                 />
                 <Calendar

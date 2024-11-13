@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axiosInstance from '../common/AxiosInstance';
 import './MemoInput.css';
 
-const MemoInput = ({ date, currentMemo, showNotification }) => {
+const MemoInput = ({ date, currentMemo, onSave, showNotification }) => {
     const [title, setTitle] = useState(currentMemo.title);
     const [content, setContent] = useState(currentMemo.content);
 
@@ -27,10 +27,11 @@ const MemoInput = ({ date, currentMemo, showNotification }) => {
                     content,
                     date,
                 });
-                showNotification("메모가 저장되었습니다"); 
+                onSave({ title, content, date });
+                showNotification("메모가 저장되었습니다");
             } catch (error) {
-                // console.error("Failed to auto-save note:", error);
-                alert("메모 저장에 실패했습니다.", error);
+                console.error("Failed to auto-save memo:", error);
+                alert("메모 저장에 실패했습니다.");
             }
         }
     };
