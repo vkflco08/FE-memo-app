@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axiosInstance from '../common/AxiosInstance';
-import './Topic.css'
+import './AddTopicModal.css'
 
 function AddTopicModal({ isOpen, onClose, setTopics }) {
   const [topicName, setTopicName] = useState('');

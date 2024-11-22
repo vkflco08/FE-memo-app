@@ -33,6 +33,7 @@ const NavBar = ({ theme, toggleTheme }) => {
         <div className="navbar-container">
           <Link to="/" className="navbar-brand">ㅈㅇㄴㄹ</Link>
           <div className="navbar-menu">
+            <Link to="/topic/write" className="theme-button">글 작성</Link>  
             <button className="theme-toggle-button" onClick={toggleTheme}>
               {theme === 'light' ? '🌙' : '☀️'}
             </button>

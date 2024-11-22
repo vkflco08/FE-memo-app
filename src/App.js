@@ -10,6 +10,8 @@ import MemoDetail from './components/memo-detail/MemoDetail';
 import MyInfo from './components/my-info/MyInfo';
 import Statistics from './components/statistics/Statistics'
 import TopicList from './components/topic/TopicList'
+import TopicContents from './components/topicContent/AllTopicContent'
+import WriteTopicContents from './components/topicContent/WriteTopicContents';
 import './styles.css'; // 전역 스타일
 
 const ProtectedLayout = ({ children, theme, toggleTheme }) => (
@@ -49,18 +51,22 @@ function App() {
 
                     {/* 모든 메모 보기 페이지 */}
                     <Route path="/all-memos" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><AllMemos /></ProtectedLayout>} />
-
                     {/* 메모 상세보기 페이지 */}
                     <Route path="/memo/:date" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><MemoDetail /></ProtectedLayout>} />
+
+
+                    {/* 주제 리스트 */}
+                    <Route path="/topic-list" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><TopicList /></ProtectedLayout>} />
+                    {/* 모든 주제별 포스팅 */}
+                    <Route path="/topic/:topicName" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><TopicContents /></ProtectedLayout>} />                
+                    {/* 새로운 포스팅 */}
+                    <Route path="/topic/write" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><WriteTopicContents /></ProtectedLayout>} />
 
                     {/* 메모 분석 페이지 */}
                     <Route path="/statistics" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><Statistics /></ProtectedLayout>} />
                     
-                    {/* 메모 분석 페이지 */}
+                    {/* 마이 페이지 */}
                     <Route path="/my-info" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><MyInfo /></ProtectedLayout>} />
-
-                    {/* 주제 리스트 */}
-                    <Route path="/topic-list" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><TopicList /></ProtectedLayout>} />
                 </Routes>
             </div>
         </Router>

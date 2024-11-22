@@ -1,0 +1,74 @@
+/* topic-card 기본 스타일 */
+.topic-card {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between; /* 양쪽 끝으로 배치 */
+    align-items: center; /* 수직 중앙 정렬 */
+}
+
+/* hover 효과 */
+.topic-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px); /* hover 시 살짝 들어 올림 */
+}
+
+/* 토픽 이름 스타일 */
+.topic-name {
+    max-width: 50%;
+    word-wrap: break-word; /* 긴 단어가 줄바꿈되도록 */
+    overflow-wrap: break-word;
+    font-size: 18px;
+    color: #007bff;
+    font-weight: bold;
+    margin-right: 10px; /* 제목과 오른쪽 컨텐츠 사이에 간격 추가 */
+}
+
+.topic-actions {
+    display: flex;
+    align-items: center;
+}
+
+/* 포스팅 개수 스타일 */
+.topic-card p {
+    margin: 0; /* 기본 margin 제거 */
+    margin-right: 10px; /* 포스팅 개수와 버튼 사이의 간격 */
+    font-size: 14px;
+    color: #666;
+}
+
+/* 버튼 스타일 */
+.edit-button {
+    margin-left: 10px; /* 버튼과 포스팅 개수 사이의 간격 */
+    padding: 5px 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.edit-button:hover {
+    background-color: #0056b3;
+}
+
+/* 다크 모드 스타일 */
+[data-theme="dark"] .topic-card {
+    background-color: #333;
+    border: 1px solid #444;
+}
+
+[data-theme="dark"] .topic-name {
+    color: #66aaff;
+}
+
+[data-theme="dark"] .content-count {
+    color: #bbb;
+}

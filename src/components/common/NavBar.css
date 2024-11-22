@@ -172,3 +172,16 @@
   font-size: 14px; /* 폰트 크기 조정 */
   margin: 10px 0; /* 상하 여백 추가 */
 }
+
+.theme-button {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 15px;
+  transition: background-color 0.3s ease;
+  border-radius: 4px;
+}
+
+.theme-button:hover {
+  background-color: #444; /* hover 시 배경색 변경 */
+}

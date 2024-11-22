@@ -3,7 +3,7 @@ import axiosInstance from '../common/AxiosInstance';
 import TopicCard from './TopicCard.jsx';
 import AddTopicModal from './AddTopicModal';
 import Loading from '../loading/Loading'; 
-import './Topic.css';
+import './TopicList.css';
 
 function TopicList() {
   const [topics, setTopics] = useState([]);
@@ -14,7 +14,7 @@ function TopicList() {
     const fetchTopics = async () => {
       try {
         setIsLoading(true);  // 로딩 시작
-        const response = await axiosInstance.get('/api/topic/member');
+        const response = await axiosInstance.get('/api/topic/list');
         setTopics(response.data.data);
       } catch (error) {
         alert("주제를 불러오는데 실패했습니다.");
@@ -46,7 +46,7 @@ function TopicList() {
   return (
     <div className="topic-list-container">
       <div className="header">
-        <h2>Your Topics</h2>
+        <div className='topic-main-title'>Your Topics</div>
         <button className="add-topic-btn" onClick={toggleModal}>
           {isModalOpen ? "Cancel" : "+ Add Topic"}
         </button>
@@ -62,7 +62,7 @@ function TopicList() {
               <TopicCard 
                 key={topic.topicId} 
                 topicId={topic.topicId}
-                name={topic.topicName} 
+                topicName={topic.topicName} 
                 contentNum={topic.contentNum} 
                 onUpdateTopicName={handleUpdateTopicName}
               />
