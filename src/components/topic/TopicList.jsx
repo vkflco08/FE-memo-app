@@ -48,7 +48,7 @@ function TopicList() {
       <div className="header">
         <div className='topic-main-title'>Your Topics</div>
         <button className="add-topic-btn" onClick={toggleModal}>
-          {isModalOpen ? "Cancel" : "+ Add Topic"}
+          + Add Topic
         </button>
       </div>
       <hr className="topic-divider" />

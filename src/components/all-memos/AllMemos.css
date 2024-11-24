@@ -27,7 +27,7 @@
   margin: 10px 0; /* 위아래 여백만 추가 */
   cursor: pointer;
   transition: box-shadow 0.3s ease, transform 0.3s ease;
-  box-sizing: border-box; /* padding과 border 포함 */
+   box-sizing: border-box; /*padding과 border 포함 */
   position: relative; /* 삭제 버튼을 절대 위치시킬 기준 요소로 설정 */
 }
 
@@ -49,7 +49,7 @@
   white-space: normal; /* 긴 내용은 자동으로 줄바꿈 */
   overflow: hidden; /* 내용이 요소를 벗어나지 않도록 */
   text-overflow: ellipsis; /* 넘친 텍스트는 말줄임(...) 표시 */
-  max-height: 4.5em; /* 최대 높이 설정 (약 세 줄 정도) */
+  max-height: 5.5em; /* 최대 높이 설정 (약 세 줄 정도) */
   line-height: 1.5em; /* 줄 간격 설정 */
   white-space: pre-line; /* 개행을 유지하도록 설정 */
 }
@@ -58,6 +58,17 @@
   text-align: right;
   font-size: 14px;
   color: #999; /* Date color */
+}
+
+.memo-content {
+  display: -webkit-box; /* Flexbox처럼 작동 */
+  -webkit-line-clamp: 3; /* 최대 3줄 표시 */
+  -webkit-box-orient: vertical; /* 수직으로 박스 정렬 */
+  overflow: hidden; /* 넘치는 텍스트 숨김 */
+  text-overflow: ellipsis; /* 초과된 부분에 ... 추가 */
+  line-height: 1.5; /* 줄 간격 설정 */
+  height: calc(4em * 3); /* 3줄 높이 계산 */
+  white-space: pre-line; /* 텍스트 개행 반영 */
 }
 
 .content-container {
@@ -103,6 +114,7 @@
 
 [data-theme="dark"] .memo-item p {
   color: rgb(200, 200, 200); /* Lighter text color */
+  border: 1px solid #444;
 }
 
 [data-theme="dark"] .memo-date {

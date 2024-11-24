@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axiosInstance from "../common/AxiosInstance"; // axiosInstance 사용
+import { useNavigate } from 'react-router-dom';
 import "./WriteTopicContents.css"; // 스타일을 위한 별도 CSS 파일
 
 const WriteTopicContents = () => {
@@ -9,6 +10,7 @@ const WriteTopicContents = () => {
   const [selectedTopicId, setSelectedTopicId] = useState(0); // topicId 저장
   const [newTopic, setNewTopic] = useState("");
   const [isAddTopicPopupOpen, setIsAddTopicPopupOpen] = useState(false);
+  const navigate = useNavigate();
 
   // 시리즈 목록 가져오기
   useEffect(() => {
@@ -74,13 +76,16 @@ const WriteTopicContents = () => {
         content,
       };
 
-      await axiosInstance.post(`/api/topic-content/new`, payload);
+      const response = await axiosInstance.post(`/api/topic-content/new`, payload);
       alert("글이 성공적으로 저장되었습니다.");
       setTitle("");
       setContent("");
       setSelectedTopicId(0); // 초기화
 
-      // 해당 주제별 포스트 목록으로 이동
+      const responseData = response.data.data
+      navigate(`/topic/${responseData.topicId}`, {
+        state: { topicName: responseData.topicName }, 
+      });
     } catch (error) {
       console.error("Failed to save post:", error);
       alert("글 저장에 실패했습니다.");

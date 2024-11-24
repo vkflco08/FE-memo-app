@@ -9,13 +9,15 @@ const AllMemos = () => {
   const [loading, setLoading] = useState(false); 
   const [searchLoading, setSearchLoading] = useState(false); 
   const [page, setPage] = useState(0); 
-  const [totalPages, setTotalPages] = useState(0); // 전체 페이지 수 추가
+  const [totalPages, setTotalPages] = useState(0); 
   const [searchKeyword, setSearchKeyword] = useState(''); 
   const navigate = useNavigate();
 
   const truncateContent = (content, maxLength) => {
-    return content.length > maxLength ? content.substring(0, maxLength) + '...' : content;
-  };
+    if (content.length <= maxLength) return content;
+    const start = content.substring(0, maxLength); 
+    return (`${start} ...`); 
+  };  
 
   useEffect(() => {
     fetchMemos(true); // 초기 메모 로드
@@ -140,8 +142,10 @@ const AllMemos = () => {
             <div className="content-container" key={memo.date}>
               <li className="memo-item" onClick={() => handleMemoClick(memo.date)}>
                 <h3>{memo.title}</h3>
-                <p>{truncateContent(memo.content, 100)}</p>
-                <div className="memo-date">{memo.date}</div>
+                <p className="memo-content">
+                  {truncateContent(memo.content, 100)}
+                </p><div className="memo-date">{memo.date}
+                </div>
                 <button 
                   className="delete-button" 
                   onClick={(e) => {
@@ -152,6 +156,7 @@ const AllMemos = () => {
                   X
                 </button>
               </li>
+
             </div>
           ))
         ) : (

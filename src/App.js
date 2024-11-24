@@ -12,6 +12,7 @@ import Statistics from './components/statistics/Statistics'
 import TopicList from './components/topic/TopicList'
 import TopicContents from './components/topicContent/AllTopicContent'
 import WriteTopicContents from './components/topicContent/WriteTopicContents';
+import TopicContentDetail from './components/topicContent/TopicContentDetail';
 import './styles.css'; // 전역 스타일
 
 const ProtectedLayout = ({ children, theme, toggleTheme }) => (
@@ -58,10 +59,12 @@ function App() {
                     {/* 주제 리스트 */}
                     <Route path="/topic-list" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><TopicList /></ProtectedLayout>} />
                     {/* 모든 주제별 포스팅 */}
-                    <Route path="/topic/:topicName" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><TopicContents /></ProtectedLayout>} />                
+                    <Route path="/topic/:topicId" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><TopicContents /></ProtectedLayout>} />                
                     {/* 새로운 포스팅 */}
                     <Route path="/topic/write" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><WriteTopicContents /></ProtectedLayout>} />
-
+                    {/* 포스팅 디테일 */}
+                    <Route path="/topicContents/:topicContentsId" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><TopicContentDetail /></ProtectedLayout>} />
+                    
                     {/* 메모 분석 페이지 */}
                     <Route path="/statistics" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><Statistics /></ProtectedLayout>} />
                     
