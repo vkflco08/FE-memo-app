@@ -25,10 +25,11 @@ const WriteTopicContents = () => {
         const validTopics = response.data.data.filter(topic => topic.topicName);
         setTopics(validTopics); // 유효한 토픽만 상태에 설정
       } else {
-        console.error("응답 데이터가 없습니다.");
+        alert("응답 데이터가 없습니다")
+        // console.error("응답 데이터가 없습니다.");
       }
     } catch (error) {
-      console.error("Failed to fetch topics:", error);
+      // console.error("Failed to fetch topics:", error);
       alert("시리즈 목록을 불러오는 데 실패했습니다.");
     }
   };
@@ -56,7 +57,7 @@ const WriteTopicContents = () => {
       alert("새로운 시리즈가 추가되었습니다.");
       setIsAddTopicPopupOpen(false); // 팝업 닫기
     } catch (error) {
-      console.error("Failed to add topic:", error);
+      // console.error("Failed to add topic:", error);
       alert("새로운 시리즈 추가에 실패했습니다.");
     }
   };  
@@ -92,14 +93,6 @@ const WriteTopicContents = () => {
     }
   };
 
-  // 엔터 키로 저장 처리
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault(); // 기본 동작 방지
-      handleSavePost();
-    }
-  };
-
   const handleNewTopicKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault(); // 기본 동작 방지
@@ -115,13 +108,11 @@ const WriteTopicContents = () => {
           placeholder="제목을 입력하세요"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          onKeyDown={handleKeyDown}  // 엔터 키 눌렀을 때 호출
         />
         <textarea
           placeholder="내용을 입력하세요"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          onKeyDown={handleKeyDown}  // 엔터 키 눌렀을 때 호출
         />
       </div>
 

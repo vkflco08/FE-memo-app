@@ -95,7 +95,8 @@ const AllTopicContents = () => {
       }
   
     } catch (error) {
-      console.error("Failed to fetch topicContents:", error);
+      // console.error("Failed to fetch topicContents:", error);
+      alert("내용을 불러오던 중 에러가 발생했습니다.")
       setTopicContents([]);
     } finally {
       if (isSearch) {
@@ -128,7 +129,8 @@ const AllTopicContents = () => {
         );
   
       } catch (error) {
-        console.error("메모 삭제 실패:", error);
+        // console.error("메모 삭제 실패:", error);
+        alert("메모 삭제 실패")
       } finally {
         setLoading(false);
       }
