@@ -81,8 +81,7 @@ const AllTopicContents = () => {
     }
   
     try {
-      const apiUrl = searchKeyword ? `/api/topic-content/${topicId}/search` : `/api/topic-content/${topicId}`;
-      console.log(apiUrl)
+      const apiUrl = searchKeyword ? `/api/topic-content/${topicId}/search` : `/api/topic-content/${topicId}/all`;
       const params = searchKeyword 
         ? { page, size: 5, keyword: searchKeyword } 
         : { page, size: 5 };
@@ -108,7 +107,9 @@ const AllTopicContents = () => {
   };
 
   const handleTopicContentsClick = (topicContentsId) => {
-    navigate(`/topicContents/${topicContentsId}`);
+    navigate(`/topicContents/${topicContentsId}`, {
+      state: { topicId },
+    });
   };
 
   const handleDeleteMemo = async (topicContentsId) => {

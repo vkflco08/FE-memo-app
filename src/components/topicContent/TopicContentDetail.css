@@ -1,26 +1,125 @@
-.coming-soon-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* 페이지 전체 높이 */
-    text-align: center; /* 텍스트 중앙 정렬 */
-    background-color: #f8f9fa; /* 배경 색상 */
-    color: #343a40; /* 텍스트 색상 */
+/* 라이트 모드 스타일 */
+.topic-content-detail-container {
+  height: 90vh; /* 전체 화면 높이 */
+  display: flex; /* Flexbox로 자식 요소 정렬 */
+  justify-content: center; /* 가로 방향 중앙 정렬 */
+  align-items: center; /* 세로 방향 중앙 정렬 */
+  padding: 20px;
+  padding-top: 75px;
+  background-color: #f8f9fa; /* 기본 배경색 */
+  border-radius: 8px; /* 모서리 둥글게 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+}
+
+.topic-content-detail {
+  display: flex; /* Flexbox 사용 */
+  flex-direction: column; /* 세로 방향 정렬 */
+  width: 100%; /* 전체 너비 사용 */
+  max-width: 600px; /* 최대 너비 설정 */
+  background-color: #ffffff; /* 배경색 */
+  border-radius: 8px; /* 모서리 둥글게 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  padding: 20px; /* 내부 여백 */
+}
+
+
+.topic-content-title-input {
+  padding: 10px; /* 내부 여백 */
+  margin-bottom: 15px; /* 아래 여백 */
+  font-size: 16px; /* 글꼴 크기 */
+  border: 1px solid #ced4da; /* 테두리 색상 */
+  border-radius: 4px; /* 모서리 둥글게 */
+  transition: border-color 0.3s; /* 테두리 색상 변화 효과 */
+}
+
+.topic-content-title-input:focus {
+  border-color: #007bff; /* 포커스 시 테두리 색상 */
+  outline: none; /* 기본 아웃라인 제거 */
+}
+
+.topic-content-textarea {
+  padding: 10px; /* 내부 여백 */
+  margin-bottom: 20px; /* 아래 여백 */
+  font-size: 16px; /* 글꼴 크기 */
+  border: 1px solid #ced4da; /* 테두리 색상 */
+  border-radius: 4px; /* 모서리 둥글게 */
+  resize: vertical; /* 수직으로 크기 조절 가능 */
+  transition: border-color 0.3s; /* 테두리 색상 변화 효과 */
+  height: 300px; /* 고정 높이 */
+}
+
+.topic-content-textarea:focus {
+  border-color: #007bff; /* 포커스 시 테두리 색상 */
+  outline: none; /* 기본 아웃라인 제거 */
+}
+
+.save-btn {
+  padding: 10px 15px; /* 내부 여백 */
+  font-size: 16px; /* 글꼴 크기 */
+  color: #fff; /* 글자 색상 */
+  background-color: #007bff; /* 배경색 */
+  border: none; /* 테두리 제거 */
+  border-radius: 4px; /* 모서리 둥글게 */
+  cursor: pointer; /* 포인터 커서 */
+  transition: background-color 0.3s; /* 배경색 변화 효과 */
+}
+
+.save-btn:hover {
+  background-color: #0056b3; /* 호버 시 배경색 변화 */
+}
+
+/* 다크 모드 스타일 */
+[data-theme="dark"] .topic-content-detail-container {
+  background-color: #444; /* 어두운 배경 */
+  color: #e0e0e0; /* 텍스트 색상 */
+}
+
+[data-theme="dark"] .topic-content-detail {
+  background-color: #292929; /* 어두운 배경 */
+  color: #e0e0e0; /* 텍스트 색상 */
+  border: 1px solid #444; /* 어두운 테두리 */
+}
+
+[data-theme="dark"] .topic-content-title-input {
+  border: 1px solid #555; /* 어두운 테두리 색상 */
+  background-color: #333; /* 어두운 입력 배경 */
+  color: #e0e0e0; /* 텍스트 색상 */
+}
+
+[data-theme="dark"] .topic-content-title-input:focus {
+  border-color: #66aaff; /* 포커스 시 밝은 테두리 색상 */
+}
+
+[data-theme="dark"] .topic-content-textarea {
+  border: 1px solid #555; /* 어두운 테두리 색상 */
+  background-color: #333; /* 어두운 textarea 배경 */
+  color: #e0e0e0; /* 텍스트 색상 */
+}
+
+[data-theme="dark"] .topic-content-textarea:focus {
+  border-color: #66aaff; /* 포커스 시 밝은 테두리 색상 */
+}
+
+[data-theme="dark"] .save-btn {
+  background-color: #007bff; /* 버튼 색상 유지 */
+}
+
+[data-theme="dark"] .save-btn:hover {
+  background-color: #0056b3; /* 호버 색상 유지 */
+}
+
+/* 반응형 조정 */
+@media (max-width: 600px) {
+  .topic-content-detail-container {
+    padding: 15px; /* 모바일에서 내부 여백 조정 */
   }
-  
-  .comming-soon-title {
-    font-size: 3rem; /* 제목 크기 */
-    margin-bottom: 20px; /* 제목 아래 여백 */
+
+  .topic-content-title-input,
+  .topic-content-textarea {
+    font-size: 14px; /* 모바일에서 글꼴 크기 조정 */
   }
-  
-  .comming-soon-content {
-    font-size: 1.25rem; /* 본문 크기 */
+
+  .save-btn {
+    font-size: 14px; /* 모바일에서 글꼴 크기 조정 */
   }
-  
-  /* 다크 모드 */
-[data-theme="dark"] .coming-soon-container {
-  background-color: #444; /* 어두운 모드에서의 배경색 */
-  border: 1px solid #666; /* 다크 모드 테두리 색 */
-  color: #eee; /* 텍스트 색 */
 }

@@ -63,7 +63,7 @@ function App() {
                     {/* 새로운 포스팅 */}
                     <Route path="/topic/write" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><WriteTopicContents /></ProtectedLayout>} />
                     {/* 포스팅 디테일 */}
-                    <Route path="/topicContents/:topicContentsId" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><TopicContentDetail /></ProtectedLayout>} />
+                    <Route path="/topicContents/:contentId" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><TopicContentDetail /></ProtectedLayout>} />
                     
                     {/* 메모 분석 페이지 */}
                     <Route path="/statistics" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><Statistics /></ProtectedLayout>} />

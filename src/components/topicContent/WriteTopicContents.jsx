@@ -87,7 +87,7 @@ const WriteTopicContents = () => {
         state: { topicName: responseData.topicName }, 
       });
     } catch (error) {
-      console.error("Failed to save post:", error);
+      // console.error("Failed to save post:", error);
       alert("글 저장에 실패했습니다.");
     }
   };
