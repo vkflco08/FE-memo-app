@@ -53,6 +53,12 @@ const MyInfo = () => {
     if (formData.profileImage && formData.profileImage instanceof File) {
       payload.append('profileImage', formData.profileImage);
     }
+
+    // JSON 객체를 문자열로 변환하여 FormData에 추가
+    payload.append('memberProfileDtoRequest', JSON.stringify({
+      name: formData.name,
+      email: formData.email,
+    }));
     
     // 디버깅용 로그 추가
     console.log("payload: ", payload);
@@ -61,7 +67,11 @@ const MyInfo = () => {
     console.log("formData.profileImage: ", formData.profileImage);
   
     try {
-      const response = await axiosInstance.put('/api/member/info_edit', payload);
+      const response = await axiosInstance.put('/api/member/info_edit', payload, {
+        headers: {
+          'Content-Type': 'multipart/form-data', // form-data 전송을 위한 헤더
+        },
+      });
       console.log("response: ", response);
       alert('프로필이 수정되었습니다.');
       setProfile(response.data.data);
