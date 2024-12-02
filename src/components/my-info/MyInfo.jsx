@@ -54,7 +54,14 @@ const MyInfo = () => {
 
     try {
       console.log("payload: ", payload)
-      const response = await axiosInstance.put('/api/member/info_edit', payload);
+      console.log("name: ", formData.name)
+      console.log("email: ", formData.email)
+      console.log("profileImage: ", formData.profileImage)
+      const response = await axiosInstance.put('/api/member/info_edit', {
+        name : formData.name,
+        email : formData.email,
+        profileImage : formData.profileImage
+      });
       console.log("response: ", response)
       alert('프로필이 수정되었습니다.');
       setProfile(response.data.data);
