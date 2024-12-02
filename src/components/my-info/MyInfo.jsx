@@ -1,14 +1,138 @@
-import React from 'react';
-import './MyInfo.css'; // 스타일 파일을 추가할 수 있습니다.
+import React, { useState, useEffect } from 'react';
+import axiosInstance from '../common/AxiosInstance';
+import Loading from '../loading/Loading';
+import FileUpload from './FileUpload';
+import './MyInfo.css'; // 스타일 파일 추가
 
-const ComingSoon = () => {
+const MyInfo = () => {
+  const [profile, setProfile] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    profileImage: '', // 수정된 프로필 이미지 상태
+  });
+
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        setIsLoading(true);
+        const response = await axiosInstance.get('/api/member/info');
+        setProfile(response.data.data);
+        setFormData({
+          name: response.data.data.name,
+          email: response.data.data.email,
+          profileImage: response.data.data.profileImage || '',
+        });
+      } catch (error) {
+        alert('내 정보를 불러오는데 실패했습니다.');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchProfile();
+  }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  // 이미지 파일 변경 처리
+  const handleFileChange = (file) => {
+    setFormData((prevData) => ({ ...prevData, profileImage: file }));
+  };
+
+  const handleSave = async () => {
+    const payload = new FormData();
+    payload.append('name', formData.name);
+    payload.append('email', formData.email);
+    if (formData.profileImage instanceof File) {
+      payload.append('profileImage', formData.profileImage);
+    }
+
+    try {
+      const response = await axiosInstance.put('/api/member/info_edit', payload);
+      alert('프로필이 수정되었습니다.');
+      setProfile(response.data.data);
+      setIsEditMode(false);
+    } catch (error) {
+      alert('프로필 수정에 실패했습니다.');
+    }
+  };
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  };
+
   return (
-    <div className="coming-soon-container">
-      <p className='comming-soon-title'>내정보 페이지를 준비중입니다!</p>
-      <p className='comming-soon-content'>이 페이지는 곧 사용할 수 있게 됩니다. 조금만 기다려 주세요.</p>
-      <p className='comming-soon-content'>감사합니다!</p>
+    <div className="my-info-container">
+      {isLoading && <Loading />}
+      <div className="my-info-profile-section">
+      <img
+          src={formData.profileImage instanceof File ? URL.createObjectURL(formData.profileImage) : profile.profileImage || 'https://via.placeholder.com/150'}
+          alt="Profile"
+          className="my-info-profile-picture"
+          />
+        {isEditMode ? (       
+          <FileUpload onChange={handleFileChange} />
+        ):(<></>)}
+        <div className="my-info-profile-details">
+          {isEditMode ? (
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleInputChange}
+              className="my-info-input"
+            />
+          ) : (
+            <h2>{profile.name}</h2>
+          )}
+          <p>@{profile.loginId}</p>
+        </div>
+      </div>
+      <div className="my-info-additional-info">
+        <p>
+          <strong>아이디:</strong> {profile.loginId}
+        </p>
+        <p>
+          <strong>이메일:</strong>{' '}
+          {isEditMode ? (
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              className="my-info-input"
+            />
+          ) : (
+            profile.email
+          )}
+        </p>
+        <p>
+          <strong>가입 날짜:</strong>{' '}
+          {profile.createdDate ? formatDate(profile.createdDate) : 'Unknown Date'}
+        </p>
+      </div>
+      <div className="my-info-actions">
+        {isEditMode ? (
+          <button className="my-info-save-button" onClick={handleSave}>
+            수정된 프로필 저장
+          </button>
+        ) : (
+          <button className="my-info-edit-button" onClick={() => setIsEditMode(true)}>
+            프로필 수정
+          </button>
+        )}
+      </div>
     </div>
   );
 };
 
-export default ComingSoon;
+export default MyInfo;

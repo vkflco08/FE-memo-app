@@ -28,6 +28,7 @@ const MemoApp = () => {
             console.error("Failed to fetch memos:", error);
             alert("메모를 가져오는데 실패했습니다.", error);
         } finally {
+            // window.location.reload()
             setLoading(false);
         }
     };

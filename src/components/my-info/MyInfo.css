@@ -1,26 +1,175 @@
-.coming-soon-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* 페이지 전체 높이 */
-    text-align: center; /* 텍스트 중앙 정렬 */
-    background-color: #f8f9fa; /* 배경 색상 */
-    color: #343a40; /* 텍스트 색상 */
-  }
-  
-  .comming-soon-title {
-    font-size: 3rem; /* 제목 크기 */
-    margin-bottom: 20px; /* 제목 아래 여백 */
-  }
-  
-  .comming-soon-content {
-    font-size: 1.25rem; /* 본문 크기 */
-  }
-  
-  /* 다크 모드 */
-[data-theme="dark"] .coming-soon-container {
-  background-color: #444; /* 어두운 모드에서의 배경색 */
-  border: 1px solid #666; /* 다크 모드 테두리 색 */
-  color: #eee; /* 텍스트 색 */
+/* 전체 컨테이너 */
+.my-info-container {
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top: 90px;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* 프로필 섹션 */
+.my-info-profile-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* 프로필 사진 */
+.my-info-profile-picture {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  object-fit: cover;
+}
+
+/* 사용자 이름 및 ID */
+.my-info-profile-details {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.my-info-user-name {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.my-info-user-login-id {
+  font-size: 1em;
+  color: #555;
+}
+
+/* 추가 정보 */
+.my-info-additional-info {
+  text-align: left;
+  margin-top: 20px;
+  padding: 10px;
+  padding-left: 20px;
+  font-size: 0.9em;
+  border-radius: 16px;
+  background-color: #333;
+  border: 1px solid #333;
+}
+
+.my-info-additional-info p {
+  margin: 10px 0;
+  line-height: 1.4;
+}
+
+/* 액션 버튼 */
+.my-info-actions {
+  margin-top: 20px;
+}
+
+.my-info-edit-button,
+.my-info-delete-button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 1em;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.my-info-edit-button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.my-info-edit-button:hover {
+  background-color: #45a049;
+}
+
+/* 수정 버튼 */
+.my-info-save-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.my-info-save-button:hover {
+  background-color: #45a049;
+}
+
+.my-info-input {
+  padding: 0.25rem 0.5rem;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.my-info-image-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+}
+
+.my-info-image-instruction {
+  margin-top: 10px;
+  font-size: 0.9em;
+  color: #777;
+}
+
+.my-info-file-input{
+  display: none;
+}
+
+.my-info-file-select-button {
+  padding: 10px 15px;
+  font-size: 1em;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.my-info-file-select-button:hover {
+  background-color: #45a049;
+}
+
+.my-info-drag-container {
+  position: relative;
+  border: 3px dashed #dbdbdb;
+  text-align: center;
+  padding: 20px;
+  border-radius: 10px;
+  transition: border-color 0.3s;
+}
+
+.my-info-drag-container.dragging {
+  border-color: #5b975b;
+}
+
+.my-info-drag-container .drag-message {
+  font-size: 16px;
+  color: #555;
+}
+
+[data-theme="dark"] .my-info-container {
+  background-color: #444;
+  color: #eee;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .my-info-profile-details {
+  color: #fff;
+}
+
+[data-theme="dark"] .topic-item {
+  background-color: #555;
+  color: #eee;
 }

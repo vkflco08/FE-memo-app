@@ -41,6 +41,7 @@ const UserNote = ({ showNotification }) => {
         } catch (error) {
             // console.error("오류가 발생했습니다:", error);
             alert("유저노트를 가져오는데 실패했습니다.", error);
+            // window.location.reload()
         }
     };
 

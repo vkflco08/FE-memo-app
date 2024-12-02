@@ -31,6 +31,7 @@ const WriteTopicContents = () => {
     } catch (error) {
       // console.error("Failed to fetch topics:", error);
       alert("시리즈 목록을 불러오는 데 실패했습니다.");
+      
     }
   };
 
