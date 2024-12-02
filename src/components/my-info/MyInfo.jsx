@@ -48,21 +48,21 @@ const MyInfo = () => {
     const payload = new FormData();
     payload.append('name', formData.name);
     payload.append('email', formData.email);
-    if (formData.profileImage instanceof File) {
+    
+    // 프로필 이미지가 존재하면 FormData에 추가
+    if (formData.profileImage && formData.profileImage instanceof File) {
       payload.append('profileImage', formData.profileImage);
     }
-
+    
+    // 디버깅용 로그 추가
+    console.log("payload: ", payload);
+    console.log("formData.name: ", formData.name);
+    console.log("formData.email: ", formData.email);
+    console.log("formData.profileImage: ", formData.profileImage);
+  
     try {
-      console.log("payload: ", payload)
-      console.log("name: ", formData.name)
-      console.log("email: ", formData.email)
-      console.log("profileImage: ", formData.profileImage)
-      const response = await axiosInstance.put('/api/member/info_edit', {
-        name : formData.name,
-        email : formData.email,
-        profileImage : formData.profileImage
-      });
-      console.log("response: ", response)
+      const response = await axiosInstance.put('/api/member/info_edit', payload);
+      console.log("response: ", response);
       alert('프로필이 수정되었습니다.');
       setProfile(response.data.data);
       setIsEditMode(false);
