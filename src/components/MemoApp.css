@@ -35,7 +35,6 @@
 
 /* 섹션 스타일 */
 .memo-section {
-    max-width: 750px;
     flex: 0 0 48%; /* flex-grow와 flex-shrink을 모두 0으로 설정하여 고정 너비 유지 */
     padding: 20px;
     margin-right: 20px;
