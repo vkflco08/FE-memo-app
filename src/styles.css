@@ -122,9 +122,13 @@ h1 {
 }
 
 .theme-toggle-button {
+    position: absolute; /* Positioned relative to parent */
+    top: 10px; 
+    right: 10px; 
     background-color: var(--navbar-text-color);
     color: var(--navbar-bg-color);
     border: none;
+    margin: 10px;
     padding: 0.5rem 1rem;
     cursor: pointer;
     border-radius: 5px;

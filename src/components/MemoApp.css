@@ -24,7 +24,7 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
-    padding-top: 75px;
+    padding-top: 85px;
     background-color: rgb(250, 250, 250); 
 }
 
@@ -81,7 +81,7 @@
 
 @media (max-width: 437px) {
     .memo-app-container {
-        padding-top: 73px;
+        padding-top: 83px;
         width: 90%;
     }
     .memo-section {

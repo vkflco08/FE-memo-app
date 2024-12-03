@@ -69,7 +69,10 @@ function App() {
                     <Route path="/statistics" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><Statistics /></ProtectedLayout>} />
                     
                     {/* 마이 페이지 */}
-                    <Route path="/my-info" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}><MyInfo /></ProtectedLayout>} />
+                    <Route path="/my-info" element={<ProtectedLayout theme={theme} toggleTheme={toggleTheme}>
+                        <MyInfo theme={theme} toggleTheme={toggleTheme} />
+                        </ProtectedLayout>
+                    } />
                 </Routes>
             </div>
         </Router>

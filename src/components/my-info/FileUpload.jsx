@@ -11,21 +11,19 @@ const FileUpload = ({ onChange }) => {
 
   return (
     <div className="file-upload-container">
-      <label htmlFor="fileInput" className="file-upload-label">
-        <input
-          type="file"
-          id="fileInput"
-          onChange={handleFileSelect}
-          className="file-upload-input"
-        />
-        <button
-          type="button"
-          onClick={() => document.getElementById('fileInput').click()}
-          className="file-upload-button"
-        >
-          파일 선택
-        </button>
-      </label>
+      <input
+        type="file"
+        id="fileInput"
+        onChange={handleFileSelect}
+        className="file-upload-input"
+      />
+      <button
+        type="button"
+        onClick={() => document.getElementById('fileInput').click()}
+        className="file-upload-button"
+      >
+        파일 선택
+      </button>
     </div>
   );
 };

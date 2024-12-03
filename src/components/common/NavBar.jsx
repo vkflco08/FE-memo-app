@@ -1,14 +1,38 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { AuthContext } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
+import axiosInstance from '../common/AxiosInstance';
 import './NavBar.css';
 
-const NavBar = ({ theme, toggleTheme }) => {
+const NavBar = () => {
   const { isAuthenticated, logout } = useContext(AuthContext);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [profileImage, setProfileImage] = useState('');
 
   // 사이드바 열기/닫기 토글 함수
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+
+  // 프로필 이미지 가져오기
+  const fetchProfile = async () => {
+    try {
+      const response = await axiosInstance.get('/api/member/info');
+      const profileImage = response.data.data.profileImage;
+      // 경로에서 uploads 이후의 부분만 추출
+      const relativePath = profileImage.split('uploads')[1];
+
+      // 수정된 URL로 프로필 이미지 설정
+      setProfileImage(`${process.env.REACT_APP_API_BASE_URL}/uploads${relativePath}`);
+    } catch (error) {
+      console.error(error);
+      alert('내 정보를 불러오는데 실패했습니다.');
+    }
+  };
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchProfile(); // 사용자 인증되었을 때만 프로필 로드
+    }
+  }, [isAuthenticated]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -33,12 +57,18 @@ const NavBar = ({ theme, toggleTheme }) => {
         <div className="navbar-container">
           <Link to="/" className="navbar-brand">ㅈㅇㄴㄹ</Link>
           <div className="navbar-menu">
-            <Link to="/topic/write" className="theme-button">글 작성</Link>  
-            <button className="theme-toggle-button" onClick={toggleTheme}>
-              {theme === 'light' ? '🌙' : '☀️'}
-            </button>
-            {/* 서랍 아이콘 추가 */}
-            <button className="sidebar-toggle-button" onClick={toggleSidebar}>☰</button>
+            <Link to="/topic/write" className="theme-button">글 작성</Link>
+            {isAuthenticated && profileImage && (
+              <img
+                src={profileImage}  // 수정된 프로필 이미지 URL
+                alt="Profile"
+                className="profile-picture"
+                onClick={() => {
+                  toggleSidebar();
+                  fetchProfile(); // 프로필 업데이트
+                }}
+              />
+            )}
           </div>
         </div>
       </nav>

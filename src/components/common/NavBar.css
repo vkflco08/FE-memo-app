@@ -185,3 +185,11 @@
 .theme-button:hover {
   background-color: #444; /* hover 시 배경색 변경 */
 }
+
+.profile-picture {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  object-fit: cover;
+}

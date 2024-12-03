@@ -4,7 +4,7 @@ import Loading from '../loading/Loading';
 import FileUpload from './FileUpload';
 import './MyInfo.css'; // 스타일 파일 추가
 
-const MyInfo = () => {
+const MyInfo = ({ theme, toggleTheme }) => {
   const [profile, setProfile] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [isEditMode, setIsEditMode] = useState(false);
@@ -88,16 +88,18 @@ const MyInfo = () => {
     <div className="my-info-container">
       {isLoading && <Loading />}
       <div className="my-info-profile-section">
-      <img
-          src={formData.profileImage instanceof File ? 
-            URL.createObjectURL(formData.profileImage) : `data:image/jpeg;base64,${formData.profileImage}`}
+        <img
+        src={formData.profileImage instanceof File ? 
+          URL.createObjectURL(formData.profileImage) : `data:image/jpeg;base64,${formData.profileImage}`}
 
-          alt="Profile"
-          className="my-info-profile-picture"
-          />
+        alt="Profile"
+        className="my-info-profile-picture"
+        />
         {isEditMode ? (       
           <FileUpload onChange={handleFileChange} />
         ):(<></>)}
+        
+        </div>
         <div className="my-info-profile-details">
           {isEditMode ? (
             <input
@@ -110,9 +112,11 @@ const MyInfo = () => {
           ) : (
             <h2>{profile.name}</h2>
           )}
-          <p>{profile.loginId}</p>
-        </div>
+        
       </div>
+      <button className="theme-toggle-button" onClick={toggleTheme}>
+               {theme === 'light' ? '🌙' : '☀️'}
+            </button>
       <div className="my-info-additional-info">
         <p>
           <strong>아이디:</strong> {profile.loginId}
@@ -139,12 +143,13 @@ const MyInfo = () => {
       <div className="my-info-actions">
         {isEditMode ? (
           <button className="my-info-save-button" onClick={handleSave}>
-            수정된 프로필 저장
+            저장
           </button>
-        ) : (
+        ) : (<>
           <button className="my-info-edit-button" onClick={() => setIsEditMode(true)}>
             프로필 수정
           </button>
+          </>
         )}
       </div>
     </div>
