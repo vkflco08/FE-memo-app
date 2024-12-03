@@ -23,7 +23,7 @@ const MyInfo = () => {
         setFormData({
           name: response.data.data.name,
           email: response.data.data.email,
-          profileImage: response.data.data.profileImage || '',
+          profileImage: response.data.data.profileImageBase64 || '',
         });
       } catch (error) {
         alert('내 정보를 불러오는데 실패했습니다.');
@@ -53,33 +53,28 @@ const MyInfo = () => {
     if (formData.profileImage && formData.profileImage instanceof File) {
       payload.append('profileImage', formData.profileImage);
     }
-
-    // JSON 객체를 문자열로 변환하여 FormData에 추가
+  
+    // DTO를 문자열로 변환해서 추가
     payload.append('memberProfileDtoRequest', JSON.stringify({
       name: formData.name,
       email: formData.email,
     }));
     
-    // 디버깅용 로그 추가
-    console.log("payload: ", payload);
-    console.log("formData.name: ", formData.name);
-    console.log("formData.email: ", formData.email);
-    console.log("formData.profileImage: ", formData.profileImage);
-  
     try {
+      console.log("Saving data..."); // 추가된 로그
       const response = await axiosInstance.put('/api/member/info_edit', payload, {
         headers: {
           'Content-Type': 'multipart/form-data', // form-data 전송을 위한 헤더
-        },
+        }
       });
-      console.log("response: ", response);
       alert('프로필이 수정되었습니다.');
       setProfile(response.data.data);
       setIsEditMode(false);
     } catch (error) {
+      // console.error("Error during request:", error.response || error);
       alert('프로필 수정에 실패했습니다.');
     }
-  };
+  };  
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -94,7 +89,9 @@ const MyInfo = () => {
       {isLoading && <Loading />}
       <div className="my-info-profile-section">
       <img
-          src={formData.profileImage instanceof File ? URL.createObjectURL(formData.profileImage) : profile.profileImage || 'https://via.placeholder.com/150'}
+          src={formData.profileImage instanceof File ? 
+            URL.createObjectURL(formData.profileImage) : `data:image/jpeg;base64,${formData.profileImage}`}
+
           alt="Profile"
           className="my-info-profile-picture"
           />
@@ -113,7 +110,7 @@ const MyInfo = () => {
           ) : (
             <h2>{profile.name}</h2>
           )}
-          <p>@{profile.loginId}</p>
+          <p>{profile.loginId}</p>
         </div>
       </div>
       <div className="my-info-additional-info">
