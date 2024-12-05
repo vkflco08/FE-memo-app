@@ -175,6 +175,7 @@
 
 .theme-button {
   display: block;
+  align-content: center;
   color: #fff;
   text-decoration: none;
   padding: 10px 15px;
