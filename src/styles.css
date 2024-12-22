@@ -7,7 +7,7 @@ body {
 
 /* 다크 모드 */
 [data-theme="dark"] body {
-    background-color: #333; /* 다크 모드 배경색 */
+    background-color: #444; /* 다크 모드 배경색 */
     color: #eee; /* 다크 모드 텍스트 색상 */
 }
 
