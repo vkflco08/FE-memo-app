@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axiosInstance from '../common/AxiosInstance';
 import './MemoInput.css';
-import syncIcon from '../../assets/sync.png'; // 동기화 이미지 경로
+import syncIcon from '../../assets/sync.png';
 
 const MemoInput = ({ date, currentMemo, onSave, showNotification }) => {
     const [title, setTitle] = useState(currentMemo.title);
     const [content, setContent] = useState(currentMemo.content);
-    const [isSyncing, setIsSyncing] = useState(false); // 동기화 상태
+    const [isSyncing, setIsSyncing] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
 
     useEffect(() => {
         setTitle(currentMemo.title || date); 
@@ -14,16 +15,36 @@ const MemoInput = ({ date, currentMemo, onSave, showNotification }) => {
     }, [currentMemo, date]);
 
     useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            handleAutoSave();
-        }, 1000);
+        if (isEditing) {
+            const timeoutId = setTimeout(() => {
+                handleAutoSave();
+            }, 1000);
+            return () => clearTimeout(timeoutId);
+        }
+    }, [title, content, isEditing]);
 
-        return () => clearTimeout(timeoutId);
-    }, [title, content]);
+    useEffect(() => {
+        const checkForMidnightRefresh = () => {
+            const now = new Date();
+            const nextMidnight = new Date(now);
+            nextMidnight.setDate(now.getDate() + 1);
+            nextMidnight.setHours(0, 0, 0, 0);
+            const timeUntilMidnight = nextMidnight - now;
+
+            setTimeout(async () => {
+                if (content.trim()) {
+                    await handleAutoSave(); // 새로고침 전에 저장
+                }
+                window.location.reload();
+            }, timeUntilMidnight);
+        };
+
+        checkForMidnightRefresh();
+    }, [content]);
 
     const handleAutoSave = async () => {
         if (content.trim()) {
-            setIsSyncing(true); // 동기화 시작
+            setIsSyncing(true);
             try {
                 await axiosInstance.post(`/api/memo/new`, {
                     title,
@@ -36,7 +57,7 @@ const MemoInput = ({ date, currentMemo, onSave, showNotification }) => {
                 console.error("Failed to auto-save memo:", error);
                 alert("메모 저장에 실패했습니다.");
             } finally {
-                setIsSyncing(false); // 동기화 종료
+                setIsSyncing(false);
             }
         }
     };
@@ -45,19 +66,30 @@ const MemoInput = ({ date, currentMemo, onSave, showNotification }) => {
         await handleAutoSave();
     };
 
+    const handleInputChange = (setter) => (e) => {
+        setter(e.target.value);
+        setIsEditing(true);
+    };
+    
+    const handleBlur = () => {
+        setIsEditing(false);
+    };
+
     return (
         <div className="memo-input-container">
             <form className="memo-input-form">
                 <input
                     type="text"
                     value={title}
-                    onChange={(e) => setTitle(e.target.value)}
+                    onChange={handleInputChange(setTitle)}
+                    onBlur={handleBlur}
                     placeholder="제목"
                     required
                 />
                 <textarea
                     value={content}
-                    onChange={(e) => setContent(e.target.value)}
+                    onChange={handleInputChange(setContent)}
+                    onBlur={handleBlur}
                     placeholder="여기에 적어놔라..."
                     required
                 />
@@ -67,7 +99,7 @@ const MemoInput = ({ date, currentMemo, onSave, showNotification }) => {
                     src={syncIcon}
                     alt="동기화 아이콘"
                     className={`sync-icon ${isSyncing ? 'loading' : ''}`}
-                    onClick={handleManualSync} // 클릭 시 수동 동기화
+                    onClick={handleManualSync}
                 />
             </div>
         </div>
