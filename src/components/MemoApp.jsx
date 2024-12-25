@@ -26,7 +26,7 @@ const MemoApp = () => {
             setMemos(response.data.data || []);
         } catch (error) {
             console.error("Failed to fetch memos:", error);
-            alert("메모를 가져오는데 실패했습니다.");
+            alert(error.response?.data?.message || "메모를 가져오는데 실패했습니다.");
         } finally {
             setLoading(false);
         }

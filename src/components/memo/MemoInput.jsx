@@ -33,7 +33,7 @@ const MemoInput = ({ date, currentMemo, onSave, showNotification }) => {
 
             setTimeout(async () => {
                 if (content.trim()) {
-                    await handleAutoSave(); // 새로고침 전에 저장
+                    await handleAutoSave(); 
                 }
                 window.location.reload();
             }, timeUntilMidnight);
@@ -54,8 +54,7 @@ const MemoInput = ({ date, currentMemo, onSave, showNotification }) => {
                 onSave({ title, content, date });
                 showNotification("메모가 저장되었습니다");
             } catch (error) {
-                console.error("Failed to auto-save memo:", error);
-                alert("메모 저장에 실패했습니다.");
+                alert(error.response?.data?.message || "메모 저장에 실패했습니다.");
             } finally {
                 setIsSyncing(false);
             }
@@ -70,7 +69,7 @@ const MemoInput = ({ date, currentMemo, onSave, showNotification }) => {
         setter(e.target.value);
         setIsEditing(true);
     };
-    
+
     const handleBlur = () => {
         setIsEditing(false);
     };
