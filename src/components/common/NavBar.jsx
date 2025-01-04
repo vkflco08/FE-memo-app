@@ -18,16 +18,17 @@ const NavBar = () => {
     try {
       const response = await axiosInstance.get('/api/member/info');
       const profileImage = response.data.data.profileImage;
-      // 경로에서 uploads 이후의 부분만 추출
-      const relativePath = profileImage.split('uploads')[1];
-
-      // 수정된 URL로 프로필 이미지 설정
-      setProfileImage(`${process.env.REACT_APP_API_BASE_URL}/uploads${relativePath}`);
+      if (profileImage) {
+        const relativePath = profileImage.split('uploads')[1];
+        setProfileImage(`${process.env.REACT_APP_API_BASE_URL}/uploads${relativePath}`);
+      } else {
+        setProfileImage('');
+      }
     } catch (error) {
       console.error(error);
       alert('내 정보를 불러오는데 실패했습니다.');
     }
-  };
+  };  
 
   useEffect(() => {
     if (isAuthenticated) {
