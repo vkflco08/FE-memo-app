@@ -3,6 +3,7 @@ import { AuthContext } from '../../contexts/AuthContext';
 import { Link } from 'react-router-dom';
 import axiosInstance from '../common/AxiosInstance';
 import './NavBar.css';
+import { FaUserCircle } from 'react-icons/fa'; // 기본 아이콘으로 사용자 아이콘 사용
 
 const NavBar = () => {
   const { isAuthenticated, logout } = useContext(AuthContext);
@@ -58,17 +59,21 @@ const NavBar = () => {
           <Link to="/" className="navbar-brand">ㅈㅇㄴㄹ</Link>
           <div className="navbar-menu">
             <Link to="/topic/write" className="theme-button">글 작성</Link>
-            {isAuthenticated && profileImage && (
-              <img
-                src={profileImage}  // 수정된 프로필 이미지 URL
-                alt="Profile"
-                className="profile-picture"
-                onClick={() => {
-                  toggleSidebar();
-                  fetchProfile(); // 프로필 업데이트
-                }}
-              />
-            )}
+            {isAuthenticated ? (
+              profileImage ? (
+                <img
+                  src={profileImage}
+                  alt="Profile"
+                  className="profile-picture"
+                  onClick={toggleSidebar}
+                />
+              ) : (
+                <FaUserCircle
+                  className="profile-icon"
+                  onClick={toggleSidebar}
+                />
+              )
+            ) : null}
           </div>
         </div>
       </nav>
@@ -80,19 +85,19 @@ const NavBar = () => {
           {isAuthenticated ? (
             <>
               <Link to="/all-memos" className="sidebar-link" onClick={toggleSidebar}>모든 메모 보기</Link>
-              <hr className="sidebar-divider" /> {/* 가로선 추가 */}
+              <hr className="sidebar-divider" />
               <Link to="/topic-list" className="sidebar-link" onClick={toggleSidebar}>주제별 기록</Link>
-              <hr className="sidebar-divider" /> {/* 가로선 추가 */}
+              <hr className="sidebar-divider" />
               <Link to="/my-info" className="sidebar-link" onClick={toggleSidebar}>내 정보 보기</Link>
               <Link to="/statistics" className="sidebar-link" onClick={toggleSidebar}>통계 보기</Link>
-              <hr className="sidebar-divider" /> {/* 가로선 추가 */}
+              <hr className="sidebar-divider" />
               <Link to="/" className="sidebar-link" onClick={logout}>Logout</Link>
             </>
           ) : (
             <>
               <Link to="/login" className="sidebar-link" onClick={toggleSidebar}>Login</Link>
               <Link to="/signup" className="sidebar-link" onClick={toggleSidebar}>Sign Up</Link>
-              <hr className="sidebar-divider" /> {/* 가로선 추가 */}
+              <hr className="sidebar-divider" />
               <p className="sidebar-note">로그인 후 이용 가능합니다.</p>
             </>
           )}

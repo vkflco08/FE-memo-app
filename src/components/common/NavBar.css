@@ -194,3 +194,8 @@
   border: 2px solid #ccc;
   object-fit: cover;
 }
+
+.profile-icon {
+  font-size: 32px;
+  cursor: pointer;
+}
