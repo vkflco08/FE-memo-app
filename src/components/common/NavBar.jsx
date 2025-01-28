@@ -17,11 +17,10 @@ const NavBar = () => {
   const fetchProfile = async () => {
     try {
       const response = await axiosInstance.get('/api/member/info');
-      const profileImage = response.data.data.profileImage;
-      console.log(profileImage)
+      const profileImage = response.data.data.profileImageBase64;
+
       if (profileImage) {
-        const relativePath = profileImage.split('uploads')[1];
-        setProfileImage(`${process.env.REACT_APP_API_BASE_URL}/uploads${relativePath}`);
+        setProfileImage(profileImage);
       } else {
         setProfileImage('');
       }
@@ -64,7 +63,8 @@ const NavBar = () => {
             {isAuthenticated ? (
               profileImage ? (
                 <img
-                  src={profileImage}
+                  src={profileImage instanceof File ? 
+                    URL.createObjectURL(profileImage) : `data:image/jpeg;base64,${profileImage}`}
                   alt="Profile"
                   className="profile-picture"
                   onClick={toggleSidebar}
