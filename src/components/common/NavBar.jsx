@@ -18,6 +18,7 @@ const NavBar = () => {
     try {
       const response = await axiosInstance.get('/api/member/info');
       const profileImage = response.data.data.profileImage;
+      console.log(profileImage)
       if (profileImage) {
         const relativePath = profileImage.split('uploads')[1];
         setProfileImage(`${process.env.REACT_APP_API_BASE_URL}/uploads${relativePath}`);
