@@ -136,7 +136,7 @@
 
 /* 다크 모드 호버 상태 */
 [data-theme="dark"] .calendar-day.today:hover {
-    background-color: #85b45f; 
+    background-color: #0073ef; 
 }
 
 .arrow-button {

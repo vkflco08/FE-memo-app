@@ -126,3 +126,108 @@
         height: 650px;
     }
 }
+
+
+/* 책갈피 */
+.note-tabs {
+    display: flex;
+    align-items: end;
+    gap: 8px;
+    padding: 0 10px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.note-tab {
+    position: relative;
+    padding: 10px 15px;
+    background-color: rgb(230, 230, 230);
+    border-radius: 8px 8px 0 0;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+[data-theme="dark"] .note-tab {
+    background-color: #999;
+    color: #EEEEEE;
+}
+
+.note-tab:hover {
+    background-color: rgb(200, 200, 200);
+    color: #333;
+}
+
+
+[data-theme="dark"] .note-tab:hover {
+    background-color: #999;
+    color: #333;
+}
+
+.note-tab.active {
+    background-color: #339AF0;
+    color: white;
+    font-weight: bold;
+}
+
+.note-tab.active:hover {
+    background-color: #339AF0;
+}
+
+.title-input-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+    width: auto;
+    max-width: 100%;
+}
+
+.note-tabs input {
+    padding: 5px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    min-width: 30px;
+    max-width: 70px;
+    flex-grow: 1;
+}
+
+.delete-note-btn {
+    background-color: #ececec; 
+    color: rgb(255, 95, 95); 
+    border: none; 
+    border-radius: 5px; 
+    padding: 5px 10px; 
+    cursor: pointer; 
+    font-size: 14px; 
+    transition: background-color 0.3s ease; /* Transition for background color */
+}
+
+.delete-note-btn:hover {
+background-color: #ffb8b8; /* Background change on hover */
+}
+
+.add-note-btn {
+    padding: 5px 10px;
+    font-size: 18px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.add-note-btn:hover {
+    background-color: #0073ef;
+}
+
+.note-content {
+    padding: 10px;
+    min-height: 200px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-top: 10px;
+}
