@@ -7,7 +7,7 @@ import './UserNote.css';
 const UserNote = ({ showNotification }) => {
     const [userNotes, setUserNotes] = useState([]);
     const [selectedNoteIndex, setSelectedNoteIndex] = useState(0);
-    const [isEditingTitle, setIsEditingTitle] = useState(null); // 수정된 부분
+    const [isEditingTitle, setIsEditingTitle] = useState(null);
     const [newNoteTitle, setNewNoteTitle] = useState('새 노트');
     const quillRef = useRef(null);
     const timeoutRef = useRef(null);
@@ -65,13 +65,18 @@ const UserNote = ({ showNotification }) => {
                     content: note.content || '',
                 }));
                 setUserNotes(notes);
+                // console.log(response.data.data)
+                // console.log(response.data.data[0].content)
+                quillRef.current.root.innerHTML = response.data.data[0].content;
             }
         } catch (error) {
             alert(error.response?.data?.message || "유저노트를 가져오는데 실패했습니다.");
         }
     };
 
+    // quill 에디터에 content 설정
     const loadNoteContent = (note) => {
+        console.log(note)
         if (quillRef.current && note.content !== undefined) {
             quillRef.current.root.innerHTML = note.content;
         }
@@ -201,7 +206,7 @@ const UserNote = ({ showNotification }) => {
             handleAutoSave();
         }, 1000);
 
-        // console.log(userNotes)
+        // console.log(selectedNoteIndex)
 
         return () => {
             if (timeoutRef.current) {
@@ -219,7 +224,7 @@ const UserNote = ({ showNotification }) => {
             
             const selectedNote = userNotes[selectedNoteIndex];
 
-            if (!selectedNote.content.trim() && !selectedNote.title.trim()) {
+            if (selectedNote.content.trim() && selectedNote.title.trim()) {
                 const noteToSend = {
                     id: selectedNote.id,
                     title: selectedNote.title,
@@ -233,7 +238,7 @@ const UserNote = ({ showNotification }) => {
         } catch (error) {
             alert(error.response?.data?.message || "유저노트 저장에 실패했습니다.");
         }
-    };
+    };  
 
     return (
         <div>
@@ -279,8 +284,8 @@ const UserNote = ({ showNotification }) => {
                             value={newNoteTitle}
                             onChange={handleNoteChange}
                             autoFocus
-                            onBlur={handleSaveNewNote}
                             placeholder="책갈피 제목 입력"
+                            onKeyDown={(e) => e.key === "Enter" && handleSaveNewNote()}
                         />
                     </div>
                 )}
