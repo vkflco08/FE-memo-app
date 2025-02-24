@@ -76,7 +76,7 @@ const UserNote = ({ showNotification }) => {
 
     // quill 에디터에 content 설정
     const loadNoteContent = (note) => {
-        console.log(note)
+        // console.log(note)
         if (quillRef.current && note.content !== undefined) {
             quillRef.current.root.innerHTML = note.content;
         }
@@ -133,8 +133,8 @@ const UserNote = ({ showNotification }) => {
      */
 
     const handleDoubleClickTitle = (index) => {
-        // setNewNoteTitle(userNotes[index]?.title || "새 노트 handle double click title");
         setIsEditingTitle(index); // 클릭한 노트의 인덱스를 설정
+        setNewNoteTitle(userNotes[index]?.title || "새 노트");
     };
     
     const handleTitleChange = (e) => {
