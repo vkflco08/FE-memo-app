@@ -1,5 +1,8 @@
 import axios from 'axios';
 
+let isLoggingOut = false;
+let alertAlreadyShown = false;
+
 // Axios 인스턴스 생성
 const axiosInstance = axios.create({
     baseURL: process.env.REACT_APP_API_BASE_URL,
@@ -23,10 +26,21 @@ axiosInstance.interceptors.request.use(
     }
 );
 
+// 기존 alert를 오버라이드
+const originalAlert = window.alert;
+window.alert = function(message) {
+    if (!alertAlreadyShown) {
+        alertAlreadyShown = true;
+        originalAlert(message); // 첫 번째 alert만 띄움
+    }
+};
+
 // 응답 처리 - 401(Unauthorized)일 때 자동으로 refresh token을 사용해 토큰 재발급
 axiosInstance.interceptors.response.use(
     (response) => response, // 성공한 응답은 그대로 반환
     async (error) => {
+        if (isLoggingOut) return Promise.reject(error); // 로그아웃 상태면 에러 처리 중단
+
         const originalRequest = error.config;
 
         // 401 에러 처리
@@ -78,10 +92,13 @@ axiosInstance.interceptors.response.use(
     }
 );
 
-// 로그아웃 및 리다이렉트 함수
 function handleLogout() {
+    if (isLoggingOut) return; // 이미 로그아웃 중이라면 추가 실행 방지
+    isLoggingOut = true;
+
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
+    alertAlreadyShown = false; // 로그아웃 후에는 alert 리셋
     alert('세션이 만료되었습니다. 다시 로그인해주세요.');
     window.location.href = '/login';
 }
