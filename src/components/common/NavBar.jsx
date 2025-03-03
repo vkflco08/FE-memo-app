@@ -88,7 +88,7 @@ const NavBar = () => {
             <>
               <Link to="/all-memos" className="sidebar-link" onClick={toggleSidebar}>모든 메모 보기</Link>
               <hr className="sidebar-divider" />
-              <Link to="/topic-list" className="sidebar-link" onClick={toggleSidebar}>주제별 기록</Link>
+              <Link to="/topic-list" className="sidebar-link" onClick={toggleSidebar}>모든 주제</Link>
               <hr className="sidebar-divider" />
               <Link to="/my-info" className="sidebar-link" onClick={toggleSidebar}>내 정보 보기</Link>
               <Link to="/statistics" className="sidebar-link" onClick={toggleSidebar}>통계 보기</Link>

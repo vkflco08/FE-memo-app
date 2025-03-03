@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ProtectedRoute from './components/common/ProtectedRoute';
+
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+
 import Login from './components/login/Login';
 import SignUp from './components/login/SignUp';
 import NavBar from './components/common/NavBar';
@@ -40,6 +44,7 @@ function App() {
     };
 
     return (
+    <DndProvider backend={HTML5Backend}>
         <Router>
             <div className={theme}> {/* 테마 클래스 설정 */}
                 <NavBar theme={theme} toggleTheme={toggleTheme} />
@@ -76,6 +81,7 @@ function App() {
                 </Routes>
             </div>
         </Router>
+    </DndProvider>
     );
 }
 

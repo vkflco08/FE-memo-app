@@ -65,3 +65,44 @@
 [data-theme="dark"] .content-count {
     color: #bbb;
 }
+
+/* TopicCard.css */
+.topic-card {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 10px 0;
+    background-color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .topic-card.dragging {
+    opacity: 0.5;
+  }
+  
+  .trash-bin {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #f8d7da;
+    padding: 20px;
+    border-radius: 50%;
+    text-align: center;
+    cursor: pointer;
+    display: none;
+  }
+  
+  .trash-bin.hovered {
+    display: block;
+  }
+  
+  .trash-icon {
+    font-size: 2rem;
+    color: #721c24;
+  }
+  
+  .trash-bin p {
+    margin-top: 5px;
+    color: #721c24;
+  }

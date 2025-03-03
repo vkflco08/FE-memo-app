@@ -1,43 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import axiosInstance from '../common/AxiosInstance';
 import TopicCard from './TopicCard.jsx';
 import AddTopicModal from './AddTopicModal';
 import Loading from '../loading/Loading'; 
+import TrashBin from './TrashBin'; // 휴지통 컴포넌트 import
 import './TopicList.css';
 
 function TopicList() {
   const [topics, setTopics] = useState([]);
   const [isModalOpen, setModalOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);  // 로딩 상태 추가
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchTopics = async () => {
       try {
-        setIsLoading(true);  // 로딩 시작
+        setIsLoading(true);
         const response = await axiosInstance.get('/api/topic/list');
         setTopics(response.data.data);
       } catch (error) {
         alert("주제를 불러오는데 실패했습니다.");
       } finally {
-        setIsLoading(false);  // 로딩 종료
+        setIsLoading(false);
       }
     };
     fetchTopics();
   }, []);
 
-  const handleUpdateTopicName = async (topicId, newName) => {
-    try {
-      await axiosInstance.put('/api/topic/edit', {
-        topicId: topicId,
-        topicName: newName,
-      });
-      setTopics((prevTopics) =>
-        prevTopics.map((topic) =>
-          topic.topicId === topicId ? { ...topic, topicName: newName } : topic
-        )
-      );
-    } catch (error) {
-      alert("주제 이름을 업데이트하는데 실패했습니다.");
+  const handleDeleteTopic = async (topicId) => {
+    if (window.confirm("정말로 주제와 모든 메모들을 삭제하시겠습니까?")) {
+      try {
+        await axiosInstance.delete(`/api/topic/${topicId}`);
+        setTopics((prevTopics) => prevTopics.filter(topic => topic.topicId !== topicId));
+      } catch (error) {
+        alert("주제를 삭제하는데 실패했습니다.");
+      }
     }
   };
 
@@ -53,7 +49,7 @@ function TopicList() {
       </div>
       <hr className="topic-divider" />
 
-      {isLoading ? (  // 로딩 중일 때 Loading 컴포넌트 표시
+      {isLoading ? (
         <Loading />
       ) : (
         topics.length > 0 ? (
@@ -64,7 +60,7 @@ function TopicList() {
                 topicId={topic.topicId}
                 topicName={topic.topicName} 
                 contentNum={topic.contentNum} 
-                onUpdateTopicName={handleUpdateTopicName}
+                onDelete={handleDeleteTopic}
               />
             ))}
           </div>
@@ -74,7 +70,9 @@ function TopicList() {
           </div>
         )
       )}
-      
+
+      <TrashBin onDelete={handleDeleteTopic} /> {/* 휴지통 컴포넌트 추가 */}
+
       {isModalOpen && <AddTopicModal isOpen={isModalOpen} onClose={toggleModal} setTopics={setTopics} />}
     </div>
   );

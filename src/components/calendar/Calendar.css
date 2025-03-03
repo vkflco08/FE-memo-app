@@ -7,6 +7,7 @@
     margin-bottom: 0;
     width: 100%; /* 가로 너비를 100%로 설정 */
     background-color: rgb(250, 250, 250);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     box-sizing: border-box; /* 패딩과 보더를 총 너비에 포함 */
 }
 
