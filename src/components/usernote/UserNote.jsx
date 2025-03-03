@@ -22,7 +22,9 @@ const UserNote = ({ showNotification }) => {
                         [{ header: [1, 2, false] }],
                         ['bold', 'italic', 'underline'],
                         [{ list: 'ordered' }, { list: 'bullet' }],
-                        ['clean'],
+                        ['code-block'],
+                        ['link'],
+                        ['clean']
                     ]
                 }
             });
