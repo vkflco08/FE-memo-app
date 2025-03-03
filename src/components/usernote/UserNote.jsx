@@ -59,7 +59,7 @@ const UserNote = ({ showNotification }) => {
 
     const fetchUserNotes = async () => {
         try {
-            const response = await axiosInstance.get(`/api/memo/user_note`);
+            const response = await axiosInstance.get(`/api/user_note/`);
             if (response.data && response.data.data) {
                 const notes = response.data.data.map(note => ({
                     id: note.id,
@@ -118,7 +118,7 @@ const UserNote = ({ showNotification }) => {
         try {
             setIsEditingTitle(null);
             
-            await axiosInstance.post('/api/memo/user_note', {
+            await axiosInstance.post('/api/user_note/new', {
                 title: newNoteTitle,
                 content: '',
             });
@@ -160,7 +160,7 @@ const UserNote = ({ showNotification }) => {
         setIsEditingTitle(null);
 
         try {
-            await axiosInstance.post(`/api/memo/user_note`, {
+            await axiosInstance.post(`/api/user_note/new`, {
                 id: updatedNotes[isEditingTitle].id,
                 title: newNoteTitle,
                 content: updatedNotes[isEditingTitle].content,
@@ -188,10 +188,10 @@ const UserNote = ({ showNotification }) => {
         if (confirmDelete) {
             try {
                 const noteToDelete = userNotes[index];
-                await axiosInstance.delete(`/api/memo/user_note/${noteToDelete.id}`); // DELETE API 호출
+                await axiosInstance.delete(`/api/user_note/${noteToDelete.id}`); // DELETE API 호출
 
                 fetchUserNotes();
-
+                setSelectedNoteIndex(selectedNoteIndex - 1)
                 showNotification("노트가 삭제되었습니다.");
             } catch (error) {
                 alert(error.response?.data?.message || "노트 삭제에 실패했습니다.");
@@ -208,7 +208,7 @@ const UserNote = ({ showNotification }) => {
             handleAutoSave();
         }, 1000);
 
-        // console.log(selectedNoteIndex)
+        console.log(selectedNoteIndex)
 
         return () => {
             if (timeoutRef.current) {
@@ -233,7 +233,7 @@ const UserNote = ({ showNotification }) => {
                     content: selectedNote.content,
                 };
                 
-                await axiosInstance.post(`/api/memo/user_note`, noteToSend);
+                await axiosInstance.post(`/api/user_note/new`, noteToSend);
 
                 showNotification("노트가 저장되었습니다");
             } 
