@@ -84,7 +84,7 @@ const UserNote = ({ showNotification }) => {
         }
     };
 
-    const handleNoteSelect = (index) => {
+    const handleNoteSelect = async (index) => {
         setSelectedNoteIndex(index);
         const selectedNote = userNotes[index];
         loadNoteContent(selectedNote);
@@ -104,6 +104,10 @@ const UserNote = ({ showNotification }) => {
         setNewNoteTitle(e.target.value);
     };
 
+    /**
+     * 새 노트 만들기
+     */
+
     const handleSaveNewNote = async () => {
         if (!newNoteTitle.trim()) {
             alert("책갈피 제목을 입력하세요.");
@@ -122,8 +126,11 @@ const UserNote = ({ showNotification }) => {
                 title: newNoteTitle,
                 content: '',
             });
-            fetchUserNotes();
-            setSelectedNoteIndex(userNotes.length);
+
+            await fetchUserNotes();
+            setSelectedNoteIndex(userNotes.length); // 새 노트를 선택
+            quillRef.current.root.innerHTML = ""; // 새 노트의 내용을 비우기
+         
             showNotification("새 노트가 추가되었습니다.");
         } catch (error) {
             alert(error.response?.data?.message || "새 노트를 추가하는 데 실패했습니다.");
@@ -188,10 +195,23 @@ const UserNote = ({ showNotification }) => {
         if (confirmDelete) {
             try {
                 const noteToDelete = userNotes[index];
-                await axiosInstance.delete(`/api/user_note/${noteToDelete.id}`); // DELETE API 호출
+                const response = await axiosInstance.delete(`/api/user_note/${noteToDelete.id}`); // DELETE API 호출
 
-                fetchUserNotes();
-                setSelectedNoteIndex(selectedNoteIndex - 1)
+                if (response.data && response.data.data) {
+                    const notes = response.data.data.map(note => ({
+                        id: note.id,
+                        title: note.title || '새 노트',
+                        content: note.content || '',
+                    }));
+                    setUserNotes(notes);    // 상태 업데이트
+                    
+                    // 마지막 노트를 선택하는 작업을 상태 업데이트 후에 처리
+                    setTimeout(() => {
+                        if (notes.length > 0) {
+                            handleNoteSelect(index - 1); // 마지막 노트를 선택
+                        }
+                    }, 0);
+                }
                 showNotification("노트가 삭제되었습니다.");
             } catch (error) {
                 alert(error.response?.data?.message || "노트 삭제에 실패했습니다.");
@@ -208,7 +228,7 @@ const UserNote = ({ showNotification }) => {
             handleAutoSave();
         }, 1000);
 
-        console.log(selectedNoteIndex)
+        // console.log(selectedNoteIndex)
 
         return () => {
             if (timeoutRef.current) {

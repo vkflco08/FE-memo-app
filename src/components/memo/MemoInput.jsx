@@ -42,6 +42,7 @@ const MemoInput = ({ date, currentMemo, onSave, showNotification }) => {
         checkForMidnightRefresh();
     }, [content]);
 
+    // 자동 저장 기능
     const handleAutoSave = async () => {
         if (content.trim()) {
             setIsSyncing(true);
@@ -61,6 +62,7 @@ const MemoInput = ({ date, currentMemo, onSave, showNotification }) => {
         }
     };
 
+    // 수동으로 동기화
     const handleManualSync = async () => {
         await handleAutoSave();
     };

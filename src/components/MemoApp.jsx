@@ -23,6 +23,7 @@ const MemoApp = () => {
         setLoading(true);
         try {
             const response = await axiosInstance.get(`/api/memo/memos/${formattedMonth}`);
+            // console.log(response.data)
             setMemos(response.data.data || []);
         } catch (error) {
             console.error("Failed to fetch memos:", error);
