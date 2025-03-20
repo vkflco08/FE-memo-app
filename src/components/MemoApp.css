@@ -1,5 +1,7 @@
 .memo-app-container {
     font-family: Arial, sans-serif;
+    width: 1200px; /* 원하는 크기로 설정 */
+    max-width: 90vw; /* 너무 크면 조절되도록 */
     padding: 1vh;
     border: 1px solid #ddd;
     border-radius: 10px;
