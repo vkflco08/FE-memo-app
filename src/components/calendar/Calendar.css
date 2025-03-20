@@ -1,14 +1,27 @@
 .calendar {
+    max-height: 440px;
+    flex-grow: 1;
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 20px;
+    padding: 1vh 20px;
     overflow: hidden;
-    margin: 15px auto;
+    margin: 0 auto;
     margin-bottom: 0;
     width: 100%; /* 가로 너비를 100%로 설정 */
     background-color: rgb(250, 250, 250);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     box-sizing: border-box; /* 패딩과 보더를 총 너비에 포함 */
+    overflow: auto;
+}
+
+/* 화면이 세로로 좁을 때 */
+@media (max-height: 800px) {
+    .calendar {
+        height: 450px;
+    }
+    .calendar-day {
+        padding: 12px !important;;
+    }
 }
 
 /* 다크 모드 */
@@ -23,7 +36,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
+    padding: 2%;
     background-color: #f7f7f7; /* 기본 배경색 */
     color: #333; /* 기본 텍스트 색 */
 }
@@ -49,7 +62,8 @@
 
 .calendar-days {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(7, 1fr); /* 7개의 열로 균등하게 배치 */
+    grid-template-rows: repeat(6, 1fr);
     border-top: 1px solid #ccc; /* 기본 테두리 색 */
 }
 
@@ -59,7 +73,8 @@
 }
 
 .day-names {
-    display: contents; /* Use grid display for day names */
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7개의 열로 균등하게 배치 */
 }
 
 /* 각 요일 이름 스타일 */
@@ -67,6 +82,7 @@
     text-align: center;
     font-weight: bold;
     padding: 5px;
+    height: 20px;
     background-color: #f0f0f0; /* 기본 배경색 */
 }
 
@@ -77,14 +93,21 @@
 }
 
 .calendar-day {
-    width: auto;
     text-align: center;
-    padding: 20px;
     cursor: pointer;
-    position: relative; 
+    position: relative;
     box-sizing: border-box;
     transition: background-color 0.3s;
     border: 1px solid #ddd; /* 기본 테두리 색 */
+
+    padding: 14px;
+    /* display: flex;
+    justify-content: center; 
+    align-items: center; 
+    flex-grow: 1;
+    flex-shrink: 1;
+    width: 100%; 
+    aspect-ratio: 22 / 17; */
 }
 
 /* 다크 모드 */
@@ -117,7 +140,6 @@
     color: white;              
     font-weight: bold;
     border-radius: 50%;  
-    top: 16%;   
     width: 40px;          
     height: 40px;         
     display: flex;            
@@ -231,7 +253,7 @@
         font-size: 0.7rem;
     }
     .calendar-day.today {
-        width:20px;
-        height:20px;
+        width: 20px;
+        height: 20px;
     }
 }

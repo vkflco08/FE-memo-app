@@ -52,12 +52,13 @@ const Calendar = ({ memos, onDateClick, onMonthChange, currentMonth, currentYear
                 <h2 className="calendar-title">{`${currentYear}-${String(currentMonth + 1).padStart(2, '0')}`}</h2>
                 <button className="arrow-button" onClick={handleNextMonth}>&gt;</button>
             </div>
+            <div className="day-names">
+                {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
+                    <div key={day} className="day-name">{day}</div>
+                ))}
+            </div>
             <div className="calendar-days">
-                <div className="day-names">
-                    {["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"].map((day) => (
-                        <div key={day} className="day-name">{day}</div>
-                    ))}
-                </div>
+                
                 {[...emptyDaysBefore, ...dates, ...emptyDaysAfter].map((day, index) => {
                     if (!day) {
                         return <div key={index} className="calendar-day empty"></div>;
