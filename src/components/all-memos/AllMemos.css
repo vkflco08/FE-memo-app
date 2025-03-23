@@ -2,8 +2,10 @@
 .all-memos-container {
   display: flex;
   justify-content: center;
-  align-items: center; 
-  height: 100vh;
+  align-items: flex-start; /* 위에서부터 정렬 */
+  min-height: 100vh; /* 최소 높이를 뷰포트 높이로 설정 */
+  padding-top: 20px; /* 상단 여백 추가 */
+  margin-top: 80px;
 }
 
 .all-memos-section {
@@ -14,7 +16,7 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
   flex-direction: column;
   width: 800px;
-  border-radius: 5px; 
+  border-radius: 16px; 
 }
 
 .memo-list {

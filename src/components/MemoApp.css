@@ -3,6 +3,8 @@
     width: 1200px; /* 원하는 크기로 설정 */
     max-width: 90vw; /* 너무 크면 조절되도록 */
     padding: 1vh;
+    margin: 20px;
+    margin-top: 80px;
     border: 1px solid #ddd;
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
