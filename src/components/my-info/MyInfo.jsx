@@ -87,6 +87,7 @@ const MyInfo = ({ theme, toggleTheme }) => {
   return (
     <div className="my-info-container">
       {isLoading && <Loading />}
+      <div className="my-info-section">
       <div className="my-info-profile-section">
         <img
         src={formData.profileImage instanceof File ? 
@@ -151,6 +152,7 @@ const MyInfo = ({ theme, toggleTheme }) => {
           </button>
           </>
         )}
+      </div>
       </div>
     </div>
   );

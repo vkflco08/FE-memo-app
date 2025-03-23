@@ -3,7 +3,8 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: #f9f9f9;
+    width: 50vh;
+    background-color: hsl(0, 0%, 98%);
 }
 
 .auth-form {
@@ -75,7 +76,7 @@
 }
 
 [data-theme="dark"] .auth-form {
-    background-color: #1e1e1e; /* 어두운 배경 */
+    background-color: #333; /* 어두운 배경 */
     color: #e0e0e0; /* 텍스트 색상 */
     border: 1px solid #444; /* 어두운 테두리 */
 }

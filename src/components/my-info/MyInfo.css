@@ -1,10 +1,17 @@
 /* 전체 컨테이너 */
 .my-info-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* 화면 전체 높이로 설정 */
+}
+
+.my-info-section {
   position: relative; 
   max-width: 400px;
   margin: 0 auto;
-  margin-top: 90px;
   padding: 20px;
+  width: 50vh;
   text-align: center;
   border-radius: 10px;
   background-color: #f9f9f9;
@@ -165,7 +172,7 @@
   color: #555;
 }
 
-[data-theme="dark"] .my-info-container {
+[data-theme="dark"] .my-info-section {
   background-color: #444;
   color: #eee;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);

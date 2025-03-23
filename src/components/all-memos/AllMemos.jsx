@@ -122,6 +122,7 @@ const AllMemos = () => {
 
   return (
     <div className="all-memos-container">
+      <div className="all-memos-section">
       <input 
         type="text" 
         value={searchKeyword} 
@@ -180,6 +181,7 @@ const AllMemos = () => {
         >
           다음
         </button>
+      </div>
       </div>
     </div>
   );  

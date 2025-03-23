@@ -1,13 +1,20 @@
 /* Light Mode Styles */
 .all-memos-container {
   display: flex;
-  align-items: center; /* 세로 방향 중앙 정렬 */
+  justify-content: center;
+  align-items: center; 
+  height: 100vh;
+}
+
+.all-memos-section {
+  display: flex;
+  align-items: center; 
   padding: 10px;
-  padding-top: 90px;
   background-color: #f8f9fa; /* 기본 배경색 */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
   flex-direction: column;
-  min-height: 100vh;
+  width: 800px;
+  border-radius: 5px; 
 }
 
 .memo-list {
@@ -71,7 +78,7 @@
   white-space: pre-line; /* 텍스트 개행 반영 */
 }
 
-.content-container {
+.content-section {
   position: relative;
 }
 
@@ -94,7 +101,7 @@
 }
 
 /* Dark Mode Styles */
-[data-theme="dark"] .all-memos-container {
+[data-theme="dark"] .all-memos-section {
   background-color: #444; /* Dark mode background */
   color: #e0e0e0; /* Default text color */
 }
@@ -191,7 +198,7 @@
 
 /* 모바일 환경에 맞춘 검색창 스타일 */
 @media (max-width: 437px) {
-  .all-memos-container {
+  .all-memos-section {
     padding: 10px; /* Reduce padding on smaller screens */
     padding-top: 100px;
   }
@@ -215,6 +222,7 @@
   align-items: center; /* 수직 중앙 정렬 */
   height: 100%; /* 부모의 전체 높이를 사용 */
   font-size: 16px; /* 글자 크기 조정 */
+  padding: 5vh;
 }
 .pagination {
   display: flex; /* Flexbox 사용 */

@@ -1,7 +1,7 @@
 .topic-list-container {
     position: relative;
     padding: 20px;
-    width: 100%;
+    width: 80vh;
     max-width: 800px;
     margin: 80px auto;
     background-color: #f7f7f7;

@@ -65,6 +65,8 @@
     grid-template-columns: repeat(7, 1fr); /* 7개의 열로 균등하게 배치 */
     grid-template-rows: repeat(6, 1fr);
     border-top: 1px solid #ccc; /* 기본 테두리 색 */
+    justify-content: center; /* 가로 방향 중앙 정렬 */
+  align-items: center; /* 세로 방향 중앙 정렬 */
 }
 
 /* 다크 모드 */
@@ -99,7 +101,7 @@
     box-sizing: border-box;
     transition: background-color 0.3s;
     border: 1px solid #ddd; /* 기본 테두리 색 */
-
+    height: 100%;
     padding: 14px;
     /* display: flex;
     justify-content: center; 

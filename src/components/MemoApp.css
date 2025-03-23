@@ -5,7 +5,6 @@
     padding: 1vh;
     border: 1px solid #ddd;
     border-radius: 10px;
-    margin-top: 10vh;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     background-color: #fff; /* 기본 배경색 */
     display: flex;
@@ -13,6 +12,7 @@
     flex-wrap: nowrap; /* 자식 요소가 줄 바꿈 없이 가로로 나열되도록 설정 */
     overflow-x: auto; /* 가로 스크롤 추가 */
     transition: margin-top 0.1s ease-in-out;
+    max-height: 800px;
 }
 
 /* 다크 모드 */
