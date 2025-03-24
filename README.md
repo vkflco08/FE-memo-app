@@ -15,10 +15,17 @@ React JSX로 개발된 메모 애플리케이션입니다.
 
 ---
 
-## 🧑‍💻 멤버 구성
-| 이름 | 역할 | GitHub |
-|------|------|--------|
-| **[vkflco08]** | Fullstack 개발 | [GitHub 프로필](https://github.com/vkflco08) |
+## 👨‍💻 개발자 소개
+
+<div align="center">
+  <img src="https://avatars.githubusercontent.com/u/67574367?s=150&v=4" alt="조승빈" width="150">
+  <br>
+  <strong>조승빈</strong>
+  <br>
+  Front End 개발
+  <br>
+  🔗 <a href="https://github.com/vkflco08">GitHub 프로필</a>
+</div>
 
 ---
 
