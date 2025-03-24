@@ -22,7 +22,7 @@ React JSX로 개발된 메모 애플리케이션입니다.
   <br>
   <strong>조승빈</strong>
   <br>
-  Front End 개발
+  Frontend 개발
   <br>
   🔗 <a href="https://github.com/vkflco08">GitHub 프로필</a>
 </div>
@@ -32,7 +32,8 @@ React JSX로 개발된 메모 애플리케이션입니다.
 ## 🚀 프로젝트 개요
 - **프레임워크**: React (JSX)
 - **배포 방식**: 개인 리눅스 서버에서 Jenkins를 활용하여 Nginx 컨테이너를 배포
-- **백엔드**: Spring Boot
+- **백엔드**: Spring Boot  
+  - **백엔드 GitHub**: [GitHub Repository]([https://github.com/your-backend-repo](https://github.com/vkflco08/BE-memo-app.git))
 - **프론트엔드 개발 환경**: `React 18`, `react-scripts 5.0.1`
 - **버전 관리**: GitHub
 
