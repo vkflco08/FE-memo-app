@@ -9,7 +9,6 @@ const Calendar = ({ memos, onDateClick, onMonthChange, currentMonth, currentYear
     // Functions to calculate days
     const getDaysInMonth = (year, month) => new Date(year, month + 1, 0).getDate();
     const getFirstDayOfMonth = (year, month) => new Date(year, month, 1).getDay();
-    const getLastDayOfMonth = (year, month) => new Date(year, month + 1, 0).getDay();
 
     // Change month functions
     const handlePrevMonth = () => {
@@ -31,10 +30,9 @@ const Calendar = ({ memos, onDateClick, onMonthChange, currentMonth, currentYear
         return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
     };
 
-    // Calculate the number of days in the month and the first and last days of the month
+    // Calculate the number of days in the month and the first day of the month
     const daysInMonth = useMemo(() => getDaysInMonth(currentYear, currentMonth), [currentYear, currentMonth]);
     const firstDayOfMonth = useMemo(() => getFirstDayOfMonth(currentYear, currentMonth), [currentYear, currentMonth]);
-    const lastDayOfMonth = useMemo(() => getLastDayOfMonth(currentYear, currentMonth), [currentYear, currentMonth]);
 
     // Create an array of dates for the calendar
     const dates = useMemo(() => Array.from({ length: daysInMonth }, (_, i) => {
@@ -43,13 +41,20 @@ const Calendar = ({ memos, onDateClick, onMonthChange, currentMonth, currentYear
     }), [currentYear, currentMonth, daysInMonth, memos]);
 
     const emptyDaysBefore = useMemo(() => Array.from({ length: firstDayOfMonth }, () => null), [firstDayOfMonth]);
-    const emptyDaysAfter = useMemo(() => Array.from({ length: 6 - lastDayOfMonth }, () => null), [lastDayOfMonth]);
+    
+    // Adjust emptyDaysAfter to ensure totalCells aligns with 35 or 42
+    const totalCells = emptyDaysBefore.length + dates.length;
+    const totalRows = totalCells > 35 ? 6 : 5;
+    const emptyDaysAfter = useMemo(() => Array.from({ length: totalRows * 7 - totalCells }, () => null), [totalRows, totalCells]);
+
+    // Dynamically calculate the grid-template-rows based on the number of rows
+    const gridRows = `repeat(${totalRows}, 1fr)`;
 
     return (
         <div className="calendar">
             <div className="calendar-header">
                 <button className="arrow-button" onClick={handlePrevMonth}>&lt;</button>
-                <h2 className="calendar-title">{`${currentYear}-${String(currentMonth + 1).padStart(2, '0')}`}</h2>
+                <h2 className="calendar-title">{`${currentYear} - ${String(currentMonth + 1).padStart(2, '0')}`}</h2>
                 <button className="arrow-button" onClick={handleNextMonth}>&gt;</button>
             </div>
             <div className="day-names">
@@ -57,8 +62,7 @@ const Calendar = ({ memos, onDateClick, onMonthChange, currentMonth, currentYear
                     <div key={day} className="day-name">{day}</div>
                 ))}
             </div>
-            <div className="calendar-days">
-                
+            <div className="calendar-days" style={{ gridTemplateRows: gridRows }}>
                 {[...emptyDaysBefore, ...dates, ...emptyDaysAfter].map((day, index) => {
                     if (!day) {
                         return <div key={index} className="calendar-day empty"></div>;

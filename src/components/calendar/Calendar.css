@@ -1,27 +1,15 @@
 .calendar {
-    max-height: 440px;
-    flex-grow: 1;
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 1vh 20px;
-    overflow: hidden;
-    margin: 0 auto;
-    margin-bottom: 0;
-    width: 100%; /* 가로 너비를 100%로 설정 */
+    padding: 10px;
     background-color: rgb(250, 250, 250);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    box-sizing: border-box; /* 패딩과 보더를 총 너비에 포함 */
-    overflow: auto;
-}
-
-/* 화면이 세로로 좁을 때 */
-@media (max-height: 800px) {
-    .calendar {
-        height: 450px;
-    }
-    .calendar-day {
-        padding: 12px !important;;
-    }
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    height: 400px; /* 달력의 고정된 높이 설정 */
 }
 
 /* 다크 모드 */
@@ -37,8 +25,11 @@
     justify-content: space-between;
     align-items: center;
     padding: 2%;
-    background-color: #f7f7f7; /* 기본 배경색 */
-    color: #333; /* 기본 텍스트 색 */
+    background-color: #f7f7f7;
+    color: #333;
+    padding-bottom: 0px;
+    border-bottom: 1px solid #ccc; /* 실선 추가 */
+    margin-bottom: 15px;
 }
 
 /* 다크 모드 */
@@ -48,11 +39,9 @@
 }
 
 .calendar-title {
-    font-size: 24px; /* 제목 폰트 크기 */
-    font-weight: bold; /* 제목 두께 */
-    color: #333; /* 기본 텍스트 색상 */
-    text-align: center; /* 중앙 정렬 */
-    margin: 15px 20px; /* 버튼과의 간격을 위한 여백 */
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
 }
 
 /* 다크 모드에서 제목 색상 */
@@ -60,13 +49,29 @@
     color: #eee; /* 어두운 모드에서 텍스트 색상 */
 }
 
+.day-names {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    background-color: #f0f0f0;
+    font-weight: bold;
+    padding: 5px 0;
+}
+
+/* 다크 모드 */
+[data-theme="dark"] .day-names {
+    background-color: #444;
+    color: #eee;
+}
+
+
 .calendar-days {
     display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7개의 열로 균등하게 배치 */
-    grid-template-rows: repeat(6, 1fr);
-    border-top: 1px solid #ccc; /* 기본 테두리 색 */
-    justify-content: center; /* 가로 방향 중앙 정렬 */
-  align-items: center; /* 세로 방향 중앙 정렬 */
+    grid-template-columns: repeat(7, 1fr);
+    grid-auto-rows: 1fr; /* 각 날짜의 행 높이를 균등하게 분배 */
+    gap: 0;
+    overflow: hidden; /* 넘치지 않도록 설정 */
+    height: calc(100% - 120px); /* 헤더와 요일 부분을 제외한 나머지 공간을 차지 */
 }
 
 /* 다크 모드 */
@@ -74,42 +79,18 @@
     border-top: 1px solid #666; /* 어두운 모드 테두리 색 */
 }
 
-.day-names {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7개의 열로 균등하게 배치 */
-}
-
-/* 각 요일 이름 스타일 */
-.day-name {
-    text-align: center;
-    font-weight: bold;
-    padding: 5px;
-    height: 20px;
-    background-color: #f0f0f0; /* 기본 배경색 */
-}
-
-/* 다크 모드 */
-[data-theme="dark"] .day-name {
-    background-color: #444; /* 어두운 모드 배경색 */
-    color: #eee; /* 다크 모드 텍스트 색 */
-}
-
 .calendar-day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
     cursor: pointer;
-    position: relative;
-    box-sizing: border-box;
+    padding: 10px;
+    border: 1px solid #ddd;
     transition: background-color 0.3s;
-    border: 1px solid #ddd; /* 기본 테두리 색 */
-    height: 100%;
-    padding: 14px;
-    /* display: flex;
-    justify-content: center; 
-    align-items: center; 
-    flex-grow: 1;
-    flex-shrink: 1;
-    width: 100%; 
-    aspect-ratio: 22 / 17; */
+    box-sizing: border-box;
+    height: 100%; /* 날짜 상자의 높이를 자동으로 비례적으로 설정 */
+    overflow: hidden; /* 날짜 텍스트가 넘치지 않도록 */
 }
 
 /* 다크 모드 */
@@ -137,33 +118,42 @@
     background-color: #3c763d; /* 어두운 모드에서 메모 있음 상태 */
 }
 
-.calendar-day.today {
-    background-color: #007bff; /* 기본 오늘 날짜 색상 */
-    color: white;              
-    font-weight: bold;
-    border-radius: 50%;  
-    width: 40px;          
-    height: 40px;         
-    display: flex;            
-    justify-content: center;  
-    align-items: center;   
-    margin: 0 auto;        
-}
 
-/* 다크 모드 */
-[data-theme="dark"] .calendar-day.today {
-    background-color: #339af0; /* 어두운 모드에서 오늘 날짜 색상 */
+/* 오늘 날짜 표시 - 원형 유지 (가로 세로 비율 상관없이 유지) */
+.calendar-day.today {
+    background-color: #339AF0;
+    color: white;
+    font-weight: bold;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
 }
 
 .calendar-day.today:hover {
     background-color: skyblue; /* 기본 오늘 날짜 호버 색상 */
 }
 
-/* 다크 모드 호버 상태 */
-[data-theme="dark"] .calendar-day.today:hover {
-    background-color: #0073ef; 
+/* 메모가 있는 날짜 */
+.calendar-day.has-memo {
+    background-color: skyblue;
+    color: black;
 }
 
+.calendar-day.has-memo:hover {
+    background-color: rgb(73, 183, 226);
+}
+
+/* 빈칸 */
+.calendar-day.empty {
+    background: none;
+    border: none;
+}
+
+/* 화살표 버튼 */
 .arrow-button {
     background: none;
     border: none;
@@ -175,87 +165,4 @@
 /* 다크 모드 화살표 버튼 색상 */
 [data-theme="dark"] .arrow-button {
     color: #66b3ff; /* 어두운 모드에서 화살표 색상 */
-}
-
-.calendar-days-of-week {
-    display: flex;
-    background-color: #f0f0f0; /* 기본 배경색 */
-    border-bottom: 1px solid #ddd; /* 기본 테두리 색 */
-}
-
-/* 다크 모드 */
-[data-theme="dark"] .calendar-days-of-week {
-    background-color: #555; /* 어두운 모드 배경색 */
-    border-bottom: 1px solid #666; /* 어두운 모드 테두리 색 */
-}
-
-.calendar-day-of-week {
-    flex: 1;
-    text-align: center;
-    padding: 10px;
-    font-weight: bold;
-    color: #666; /* 기본 텍스트 색 */
-}
-
-/* 다크 모드 */
-[data-theme="dark"] .calendar-day-of-week {
-    color: #eee; /* 다크 모드 텍스트 색 */
-}
-
-/* 다크 모드 메모 있음 상태 */
-[data-theme="dark"] .calendar-day.has-memo {
-    background-color: #3c763d; /* 어두운 모드에서 메모 있음 상태 */
-}
-
-.calendar-day:hover {
-    background-color: #e0e0e0; /* 기본 호버 색상 */
-}
-
-/* 다크 모드 호버 상태 */
-[data-theme="dark"] .calendar-day:hover {
-    background-color: #666; /* 어두운 모드 호버 색상 */
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .calendar-title {
-        font-size: 1.5rem; /* 작은 화면에서 제목 폰트 크기 조정 */
-    }
-
-    .calendar-day {
-        padding: 15px; /* 작은 화면에서 패딩 조정 */
-    }
-
-    .arrow-button {
-        font-size: 16px; /* 버튼 크기 조정 */
-    }
-
-    .day-name {
-        padding: 10px; /* 요일 이름 패딩 조정 */
-    }
-}
-
-/* Responsive Design */
-@media (max-width: 500px) {
-    .calendar-title {
-        font-size: 1rem; /* 작은 화면에서 제목 폰트 크기 조정 */
-    }
-
-    .calendar-day {
-        padding: 8px 0; /* 작은 화면에서 패딩 조정 */
-        font-size: 0.7rem;
-    }
-
-    .arrow-button {
-        font-size: 15px; /* 버튼 크기 조정 */
-    }
-
-    .day-name {
-        padding: 3px; /* 요일 이름 패딩 조정 */
-        font-size: 0.7rem;
-    }
-    .calendar-day.today {
-        width: 20px;
-        height: 20px;
-    }
 }
