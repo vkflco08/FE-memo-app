@@ -78,23 +78,6 @@ const MemoInput = ({ date, currentMemo, onSave, showNotification }) => {
 
     return (
         <div className="memo-input-container">
-            <form className="memo-input-form">
-                <input
-                    type="text"
-                    value={title}
-                    onChange={handleInputChange(setTitle)}
-                    onBlur={handleBlur}
-                    placeholder="제목"
-                    required
-                />
-                <textarea
-                    value={content}
-                    onChange={handleInputChange(setContent)}
-                    onBlur={handleBlur}
-                    placeholder="여기에 적어놔라..."
-                    required
-                />
-            </form>
             <div className="sync-control">
                 <img
                     src={syncIcon}
@@ -103,6 +86,21 @@ const MemoInput = ({ date, currentMemo, onSave, showNotification }) => {
                     onClick={handleManualSync}
                 />
             </div>
+            <input
+                type="text"
+                value={title}
+                onChange={handleInputChange(setTitle)}
+                onBlur={handleBlur}
+                placeholder="제목"
+                required
+            />
+            <textarea
+                value={content}
+                onChange={handleInputChange(setContent)}
+                onBlur={handleBlur}
+                placeholder="여기에 적어놔라..."
+                required
+            />
         </div>
     );
 };

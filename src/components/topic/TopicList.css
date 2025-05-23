@@ -1,12 +1,13 @@
 .topic-list-container {
     position: relative;
-    padding: 20px;
-    width: 80vh;
-    max-width: 800px;
-    margin: 80px auto;
-    background-color: #f7f7f7;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 2.5rem 1.5rem;
+    width: 100%;
+    max-width: 900px;
+    margin: 100px auto 0 auto;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border: 1px solid #ececec;
 }
 
 .header {
@@ -16,72 +17,73 @@
 }
 
 .topic-main-title {
-    font-size: 1.75rem;
-    color: #2a2a2a;
-    margin: 10px 10px;
+    font-size: 1.5rem;
+    color: #222;
+    margin: 0 0 1.5rem 0;
+    font-weight: 700;
 }
 
 .topic-divider {
     border: none;
-    border-top: 1px solid #888;
-    margin: 15px 0;
+    border-top: 1px solid #ececec;
+    margin: 18px 0;
 }
 
 /* 토픽 리스트 스타일 */
 .topics {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 20px;
+    gap: 24px;
 }
 
 /* 주제 카드 스타일 */
 .topic-item {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    background: #fafbfc;
+    padding: 1.5rem 1.2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: box-shadow 0.2s, transform 0.2s;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 220px; /* 카드 높이 고정 */
+    height: 210px;
+    border: 1px solid #e0e0e0;
 }
 
 .topic-item:hover {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px); /* Lift effect on hover */
+    box-shadow: 0 4px 16px rgba(74,144,226,0.08);
+    transform: translateY(-2px);
 }
 
 .topic-item .topic-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #357abd;
+    margin-bottom: 12px;
 }
 
 .topic-item .topic-description {
     font-size: 1rem;
-    color: #777;
+    color: #666;
     flex-grow: 1;
 }
 
 .topic-item .view-topic-btn {
-    background-color: #4a90e2;
-    color: white;
+    background: #4a90e2;
+    color: #fff;
     border: none;
     padding: 10px 18px;
     border-radius: 8px;
     cursor: pointer;
     font-size: 1rem;
     font-weight: 600;
-    margin-top: 15px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 12px;
+    transition: background 0.2s, color 0.2s;
 }
 
 .topic-item .view-topic-btn:hover {
-    background-color: #357abd;
-    transform: translateY(-2px); /* 버튼 효과 */
+    background: #357abd;
 }
 
 .edit-button {
@@ -98,9 +100,9 @@
 
 /* 다크 모드 */
 [data-theme="dark"] .topic-list-container {
-    background-color: #444;
-    color: #eee;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    background: #23272f;
+    color: #f5f5f5;
+    border: 1px solid #333;
 }
 
 [data-theme="dark"] .topic-main-title {
@@ -108,31 +110,35 @@
 }
 
 [data-theme="dark"] .topic-item {
-    background-color: #555;
-    color: #eee;
+    background: #23272f;
+    color: #f5f5f5;
+    border: 1px solid #333;
 }
 
 [data-theme="dark"] .topic-item:hover {
     box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
 }
 
-[data-theme="dark"] .view-topic-btn {
-    background-color: #5a9bd8;
+[data-theme="dark"] .topic-item .topic-title {
+    color: #4a90e2;
 }
 
-[data-theme="dark"] .view-topic-btn:hover {
-    background-color: #4179b1;
+[data-theme="dark"] .topic-item .topic-description {
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .topic-item .view-topic-btn {
+    background: #4a90e2;
+}
+
+[data-theme="dark"] .topic-item .view-topic-btn:hover {
+    background: #357abd;
 }
 
 /* 모바일 환경에 맞춘 검색창 스타일 */
-@media (max-width: 437px) {
+@media (max-width: 900px) {
   .topic-list-container {
-    width: 80%;
-  }
-}
-
-@media (max-width: 875px) {
-  .topic-list-container {
-    width: 90%;
+    width: 98%;
+    padding: 1rem;
   }
 }

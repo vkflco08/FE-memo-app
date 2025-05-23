@@ -123,65 +123,66 @@ const AllMemos = () => {
   return (
     <div className="all-memos-container">
       <div className="all-memos-section">
-      <input 
-        type="text" 
-        value={searchKeyword} 
-        onChange={(e) => setSearchKeyword(e.target.value)}
-        placeholder="검색어를 입력하세요"
-        className="search-input"
-      />
-      {searchLoading && (
-        <div className="dots-loading">
-          <span className="dot">.</span>
-          <span className="dot">.</span>
-          <span className="dot">.</span>
-        </div>
-      )}
-      <ul className="memo-list">
-        {memos.length > 0 ? (
-          memos.map((memo) => (
-            <div className="content-container" key={memo.date}>
-              <li className="memo-item" onClick={() => handleMemoClick(memo.date)}>
-                <h3>{memo.title}</h3>
-                <p className="memo-content">
-                  {truncateContent(memo.content, 100)}
-                </p><div className="memo-date">{memo.date}
-                </div>
-                <button 
-                  className="delete-button" 
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleDeleteMemo(memo.date);
-                  }}
-                >
-                  X
-                </button>
-              </li>
-
-            </div>
-          ))
-        ) : (
-          !searchLoading && <div className="no-results">검색 결과가 없습니다.</div>
+        <input 
+          type="text" 
+          value={searchKeyword} 
+          onChange={(e) => setSearchKeyword(e.target.value)}
+          placeholder="검색어를 입력하세요"
+          className="search-input"
+        />
+        {searchLoading && (
+          <div className="dots-loading">
+            <span className="dot">.</span>
+            <span className="dot">.</span>
+            <span className="dot">.</span>
+          </div>
         )}
-      </ul>
-      {loading && <Loading />}
-      <div className="pagination">
-        <button 
-          className="pagination-button"
-          onClick={handlePreviousPage} 
-          disabled={page === 0}
-        >
-          이전
-        </button>
-        <span className="pagination-info">{`현재 페이지: ${page + 1} / 총 페이지: ${totalPages}`}</span>
-        <button 
-          className="pagination-button"
-          onClick={handleNextPage} 
-          disabled={page >= totalPages - 1}
-        >
-          다음
-        </button>
-      </div>
+        <div className="memos-grid">
+          {memos.length > 0 ? (
+            memos.map((memo) => (
+              <div
+                className="memo-card"
+                key={memo.date}
+                onClick={() => handleMemoClick(memo.date)}
+              >
+                <div className="memo-title">{memo.title}</div>
+                <div className="memo-preview">{truncateContent(memo.content, 100)}</div>
+                <div className="memo-meta">
+                  <span>{memo.date}</span>
+                  <button 
+                    className="delete-button" 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDeleteMemo(memo.date);
+                    }}
+                  >
+                    X
+                  </button>
+                </div>
+              </div>
+            ))
+          ) : (
+            !searchLoading && <div className="no-results">검색 결과가 없습니다.</div>
+          )}
+        </div>
+        {loading && <Loading />}
+        <div className="pagination">
+          <button 
+            className="pagination-button"
+            onClick={handlePreviousPage} 
+            disabled={page === 0}
+          >
+            이전
+          </button>
+          <span className="pagination-info">{`현재 페이지: ${page + 1} / 총 페이지: ${totalPages}`}</span>
+          <button 
+            className="pagination-button"
+            onClick={handleNextPage} 
+            disabled={page >= totalPages - 1}
+          >
+            다음
+          </button>
+        </div>
       </div>
     </div>
   );  

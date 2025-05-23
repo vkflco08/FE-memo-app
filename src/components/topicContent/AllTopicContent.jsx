@@ -173,29 +173,33 @@ const AllTopicContents = () => {
       )}
       {/* 로딩 상태에 따라 조건부 렌더링 */}
       {!loading && topicContents.length > 0 ? (
-        <ul className="memo-list">
+        <div className="memos-grid">
           {topicContents.map((content) => {
             const uniqueKey = content.contentId;
             return (
-              <div className="content-container" key={uniqueKey}>
-                <li className="memo-item" onClick={() => handleTopicContentsClick(content.contentId)}>
-                  <h3>{content.title}</h3>
-                  <p className="memo-content">{truncateContent(content.content, 100)}</p>
-                  <div className="memo-date">{content.date ? formatDate(content.date) : 'Unknown Date'}</div>
-                  <button 
-                    className="delete-button" 
-                    onClick={(e) => {
+              <div
+                className="memo-card"
+                key={uniqueKey}
+                onClick={() => handleTopicContentsClick(content.contentId)}
+              >
+                <div className="memo-title">{content.title}</div>
+                <div className="memo-preview">{truncateContent(content.content, 100)}</div>
+                <div className="memo-meta">
+                  <span>{content.date ? formatDate(content.date) : 'Unknown Date'}</span>
+                  <button
+                    className="delete-button"
+                    onClick={e => {
                       e.stopPropagation();
-                      handleDeleteMemo(content.contentId); // 고유 id로 메모 삭제
+                      handleDeleteMemo(content.contentId);
                     }}
                   >
                     X
                   </button>
-                </li>
+                </div>
               </div>
             );
           })}
-        </ul>
+        </div>
       ) : (
         !searchLoading && <div className="no-results">검색 결과가 없습니다.</div>
       )}

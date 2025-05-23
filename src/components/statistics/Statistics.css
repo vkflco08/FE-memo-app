@@ -1,38 +1,39 @@
 .user-statistics {
-    width: 80vh;
-    margin: 0 auto; /* 중앙 정렬 */
+    width: 100%;
+    max-width: 900px;
+    margin: 100px auto 0 auto;
     text-align: center;
-    padding: 20px; /* 여백 추가 */
-    margin-top: 140px;
-    margin-bottom: 20px;
-    background-color: #f9f9f9; /* Light background */
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    padding: 2.5rem 1.5rem;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border: 1px solid #ececec;
 }
 
 /* 차트 박스 스타일 */
 .chart-box {
-    border: 1px solid #ddd; /* 박스 테두리 */    
+    border: 1px solid #e0e0e0;
     width: 80%;
-    border-radius: 10px; /* 둥근 모서리 */
-    padding: 20px; /* 안쪽 여백 */
-    background-color: #fff; /* 배경색 */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-    max-width: 100%; /* 박스의 최대 너비를 100%로 설정하여 반응형 유지 */
+    border-radius: 10px;
+    padding: 2rem 1rem;
+    background: #fafbfc;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    max-width: 100%;
     height: 300px;
-    position: relative; /* 자식 요소의 위치 설정 */
-    margin: 0 auto; /* 중앙 정렬 */
+    position: relative;
+    margin: 0 auto;
 }
 
 /* 가로 구분선 스타일 */
 .divider {
     border: none;
-    border-top: 1px solid #ddd; /* 구분선 색상 */
-    margin: 30px 0; /* 여백 */
+    border-top: 1px solid #ececec;
+    margin: 30px 0;
 }
+
 /* Progress bar 스타일 */
 .progress-container {
-    background-color: #ddd;
+    background: #e0e0e0;
     border-radius: 10px;
     height: 20px;
     width: 100%;
@@ -40,60 +41,48 @@
 }
 
 .progress-bar {
-    background-color: #4CAF50; /* Progress bar color */
+    background: #4CAF50;
     height: 100%;
     max-width: 100%;
     border-radius: 10px;
 }
 
-[data-theme="dark"] .progress-bar {
-    background-color: #76c7c0; /* Lighter color for progress bar */
-}
-
 .description {
-    color: #aaa; /* 회색으로 설정 */
-    font-size: 0.9em; /* 글자 크기 조정 */
+    color: #888;
+    font-size: 0.98em;
 }
 
 /* Dark mode styles */
 [data-theme="dark"] .user-statistics {
-    background-color: #444; /* Darker background */
-    color: #fff; /* Bright text */
+    background: #23272f;
+    color: #f5f5f5;
+    border: 1px solid #333;
 }
 
 /* 차트 박스 스타일 */
 [data-theme="dark"] .chart-box {
-    background-color: #555; /* Darker box background for contrast */
-    border: 1px solid #777; /* Lighter border for visibility */
-    color: #fff; /* Bright text color for better readability */
+    background: #23272f;
+    border: 1px solid #333;
+    color: #f5f5f5;
 }
 
 /* Progress bar 스타일 */
 [data-theme="dark"] .progress-container {
-    background-color: #666; /* Darker background for the progress bar */
-    border-radius: 10px;
-    height: 20px;
-    width: 100%;
-    margin: 10px 0;
+    background: #444;
 }
 
 [data-theme="dark"] .progress-bar {
-    background-color: #4CAF50; /* Green color remains the same */
-    height: 100%;
-    max-width: 100%;
-    border-radius: 10px;
+    background: #76c7c0;
 }
 
 /* Description text in dark mode */
 [data-theme="dark"] .description {
-    color: #bbb; /* Lighter gray for better readability */
-    font-size: 0.9em; /* Font size remains the same */
+    color: #bbb;
 }
 
 /* 가로 구분선 스타일 */
 [data-theme="dark"] .divider {
-    border-top: 1px solid #777; /* Darker color for dividers */
-    margin: 30px 0; /* 여백 */
+    border-top: 1px solid #333;
 }
 
 /* 헤더와 설명 텍스트 */

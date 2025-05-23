@@ -1,110 +1,115 @@
 /* 라이트 모드 스타일 */
 .topic-content-detail-container {
-  height: 90vh; /* 전체 화면 높이 */
-  width: 80vh;
-  display: flex; /* Flexbox로 자식 요소 정렬 */
-  justify-content: center; /* 가로 방향 중앙 정렬 */
-  align-items: center; /* 세로 방향 중앙 정렬 */
-  padding: 20px;
-  padding-top: 75px;
-  border-radius: 8px; /* 모서리 둥글게 */
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2.5rem 1.5rem;
+  background: none;
 }
 
 .topic-content-detail {
-  display: flex; /* Flexbox 사용 */
-  flex-direction: column; /* 세로 방향 정렬 */
-  width: 100%; /* 전체 너비 사용 */
-  max-width: 600px; /* 최대 너비 설정 */
-  background-color: #ffffff; /* 배경색 */
-  border-radius: 8px; /* 모서리 둥글게 */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-  padding: 20px; /* 내부 여백 */
+  width: 100%;
+  max-width: 1000px;
+  min-height: 600px;
+  background: #fff;
+  border-radius: 16px;
+  border: 1.5px solid #e0e6ed;
+  box-shadow: none;
+  padding: 2.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Pretendard', 'Noto Sans KR', 'Inter', Arial, sans-serif;
 }
-
 
 .topic-content-title-input {
-  padding: 10px; /* 내부 여백 */
-  margin-bottom: 15px; /* 아래 여백 */
-  font-size: 16px; /* 글꼴 크기 */
-  border: 1px solid #ced4da; /* 테두리 색상 */
-  border-radius: 4px; /* 모서리 둥글게 */
-  transition: border-color 0.3s; /* 테두리 색상 변화 효과 */
-}
-
-.topic-content-title-input:focus {
-  border-color: #007bff; /* 포커스 시 테두리 색상 */
-  outline: none; /* 기본 아웃라인 제거 */
+  width: 100%;
+  padding: 0.9rem 1rem;
+  margin-bottom: 1.2rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1.5px solid #e0e6ed;
+  background: #fafbfc;
+  color: #222;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  font-family: 'Pretendard', 'Noto Sans KR', 'Inter', Arial, sans-serif;
 }
 
 .topic-content-textarea {
-  padding: 10px; /* 내부 여백 */
-  margin-bottom: 20px; /* 아래 여백 */
-  font-size: 16px; /* 글꼴 크기 */
-  border: 1px solid #ced4da; /* 테두리 색상 */
-  border-radius: 4px; /* 모서리 둥글게 */
-  resize: vertical; /* 수직으로 크기 조절 가능 */
-  transition: border-color 0.3s; /* 테두리 색상 변화 효과 */
-  height: 300px; /* 고정 높이 */
+  width: 100%;
+  padding: 0.9rem 1rem;
+  margin-bottom: 1.2rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  border: 1.5px solid #e0e6ed;
+  background: #fafbfc;
+  color: #222;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  min-height: 350px;
+  max-height: 400px;
+  resize: vertical;
+  font-family: 'Pretendard', 'Noto Sans KR', 'Inter', Arial, sans-serif;
 }
 
-.topic-content-textarea:focus {
-  border-color: #007bff; /* 포커스 시 테두리 색상 */
-  outline: none; /* 기본 아웃라인 제거 */
+.topic-content-title-input:focus, .topic-content-textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px #e3f0fc;
 }
 
 .save-btn {
-  padding: 10px 15px; /* 내부 여백 */
-  font-size: 16px; /* 글꼴 크기 */
-  color: #fff; /* 글자 색상 */
-  background-color: #007bff; /* 배경색 */
-  border: none; /* 테두리 제거 */
-  border-radius: 4px; /* 모서리 둥글게 */
-  cursor: pointer; /* 포인터 커서 */
-  transition: background-color 0.3s; /* 배경색 변화 효과 */
+  width: 100%;
+  background: linear-gradient(90deg, #4a90e2 0%, #357abd 100%);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 1em 0;
+  font-weight: 700;
+  font-size: 1.08em;
+  cursor: pointer;
+  box-shadow: none;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
+  outline: none;
+  letter-spacing: 0.01em;
+  margin-top: 1.2em;
+  margin-bottom: 0.2em;
+  display: block;
+  font-family: inherit;
 }
 
 .save-btn:hover {
-  background-color: #0056b3; /* 호버 시 배경색 변화 */
+  background: linear-gradient(90deg, #357abd 0%, #4a90e2 100%);
+  color: #fff;
+  transform: translateY(-2px) scale(1.03);
 }
 
 /* 다크 모드 스타일 */
-[data-theme="dark"] .topic-content-detail-container {
-  background-color: #444; /* 어두운 배경 */
-  color: #e0e0e0; /* 텍스트 색상 */
-}
-
 [data-theme="dark"] .topic-content-detail {
-  background-color: #292929; /* 어두운 배경 */
-  color: #e0e0e0; /* 텍스트 색상 */
-  border: 1px solid #444; /* 어두운 테두리 */
+  background: #23272f;
+  color: #f5f5f5;
+  border: 1.5px solid #333;
 }
 
-[data-theme="dark"] .topic-content-title-input {
-  border: 1px solid #555; /* 어두운 테두리 색상 */
-  background-color: #333; /* 어두운 입력 배경 */
-  color: #e0e0e0; /* 텍스트 색상 */
+[data-theme="dark"] .topic-content-title-input, [data-theme="dark"] .topic-content-textarea {
+  border: 1.5px solid #444;
+  background: #23272f;
+  color: #f5f5f5;
 }
 
-[data-theme="dark"] .topic-content-title-input:focus {
-  border-color: #66aaff; /* 포커스 시 밝은 테두리 색상 */
-}
-
-[data-theme="dark"] .topic-content-textarea {
-  border: 1px solid #555; /* 어두운 테두리 색상 */
-  background-color: #333; /* 어두운 textarea 배경 */
-  color: #e0e0e0; /* 텍스트 색상 */
-}
-
-[data-theme="dark"] .topic-content-textarea:focus {
-  border-color: #66aaff; /* 포커스 시 밝은 테두리 색상 */
+[data-theme="dark"] .topic-content-title-input:focus, [data-theme="dark"] .topic-content-textarea:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px #2a3a4d;
 }
 
 [data-theme="dark"] .save-btn {
-  background-color: #007bff; /* 버튼 색상 유지 */
+  background: linear-gradient(90deg, #357abd 0%, #4a90e2 100%);
+  color: #fff;
 }
 
 [data-theme="dark"] .save-btn:hover {
-  background-color: #0056b3; /* 호버 색상 유지 */
+  background: linear-gradient(90deg, #4a90e2 0%, #357abd 100%);
+  color: #fff;
 }
 
 /* 반응형 조정 */

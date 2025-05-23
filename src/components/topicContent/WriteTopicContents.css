@@ -1,38 +1,48 @@
 .topic-editor-container {
-  width: 80vh;
-  max-width: 1000px;
-  margin: 20px auto;
-  margin-top: 80px;
-  padding: 20px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  border-radius: 8px;
+  width: 100%;
+  max-width: 900px;
+  margin: 100px auto 0 auto;
+  padding: 2.5rem 1.5rem;
+  background: #fff;
+  border-radius: 16px;
+  border: 1.5px solid #e0e6ed;
+  box-shadow: none;
+  font-family: 'Pretendard', 'Noto Sans KR', 'Inter', Arial, sans-serif;
 }
 
 h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #222;
 }
 
 /* 제목, 내용 입력 영역 */
 .input-container input,
 .input-container textarea {
-  width: 96%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  width: 100%;
+  padding: 12px 16px;
+  margin: 10px 0 18px 0;
+  border: 1.5px solid #e0e6ed;
+  border-radius: 10px;
+  background: #fafbfc;
+  font-size: 1rem;
+  color: #222;
+  font-family: inherit;
+  box-shadow: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.input-container input {
-  font-size: 16px;
+.input-container input:focus,
+.input-container textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px #e3f0fc;
 }
 
 .input-container textarea {
-  height: 57vh; /* 화면의 40% 높이 */
-  font-size: 14px;
-  resize: vertical; /* 수직으로만 크기 조정 가능 */
+  min-height: 180px;
+  resize: vertical;
 }
 
 /* 시리즈 선택 부분 */
@@ -45,26 +55,37 @@ h2 {
 }
 
 .topic-selection select {
-  width: 30%;
+  width: 40%;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
+  border: 1.5px solid #e0e6ed;
+  border-radius: 8px;
+  font-size: 1rem;
   margin-bottom: 18px;
+  background: #fafbfc;
+  color: #222;
+  font-family: inherit;
+}
+
+.topic-selection select:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px #e3f0fc;
 }
 
 .topic-selection button {
-  background-color: #007bff;
-  color: white;
+  background: #2563eb;
+  color: #fff;
   border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
+  padding: 10px 18px;
+  border-radius: 8px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.13s, color 0.13s;
+  font-family: inherit;
 }
 
 .topic-selection button:hover {
-  background-color: #0056b3;
+  background: #357abd;
 }
 
 /* 시리즈 추가 팝업 스타일 */
@@ -140,98 +161,112 @@ h2 {
 
 /* 저장 버튼 스타일 */
 .save-post {
-  background-color: #4CAF50;
-  color: white;
+  background: linear-gradient(90deg, #4a90e2 0%, #357abd 100%);
+  color: #fff;
   border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
+  border-radius: 12px;
+  padding: 0.85em 2em;
+  font-weight: 700;
+  font-size: 1.08em;
   cursor: pointer;
-  width: 100%;
-  font-size: 16px;
+  box-shadow: none;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
+  outline: none;
+  letter-spacing: 0.01em;
+  margin-top: 1.2em;
+  margin-bottom: 0.2em;
+  display: inline-block;
+  font-family: inherit;
 }
 
 .save-post:hover {
-  background-color: #1e7e34;
+  background: linear-gradient(90deg, #357abd 0%, #4a90e2 100%);
+  color: #fff;
+  transform: translateY(-2px) scale(1.03);
 }
 
 .delete-button {
-  position: absolute; /* Positioned relative to parent */
-  top: 10px; 
-  right: 10px; 
-  background-color: #ececec; 
-  color: rgb(255, 95, 95); 
-  border: none; 
-  border-radius: 5px; 
-  padding: 5px 10px; 
-  cursor: pointer; 
-  font-size: 14px; 
-  transition: background-color 0.3s ease; /* Transition for background color */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #ececec;
+  color: rgb(255, 95, 95);
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s;
+  font-family: inherit;
 }
 
 .delete-button:hover {
-  background-color: #ffb8b8; /* Background change on hover */
+  background-color: #ffb8b8;
 }
 
 [data-theme="dark"] .memo-detail-container {
-  color: #e0e0e0; /* 텍스트 색상 */
+  color: #e0e0e0;
 }
 
 [data-theme="dark"] .memo-detail {
-  background-color: #292929; /* 어두운 배경 */
-  color: #e0e0e0; /* 텍스트 색상 */
-  border: 1px solid #444; /* 어두운 테두리 */
+  background-color: #23272f;
+  color: #e0e0e0;
+  border: 1px solid #444;
 }
 
 [data-theme="dark"] .memo-title-input {
-  border: 1px solid #555; /* 어두운 테두리 색상 */
-  background-color: #444; /* 어두운 입력 배경 */
-  color: #e0e0e0; /* 텍스트 색상 */
+  border: 1px solid #444;
+  background-color: #23272f;
+  color: #e0e0e0;
 }
 
 [data-theme="dark"] .memo-title-input:focus {
-  border-color: #66aaff; /* 포커스 시 밝은 테두리 색상 */
+  border-color: #4a90e2;
 }
 
 [data-theme="dark"] .memo-content-textarea {
-  border: 1px solid #555; /* 어두운 테두리 색상 */
-  background-color: #444; /* 어두운 textarea 배경 */
-  color: #e0e0e0; /* 텍스트 색상 */
+  border: 1px solid #444;
+  background-color: #23272f;
+  color: #e0e0e0;
 }
 
 [data-theme="dark"] .memo-content-textarea:focus {
-  border-color: #66aaff; /* 포커스 시 밝은 테두리 색상 */
+  border-color: #4a90e2;
 }
 
 [data-theme="dark"] .save-btn {
-  background-color: #007bff; /* 버튼 색상 유지 */
+  background: linear-gradient(90deg, #357abd 0%, #4a90e2 100%);
+  color: #fff;
 }
 
 [data-theme="dark"] .save-btn:hover {
-  background-color: #0056b3; /* 호버 색상 유지 */
+  background: linear-gradient(90deg, #4a90e2 0%, #357abd 100%);
+  color: #fff;
 }
 
 /* Topic Editor */
 [data-theme="dark"] .topic-editor-container {
-  background-color: #292929; /* 어두운 배경 */
-  color: #e0e0e0; /* 텍스트 색상 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* 그림자 강화 */
+  background: #23272f;
+  color: #f5f5f5;
+  border: 1.5px solid #333;
 }
 
-[data-theme="dark"] .topic-editor-container h2 {
-  color: #e0e0e0; /* 제목 텍스트 색상 */
+[data-theme="dark"] h2 {
+  color: #fff;
 }
 
 /* 제목, 내용 입력 영역 */
 [data-theme="dark"] .input-container input,
 [data-theme="dark"] .input-container textarea {
-  background-color: #333; /* 어두운 입력 배경 */
-  color: #e0e0e0; /* 텍스트 색상 */
-  border: 1px solid #555; /* 어두운 테두리 색상 */
+  background: #23272f;
+  color: #f5f5f5;
+  border: 1.5px solid #444;
 }
 
 [data-theme="dark"] .input-container input:focus,
 [data-theme="dark"] .input-container textarea:focus {
-  border-color: #66aaff; /* 포커스 시 밝은 테두리 색상 */
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px #2a3a4d;
 }
 
 /* 시리즈 선택 부분 */
@@ -240,18 +275,23 @@ h2 {
 }
 
 [data-theme="dark"] .topic-selection select {
-  background-color: #333; /* 어두운 선택 박스 */
-  color: #e0e0e0; /* 텍스트 색상 */
-  border: 1px solid #555; /* 어두운 테두리 색상 */
+  background: #23272f;
+  color: #f5f5f5;
+  border: 1.5px solid #444;
+}
+
+[data-theme="dark"] .topic-selection select:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px #2a3a4d;
 }
 
 [data-theme="dark"] .topic-selection button {
-  background-color: #007bff; /* 버튼 색상 유지 */
-  color: white; /* 글자 색상 유지 */
+  background: #357abd;
+  color: #fff;
 }
 
 [data-theme="dark"] .topic-selection button:hover {
-  background-color: #0056b3; /* 호버 색상 유지 */
+  background: #4a90e2;
 }
 
 /* 시리즈 추가 팝업 스타일 */
@@ -285,19 +325,31 @@ h2 {
 
 /* 저장 버튼 스타일 */
 [data-theme="dark"] .save-post {
-  background-color: #007bff; /* 버튼 색상 유지 */
+  background: linear-gradient(90deg, #357abd 0%, #4a90e2 100%);
+  color: #fff;
 }
 
 [data-theme="dark"] .save-post:hover {
-  background-color: #0056b3; /* 호버 색상 유지 */
+  background: linear-gradient(90deg, #4a90e2 0%, #357abd 100%);
+  color: #fff;
 }
 
 [data-theme="dark"] .delete-button {
-  background-color: #444; /* 어두운 배경 */
-  color: rgb(255, 95, 95); /* 삭제 텍스트 색상 */
-  border: none; /* 테두리 제거 */
+  background-color: #444;
+  color: rgb(255, 95, 95);
 }
 
 [data-theme="dark"] .delete-button:hover {
-  background-color: #ff6666; /* 호버 시 배경 색상 */
+  background-color: #ff6666;
+}
+
+@media (max-width: 900px) {
+  .topic-editor-container {
+    padding: 1rem;
+  }
+}
+@media (max-width: 600px) {
+  .topic-editor-container {
+    padding: 0.5rem;
+  }
 }

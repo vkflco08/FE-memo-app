@@ -1,15 +1,15 @@
 .navbar {
-  background: linear-gradient(90deg, #4e54c8, #8f94fb); /* 그라데이션 추가 */
-  color: #fff;
-  padding: 15px 10px; /* 수평 padding 제거 */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  color: #222;
+  padding: 14px 0;
+  box-shadow: none;
   width: 100%;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
-  transition: background-color 0.3s ease;
-  box-sizing: border-box; 
+  border-bottom: 1px solid #ececec;
+  transition: background 0.2s;
 }
 
 .navbar-container {
@@ -17,67 +17,40 @@
   justify-content: space-between;
   align-items: center;
   margin: 0 auto;
-  padding: 0 15px; 
+  padding: 0 32px;
   width: 100%;
-  max-width: 1200px; 
+  max-width: 1200px;
   box-sizing: border-box;
 }
 
 .navbar-brand {
-  font-size: 1.75rem;
-  font-weight: bold;
-  color: #fff;
-  text-decoration: none;
+  color: #222;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
 }
 
 .navbar-menu {
   display: flex;
-  gap: 20px;
-  flex-wrap: nowrap; 
+  align-items: center;
+  gap: 16px;
 }
 
-/* 모든 메모 보기 링크 스타일 */
-.memo-link {
-  color: #ffffff; /* 텍스트 색상 */
+.theme-button, .memo-link, .auth-link {
+  background: none;
+  color: #357abd;
+  border: 1.2px solid #e0e6ed;
+  border-radius: 16px;
+  padding: 7px 18px;
+  font-weight: 600;
   font-size: 1rem;
-  padding: 8px 16px; /* 패딩 조정 */
-  border-radius: 4px; /* 둥근 모서리 */
-  text-decoration: none;
-  background: #4e54c8; /* 흰색 배경 */
-  transition: background-color 0.3s ease, color 0.3s ease;
-  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
-  box-shadow: none; /* 그림자 제거 */
+  transition: background 0.13s, color 0.13s, border 0.13s;
+  box-shadow: none;
 }
-
-.memo-link:hover {
-  background-color: #cfd1e8; /* 호버 시 배경 색상 변경 */
-  color: #262fdf; /* 호버 시 텍스트 색상 변경 */
-}
-
-.memo-link:active {
-  transform: scale(0.95);
-}
-
-/* 로그인/로그아웃 링크 스타일 */
-.auth-link {
-  color: #fff;
-  font-size: 1rem;
-  padding: 8px 16px;
-  border-radius: 4px;
-  text-decoration: none;
-  background: rgba(255, 255, 255, 0.1);
-  transition: background-color 0.3s ease, color 0.3s ease;
-  white-space: nowrap; /* 텍스트 줄바꿈 방지 */
-}
-
-.auth-link:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-  color: #fff;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.auth-link:active {
-  transform: scale(0.95);
+.theme-button:hover, .memo-link:hover, .auth-link:hover {
+  background: #f0f4fa;
+  color: #222;
+  border-color: #b5c6e0;
 }
 
 /* 모바일 환경에 맞춘 검색창 스타일 */
@@ -85,10 +58,7 @@
   .navbar-brand {
     font-size: 1.3rem;
   }
-  .memo-link {
-    font-size: 0.7rem;
-  }
-  .auth-link {
+  .memo-link, .auth-link {
     font-size: 0.7rem;
   }
 }
@@ -97,57 +67,87 @@
 .sidebar {
   position: fixed;
   top: 0;
-  right: -300px; /* 사이드바를 오른쪽 밖으로 설정 */
-  width: 300px; /* 사이드바 너비 */
+  right: -320px;
+  width: 320px;
   height: 100%;
-  background-color: #333; /* 사이드바 배경색 */
-  transition: right 0.3s ease; /* 부드러운 열기/닫기 효과 */
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5); /* 그림자 효과 */
-  z-index: 1000; /* 다른 요소 위에 나타나도록 설정 */
+  background: #fff;
+  transition: right 0.3s cubic-bezier(.4,0,.2,1);
+  box-shadow: none;
+  z-index: 1000;
+  border-left: 1px solid #ececec;
 }
 
 .sidebar.open {
-  right: 0; /* 열릴 때 화면에 보이도록 설정 */
+  right: 0;
 }
 
 /* 사이드바 닫기 버튼 */
 .close-sidebar-button {
   background: none;
   border: none;
-  color: white; /* 닫기 버튼 색상 */
-  font-size: 24px; /* 닫기 버튼 크기 */
+  color: #888;
+  font-size: 20px;
+  width: 32px;
+  height: 32px;
   cursor: pointer;
-  margin: 10px; /* 마진 추가 */
-  float: right; /* 오른쪽 정렬 */
+  margin: 10px 10px 12px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0;
+  transition: background 0.13s;
+}
+.close-sidebar-button:hover {
+  background: #f0f0f0;
 }
 
 /* 사이드바 콘텐츠 스타일 */
 .sidebar-content {
-  padding: 20px; /* 패딩 추가 */
-  padding-top: 40px;
-  color: white; /* 텍스트 색상 */
-  font-family: Arial, sans-serif; /* 기본 폰트 설정 */
+  padding: 10px 32px;
+  color: #222;
+  font-family: 'Pretendard', 'Noto Sans KR', 'Inter', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 }
 
 .sidebar-divider {
-  border: none; /* 기본 경계 제거 */
-  border-top: 1px solid #444; /* 상단 경계선 추가 */
-  margin: 5px 0; /* 상하 여백 추가 */
+  border: none;
+  border-top: 1px solid #e0e6ed;
+  margin: 12px 0 12px 0;
 }
 
 /* 링크 스타일 */
 .sidebar-link {
-  display: block; /* 블록 형태로 표시 */
-  color: #fff; /* 링크 색상 */
-  text-decoration: none; /* 링크 기본 스타일 제거 */
-  padding: 10px 15px;
-  margin: 15px 0;
-  transition: background-color 0.3s ease; /* 배경색 전환 효과 */
-  border-radius: 4px; /* 둥근 모서리 */
+  display: block;
+  width: 100%;
+  color: #2563eb;
+  background: none;
+  border: none;
+  border-radius: 10px;
+  padding: 13px 0 13px 0;
+  margin: 0;
+  font-weight: 500;
+  font-size: 1.04rem;
+  text-align: center;
+  transition: background 0.13s, color 0.13s;
+  box-sizing: border-box;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+.sidebar-link:hover, .sidebar-link:focus, .sidebar-link.active {
+  text-decoration: none;
 }
 
-.sidebar-link:hover {
-  background-color: #444; /* hover 시 배경색 변경 */
+/* Logout special hover */
+.sidebar-link:last-child:hover {
+  background: #ffeaea;
+  color: #d32f2f;
+}
+[data-theme="dark"] .sidebar-link:last-child:hover {
+  background: #3a2323;
+  color: #ffb8b8;
 }
 
 /* 서랍 아이콘 버튼 스타일 */
@@ -168,34 +168,84 @@
 
 /* 사이드바 노트 스타일 */
 .sidebar-note {
-  color: #aaa; /* 회색 텍스트 */
-  font-size: 14px; /* 폰트 크기 조정 */
-  margin: 10px 0; /* 상하 여백 추가 */
-}
-
-.theme-button {
-  display: block;
-  align-content: center;
-  color: #fff;
-  text-decoration: none;
-  padding: 10px 15px;
-  transition: background-color 0.3s ease;
-  border-radius: 4px;
-}
-
-.theme-button:hover {
-  background-color: #444; /* hover 시 배경색 변경 */
+  color: #aaa;
+  font-size: 14px;
+  margin: 10px 0;
 }
 
 .profile-picture {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  border: 2px solid #ccc;
+  border: 1.5px solid #e0e0e0;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .profile-icon {
   font-size: 32px;
+  color: #357abd;
   cursor: pointer;
+}
+
+[data-theme="dark"] .navbar {
+  background: #23272f;
+  color: #f5f5f5;
+  border-bottom: 1px solid #333;
+}
+[data-theme="dark"] .navbar-brand {
+  color: #f5f5f5;
+}
+[data-theme="dark"] .sidebar {
+  background: #23272f;
+  color: #f5f5f5;
+  border-left: 1px solid #333;
+}
+[data-theme="dark"] .sidebar-content {
+  color: #f5f5f5;
+}
+[data-theme="dark"] .sidebar-link {
+  color: #76c7c0;
+}
+[data-theme="dark"] .sidebar-link:hover, [data-theme="dark"] .sidebar-link:focus {
+  background: #2a3a4d;
+  color: #fff;
+}
+[data-theme="dark"] .theme-button, [data-theme="dark"] .memo-link, [data-theme="dark"] .auth-link {
+  color: #76c7c0;
+  border: 1.2px solid #333;
+  background: none;
+}
+[data-theme="dark"] .theme-button:hover, [data-theme="dark"] .memo-link:hover, [data-theme="dark"] .auth-link:hover {
+  background: #23272f;
+  color: #fff;
+  border-color: #76c7c0;
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+    width: 100vw;
+    min-width: unset;
+    right: -100vw;
+  }
+  .sidebar.open {
+    right: 0;
+  }
+  .sidebar-content {
+    padding: 24px 4vw 24px 4vw;
+  }
+}
+
+.drawer-label {
+  display: block;
+  font-size: 12px;
+  color: #888;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 110%;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  font-family: 'Pretendard', 'Noto Sans KR', 'Inter', Arial, sans-serif;
 }
