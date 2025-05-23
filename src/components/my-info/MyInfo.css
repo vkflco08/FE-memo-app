@@ -3,19 +3,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* 화면 전체 높이로 설정 */
+  min-height: 100vh;
+  background: none;
 }
 
 .my-info-section {
-  position: relative; 
-  max-width: 400px;
+  position: relative;
+  max-width: 420px;
   margin: 0 auto;
-  padding: 20px;
-  width: 50vh;
+  padding: 2.5rem 1.5rem;
+  width: 100%;
   text-align: center;
-  border-radius: 10px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  border: 1px solid #ececec;
 }
 
 /* 프로필 섹션 */
@@ -23,15 +25,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 18px;
 }
 
 /* 프로필 사진 */
 .my-info-profile-picture {
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  border: 2px solid #ccc;
+  border: 1.5px solid #e0e0e0;
   object-fit: cover;
 }
 
@@ -42,25 +44,24 @@
 }
 
 .my-info-user-name {
-  font-size: 1.5em;
-  font-weight: bold;
+  font-size: 1.3em;
+  font-weight: 700;
   margin: 0;
 }
 
 .my-info-user-login-id {
   font-size: 1em;
-  color: #555;
+  color: #888;
 }
 
 /* 추가 정보 */
 .my-info-additional-info {
   text-align: left;
-  margin-top: 20px;
-  padding: 10px;
-  padding-left: 20px;
-  font-size: 0.9em;
-  border-radius: 16px;
-  background-color: #f9f9f9;
+  margin-top: 18px;
+  padding: 12px 18px;
+  font-size: 0.98em;
+  border-radius: 10px;
+  background: #fafbfc;
   border: 1px solid #e0e0e0;
 }
 
@@ -71,56 +72,41 @@
 
 /* 액션 버튼 */
 .my-info-actions {
-  margin-top: 20px;
+  margin-top: 18px;
 }
 
 .my-info-edit-button,
-.my-info-delete-button {
+.my-info-save-button,
+.my-info-file-select-button {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   margin: 10px 0;
   font-size: 1em;
-  font-weight: bold;
+  font-weight: 600;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  background: #4a90e2;
+  color: #fff;
+  transition: background 0.2s;
 }
 
-.my-info-edit-button {
-  background-color: #007bff;
-  color: white;
-}
-
-.my-info-edit-button:hover {
-  background-color: #0056b3;
-}
-
-/* 저장하기 버튼 */
-.my-info-save-button {
-  width: 100%;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  font-size: 1em;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-top: 20px;
-}
-
-.my-info-save-button:hover {
-  background-color: #45a049;
+.my-info-edit-button:hover,
+.my-info-save-button:hover,
+.my-info-file-select-button:hover {
+  background: #357abd;
 }
 
 .my-info-input {
-  padding: 0.25rem 0.5rem;
-  /* border-radius: 5px; */
+  padding: 0.5rem 0.8rem;
+  border-radius: 8px;
   font-size: 1rem;
-  text-align: center; /* 텍스트 수평 중앙 정렬 */
-  width: auto; /* 기본 길이를 없앰 */
-  min-width: 5rem; /* 최소 너비 설정 */
-  box-sizing: border-box; /* 패딩 포함 크기 계산 */
+  text-align: center;
+  width: 100%;
+  min-width: 5rem;
+  box-sizing: border-box;
+  border: 1px solid #e0e0e0;
+  background: #fafbfc;
 }
 
 .my-info-image-label {
@@ -138,20 +124,6 @@
 
 .my-info-file-input{
   display: none;
-}
-
-.my-info-file-select-button {
-  padding: 10px 15px;
-  font-size: 1em;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.my-info-file-select-button:hover {
-  background-color: #45a049;
 }
 
 .my-info-drag-container {
@@ -173,9 +145,9 @@
 }
 
 [data-theme="dark"] .my-info-section {
-  background-color: #444;
-  color: #eee;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  background: #23272f;
+  color: #f5f5f5;
+  border: 1px solid #333;
 }
 
 [data-theme="dark"] .my-info-profile-details {
@@ -188,13 +160,13 @@
 }
 
 [data-theme="dark"] .my-info-additional-info {
-    background-color: #333;
-    border: 1px solid #444;
+  background: #23272f;
+  border: 1px solid #333;
 }
 
 /* 다크 모드 입력창 */
 [data-theme="dark"] .my-info-container input {
-  border: 1px solid #666; /* 어두운 모드에서 입력창 테두리 색 */
-  background-color: #555; /* 어두운 모드 입력창 배경색 */
-  color: #eee; /* 어두운 모드 텍스트 색 */
+  border: 1px solid #444;
+  background: #23272f;
+  color: #f5f5f5;
 }

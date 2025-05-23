@@ -62,18 +62,25 @@ const NavBar = () => {
             <Link to="/topic/write" className="theme-button">글 작성</Link>
             {isAuthenticated ? (
               profileImage ? (
-                <img
-                  src={profileImage instanceof File ? 
-                    URL.createObjectURL(profileImage) : `data:image/jpeg;base64,${profileImage}`}
-                  alt="Profile"
-                  className="profile-picture"
-                  onClick={toggleSidebar}
-                />
+                <div style={{display: 'inline-block', position: 'relative'}}>
+                  <img
+                    src={profileImage instanceof File ? 
+                      URL.createObjectURL(profileImage) : `data:image/jpeg;base64,${profileImage}`}
+                    alt="Profile"
+                    className="profile-picture"
+                    onClick={toggleSidebar}
+                  />
+                  {!sidebarOpen && (
+                    <span className="drawer-label">서랍</span>
+                  )}
+                </div>
               ) : (
-                <FaUserCircle
-                  className="profile-icon"
-                  onClick={toggleSidebar}
-                />
+                <div style={{display: 'inline-block', position: 'relative'}}>
+                  <FaUserCircle
+                    className="profile-icon"
+                    onClick={toggleSidebar}
+                  />
+                </div>
               )
             ) : null}
           </div>
@@ -87,7 +94,6 @@ const NavBar = () => {
           {isAuthenticated ? (
             <>
               <Link to="/all-memos" className="sidebar-link" onClick={toggleSidebar}>모든 메모 보기</Link>
-              <hr className="sidebar-divider" />
               <Link to="/topic-list" className="sidebar-link" onClick={toggleSidebar}>모든 주제</Link>
               <hr className="sidebar-divider" />
               <Link to="/my-info" className="sidebar-link" onClick={toggleSidebar}>내 정보 보기</Link>

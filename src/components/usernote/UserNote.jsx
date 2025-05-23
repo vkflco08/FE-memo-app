@@ -263,67 +263,70 @@ const UserNote = ({ showNotification }) => {
     };  
 
     return (
-        <div>
-            <div className="note-tabs">
-            {userNotes.map((note, index) => (
-                <div
-                    key={note.id ? note.id : `${index}-${Date.now()}`} 
-                    className={`note-tab ${selectedNoteIndex === index ? 'active' : ''}`}
-                    onClick={() => handleNoteSelect(index)}
-                    onDoubleClick={() => handleDoubleClickTitle(index)}
-                >
-                    {isEditingTitle === index ? (
-                        <div className="title-input-container">
+    <div className="user-note-container">
+        <div className="user-note-section">
+            <div className="note-tabs-row">
+                <div className="note-tabs">
+                    {userNotes.map((note, index) => (
+                        <div
+                            key={note.id ? note.id : `${index}-${Date.now()}`}
+                            className={`note-tab ${selectedNoteIndex === index ? 'active' : ''}`}
+                            onClick={() => handleNoteSelect(index)}
+                            onDoubleClick={() => handleDoubleClickTitle(index)}
+                        >
+                            {isEditingTitle === index ? (
+                                <div className="title-input-container">
+                                    <input
+                                        type="text"
+                                        value={newNoteTitle}
+                                        onChange={handleTitleChange}
+                                        autoFocus
+                                        onBlur={handleTitleSave}
+                                        onKeyDown={(e) => e.key === "Enter" && handleTitleSave()}
+                                    />
+                                    <button
+                                        className="delete-note-btn"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            setIsEditingTitle(false);
+                                            handleDeleteNote(index, e);
+                                        }}
+                                    >
+                                        x
+                                    </button>
+                                </div>
+                            ) : (
+                                note.title
+                            )}
+                        </div>
+                    ))}
+                    {isEditingTitle === -1 && (
+                        <div className="add-note-form">
                             <input
                                 type="text"
                                 value={newNoteTitle}
-                                onChange={handleTitleChange}
+                                onChange={handleNoteChange}
                                 autoFocus
-                                // onBlur={handleTitleSave}
-                                onKeyDown={(e) => e.key === "Enter" && handleTitleSave()}
+                                placeholder="책갈피 제목 입력"
+                                onKeyDown={(e) => e.key === "Enter" && handleSaveNewNote()}
                             />
-                            <button
-                                className="delete-note-btn"
-                                onClick={(e) => {
-                                    e.stopPropagation(); // 클릭 이벤트 전파 막기
-                                    setIsEditingTitle(false); // 제목 수정 모드 종료
-                                    handleDeleteNote(index, e); // 삭제 함수에 이벤트 전달
-                                }}
-                            >
-                                x
-                            </button>
                         </div>
-                    ) : (
-                        note.title
+                    )}
+                    {!isEditingTitle && (
+                        <button
+                            className="add-note-btn"
+                            onClick={handleAddNote}
+                        >
+                            +
+                        </button>
                     )}
                 </div>
-            ))}
-
-                {isEditingTitle === -1 && (
-                    <div className="add-note-form">
-                        <input
-                            type="text"
-                            value={newNoteTitle}
-                            onChange={handleNoteChange}
-                            autoFocus
-                            placeholder="책갈피 제목 입력"
-                            onKeyDown={(e) => e.key === "Enter" && handleSaveNewNote()}
-                        />
-                    </div>
-                )}
-
-                {!isEditingTitle && (
-                    <button
-                        className="add-note-btn"
-                        onClick={handleAddNote}
-                    >
-                        +
-                    </button>
-                )}
             </div>
-
-            <div id="editor" className="note-content"></div>
+            <div className="note-editor-wrapper">
+                <div id="editor" className="note-content"></div>
+            </div>
         </div>
+    </div>
     );
 };
 

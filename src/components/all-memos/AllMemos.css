@@ -2,269 +2,201 @@
 .all-memos-container {
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* 위에서부터 정렬 */
-  min-height: 100vh; /* 최소 높이를 뷰포트 높이로 설정 */
-  padding-top: 20px; /* 상단 여백 추가 */
-  margin-top: 80px;
+  align-items: flex-start;
+  min-height: 100vh;
+  margin-top: 100px;
+  background: none;
+  font-family: 'Pretendard', 'Noto Sans KR', 'Inter', Arial, sans-serif;
 }
 
 .all-memos-section {
-  display: flex;
-  align-items: center; 
-  padding: 10px;
-  background-color: #f8f9fa; /* 기본 배경색 */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
-  flex-direction: column;
-  width: 800px;
-  border-radius: 16px; 
+  width: 100%;
+  max-width: 900px;
+  background: #fff;
+  border-radius: 16px;
+  border: 1.5px solid #e0e6ed;
+  padding: 2.5rem 1.5rem;
+  margin: 0 auto;
+  box-shadow: none;
 }
 
-.memo-list {
-  list-style-type: none;
-  padding: 0;
-  width: 100%; /* 100% 너비로 설정 */
-  max-width: 700px; /* 최대 너비 */
-  margin: 0 auto; /* 중앙 정렬 */
-}
-
-.memo-item {
-  width: 100%; /* 부모의 너비에 맞춤 */
-  background-color: #f9f9f9;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 15px;
-  margin: 10px 0; /* 위아래 여백만 추가 */
-  cursor: pointer;
-  transition: box-shadow 0.3s ease, transform 0.3s ease;
-   box-sizing: border-box; /*padding과 border 포함 */
-  position: relative; /* 삭제 버튼을 절대 위치시킬 기준 요소로 설정 */
-}
-
-.memo-item:hover {
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transform: translateY(-2px); /* Lift effect on hover */
-}
-
-.memo-item h3 {
-  margin: 0;
-  font-size: 18px;
-  color: #007bff; /* Title color */
-}
-
-.memo-item p {
-  margin: 10px 0;
-  width: 100%; /* 부모의 너비에 맞춤 */
-  color: #666;
-  white-space: normal; /* 긴 내용은 자동으로 줄바꿈 */
-  overflow: hidden; /* 내용이 요소를 벗어나지 않도록 */
-  text-overflow: ellipsis; /* 넘친 텍스트는 말줄임(...) 표시 */
-  max-height: 5.5em; /* 최대 높이 설정 (약 세 줄 정도) */
-  line-height: 1.5em; /* 줄 간격 설정 */
-  white-space: pre-line; /* 개행을 유지하도록 설정 */
-}
-
-.memo-date {
-  text-align: right;
-  font-size: 14px;
-  color: #999; /* Date color */
-}
-
-.memo-content {
-  display: -webkit-box; /* Flexbox처럼 작동 */
-  -webkit-line-clamp: 3; /* 최대 3줄 표시 */
-  -webkit-box-orient: vertical; /* 수직으로 박스 정렬 */
-  overflow: hidden; /* 넘치는 텍스트 숨김 */
-  text-overflow: ellipsis; /* 초과된 부분에 ... 추가 */
-  line-height: 1.5; /* 줄 간격 설정 */
-  height: calc(4em * 3); /* 3줄 높이 계산 */
-  white-space: pre-line; /* 텍스트 개행 반영 */
-}
-
-.content-section {
-  position: relative;
-}
-
-.delete-button {
-  position: absolute; /* Positioned relative to parent */
-  top: 10px; 
-  right: 10px; 
-  background-color: #ececec; 
-  color: rgb(255, 95, 95); 
-  border: none; 
-  border-radius: 5px; 
-  padding: 5px 10px; 
-  cursor: pointer; 
-  font-size: 14px; 
-  transition: background-color 0.3s ease; /* Transition for background color */
-}
-
-.delete-button:hover {
-  background-color: #ffb8b8; /* Background change on hover */
-}
-
-/* Dark Mode Styles */
-[data-theme="dark"] .all-memos-section {
-  background-color: #444; /* Dark mode background */
-  color: #e0e0e0; /* Default text color */
-}
-
-[data-theme="dark"] .memo-list .memo-item {
-  background-color: #333; /* Darker item background */
-  border: 1px solid #333; /* Darker border for items */
-}
-
-[data-theme="dark"] .memo-item:hover {
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
-}
-
-[data-theme="dark"] .memo-item h3 {
-  color: #66aaff; /* Lighter color for titles in dark mode */
-}
-
-[data-theme="dark"] .memo-item p {
-  color: rgb(200, 200, 200); /* Lighter text color */
-  border: 1px solid #444;
-}
-
-[data-theme="dark"] .memo-date {
-  color: #bbb; /* Lighter date color */
-}
-
-[data-theme="dark"] .delete-button {
-  background-color: #444; /* Darker button background */
-  color: #ff5f5f; /* Red color for delete button */
-}
-
-[data-theme="dark"] .delete-button:hover {
-  background-color: #444; /* Darker on hover */
-}
-
-.dots-loading {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-}
-
-.dot {
-  font-size: 1.5rem;
-  animation: blink 1s infinite alternate;
-}
-
-.dot:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.dot:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-@keyframes blink {
-  0% {
-    opacity: 0.2;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-/* 검색창 스타일 */
 .search-input {
-  width: 90%;
-  max-width: 500px; /* 최대 너비 */
-  padding: 10px 15px;
-  margin: 10px auto; /* 중앙 정렬 */
-  font-size: 16px;
-  border: 1px solid #e0e0e0; /* 기본 테두리 */
-  border-radius: 8px;
-  outline: none;
-  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* 입력창 그림자 */
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 420px;
+  padding: 12px 16px;
+  margin: 0 auto 1.5rem auto;
+  font-size: 1rem;
+  border: 1.5px solid #e0e6ed;
+  border-radius: 10px;
+  background: #fafbfc;
+  color: #222;
+  box-shadow: none;
+  display: block;
+  font-family: inherit;
 }
 
 .search-input:focus {
-  border-color: #007bff; /* 포커스 시 테두리 색상 */
-  box-shadow: 0px 4px 12px rgba(0, 123, 255, 0.3); /* 포커스 시 그림자 강조 */
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px #e3f0fc;
 }
 
-/* 다크 모드 검색창 스타일 */
-[data-theme="dark"] .search-input {
-  background-color: #333; /* 다크 모드 배경색 */
-  color: #e0e0e0; /* 다크 모드 텍스트 색상 */
-  border: 1px solid #555; /* 다크 모드 테두리 */
+.memos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  width: 100%;
+  margin: 0 auto 2rem auto;
 }
 
-[data-theme="dark"] .search-input:focus {
-  border-color: #66aaff; /* 다크 모드 포커스 색상 */
-  box-shadow: 0px 4px 12px rgba(102, 170, 255, 0.3); /* 다크 모드 포커스 그림자 */
+.memo-card {
+  background: #f7faff;
+  border: 1.5px solid #e0e6ed;
+  border-radius: 14px;
+  padding: 1.3rem 1.1rem 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  transition: background 0.13s, border 0.13s;
+  cursor: pointer;
+  box-shadow: none;
+  font-family: inherit;
 }
 
-/* 모바일 환경에 맞춘 검색창 스타일 */
-@media (max-width: 437px) {
-  .all-memos-section {
-    padding: 10px; /* Reduce padding on smaller screens */
-    padding-top: 100px;
-  }
-
-  .memo-item {
-    padding: 10px; /* Adjust padding for memo items */
-  }
-
-  .memo-item h3 {
-    font-size: 16px; /* Slightly smaller title font */
-  }
-
-  .memo-date {
-    font-size: 12px; /* Smaller date font */
-  }
+.memo-card:hover {
+  background: #e3f0fc;
+  border-color: #2563eb;
 }
 
-.no-results {
-  display: flex; /* flexbox 사용 */
-  justify-content: center; /* 수평 중앙 정렬 */
-  align-items: center; /* 수직 중앙 정렬 */
-  height: 100%; /* 부모의 전체 높이를 사용 */
-  font-size: 16px; /* 글자 크기 조정 */
-  padding: 5vh;
+.memo-title {
+  font-weight: 600;
+  font-size: 1.08rem;
+  color: #222;
+  margin-bottom: 0.2rem;
+  font-family: inherit;
 }
+
+.memo-preview {
+  color: #555;
+  font-size: 0.98rem;
+  min-height: 2.2em;
+  font-family: inherit;
+}
+
+.memo-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.92rem;
+  color: #888;
+  font-family: inherit;
+}
+
+.delete-button {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: #e0e6ed;
+  color: #357abd;
+  border: none;
+  border-radius: 8px;
+  padding: 7px 16px;
+  cursor: pointer;
+  font-size: 0.98rem;
+  font-weight: 600;
+  transition: background 0.13s, color 0.13s;
+  font-family: inherit;
+}
+.delete-button:hover {
+  background: #2563eb;
+  color: #fff;
+}
+
 .pagination {
-  display: flex; /* Flexbox 사용 */
-  justify-content: center; /* 수평 중앙 정렬 */
-  align-items: center; /* 수직 중앙 정렬 */
-  margin: 20px 0; /* 위아래 여백 추가 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0 0 0;
+  gap: 8px;
 }
 
 .pagination-button {
-  background-color: #007bff; /* 기본 버튼 배경색 */
-  color: white; /* 버튼 텍스트 색상 */
-  border: none; /* 기본 테두리 제거 */
-  border-radius: 5px; /* 테두리 둥글게 */
-  padding: 10px 15px; /* 버튼 패딩 */
-  margin: 0 5px; /* 버튼 사이 여백 */
-  cursor: pointer; /* 커서 포인터로 변경 */
-  transition: background-color 0.3s ease; /* 배경색 변화 애니메이션 */
+  background: #2563eb;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6em 1.2em;
+  font-weight: 500;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.13s, color 0.13s;
+  font-family: inherit;
 }
-
-.pagination-button {
-  /* 이전 버튼 스타일 */
-  background-color: #007bff; /* 기본 버튼 배경색 */
-}
-
 .pagination-button:hover {
-  background-color: #0056b3; /* 호버 시 버튼 색상 변화 */
-}
-
-.pagination-button:disabled {
-  display: none; /* 비활성화된 버튼을 숨김 */
+  background: #357abd;
 }
 
 .pagination-info {
-  margin: 0 10px; /* 정보 텍스트와 버튼 사이 여백 */
-  font-size: 16px; /* 폰트 크기 */
-  color: #333; /* 텍스트 색상 */
+  font-size: 1em;
+  color: #888;
+  font-family: inherit;
 }
 
-[data-theme="dark"] .pagination-info {
-  margin: 0 10px; /* 정보 텍스트와 버튼 사이 여백 */
-  font-size: 16px; /* 폰트 크기 */
-  color: #ccc; /* 텍스트 색상 */
+.no-results {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 120px;
+  font-size: 1.05em;
+  color: #bbb;
+  font-family: inherit;
+}
+
+@media (max-width: 900px) {
+  .all-memos-section {
+    padding: 1rem;
+  }
+  .memos-grid {
+    gap: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .all-memos-section {
+    padding: 0.5rem;
+  }
+  .memos-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+[data-theme="dark"] .all-memos-section {
+  background: #23272f;
+  color: #f5f5f5;
+  border: 1.5px solid #333;
+}
+[data-theme="dark"] .memo-card {
+  background: #23272f;
+  border: 1.5px solid #333;
+  color: #f5f5f5;
+}
+[data-theme="dark"] .memo-card:hover {
+  background: #2a3a4d;
+  border-color: #76c7c0;
+}
+[data-theme="dark"] .memo-title {
+  color: #fff;
+}
+[data-theme="dark"] .memo-preview {
+  color: #e0e0e0;
+}
+[data-theme="dark"] .memo-meta {
+  color: #bbb;
+}
+[data-theme="dark"] .delete-button {
+  background: #333;
+  color: #76c7c0;
+}
+[data-theme="dark"] .delete-button:hover {
+  background: #76c7c0;
+  color: #23272f;
 }

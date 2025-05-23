@@ -1,149 +1,148 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
 body {
-    width: 100vw;
-    font-family: Arial, sans-serif;
-    display: flex;
-    
-    align-items: center;     /* 수직 중앙 정렬 */
-    min-height: 100vh;       /* 화면 전체 높이를 사용 */
-    background-color: #f5f5f5;
-    
-    display: flex;
-    flex-direction: column; /* 세로 방향 정렬 */
-    margin-top: 80px;
-    justify-content: flex-start; /* 위에서부터 정렬 */
+    font-family: 'Pretendard', 'Noto Sans KR', 'Inter', Arial, sans-serif;
+    background-color: #f7f8fa;
+    color: #222;
+    margin: 0;
+    padding: 0;
     min-height: 100vh;
-    overflow-y: auto; /* 세로 스크롤 허용 */
+    overflow-x: hidden;
+}
+
+*, *::before, *::after {
+    font-family: inherit !important;
+    box-sizing: border-box;
 }
 
 /* 다크 모드 */
 [data-theme="dark"] body {
-    background-color: #444; /* 다크 모드 배경색 */
-    color: #eee; /* 다크 모드 텍스트 색상 */
+    background-color: #23272f;
+    color: #f5f5f5;
 }
 
 html, body {
     height: 100%;
-    margin: 0; /* 기본 여백 제거 */
+    margin: 0;
     padding: 0;
-    overflow-x: hidden; /* 가로 스크롤 방지 */
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    color: #222;
+    margin: 0 0 0.5em 0;
+}
+
+[data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3 {
+    color: #fff;
 }
 
 .App {
-    width: 90%;
+    width: 100%;
     max-width: 900px;
-    margin: 20px auto;
+    margin: 32px auto 0 auto;
 }
 
-h1 {
-    text-align: center;
-    color: #333;
+.card, .memo-form, .memo-display, .all-memos-section, .topic-list-container, .topic-content-container, .user-statistics, .my-info-section, .memo-detail, .topic-content-detail {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border: 1px solid #ececec;
+    padding: 2rem;
+    margin-bottom: 2rem;
+}
+[data-theme="dark"] .card, [data-theme="dark"] .memo-form, [data-theme="dark"] .memo-display, [data-theme="dark"] .all-memos-section, [data-theme="dark"] .topic-list-container, [data-theme="dark"] .topic-content-container, [data-theme="dark"] .user-statistics, [data-theme="dark"] .my-info-section, [data-theme="dark"] .memo-detail, [data-theme="dark"] .topic-content-detail {
+    background: #23272f;
+    border: 1px solid #333;
+    color: #f5f5f5;
 }
 
-.memo-form {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 20px;
-    background-color: #fff;
-    border: 1px solid #ddd;
+input, textarea, select, button {
+    font-family: inherit;
+    font-size: 1rem;
     border-radius: 8px;
-}
-
-.memo-form h2 {
-    margin: 0 0 10px;
-    color: #333;
-}
-
-.memo-form-content {
-    display: flex;
-    flex-direction: column;
-}
-
-.memo-title {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: #f8f8f8;
-    color: #666;
+    border: 1px solid #e0e0e0;
+    outline: none;
+    background: #fafbfc;
+    color: #222;
+    transition: border-color 0.2s, box-shadow 0.2s;
     box-sizing: border-box;
 }
-
-.memo-content {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
-    height: 100px;
-    resize: vertical;
-    box-sizing: border-box;
+input:focus, textarea:focus, select:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px #e3f0fc;
+}
+[data-theme="dark"] input, [data-theme="dark"] textarea, [data-theme="dark"] select {
+    background: #23272f;
+    color: #f5f5f5;
+    border: 1px solid #444;
+}
+[data-theme="dark"] input:focus, [data-theme="dark"] textarea:focus, [data-theme="dark"] select:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px #2a3a4d;
 }
 
-.save-button {
-    background-color: #007bff;
+.save-btn, .save-button, .save-post {
+    background: linear-gradient(90deg, #4a90e2 0%, #357abd 100%);
     color: #fff;
     border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 4px;
+    border-radius: 12px;
+    padding: 0.85em 2em;
+    font-weight: 700;
+    font-size: 1.08em;
     cursor: pointer;
-    transition: background-color 0.3s;
-    align-self: flex-start;
+    box-shadow: 0 2px 12px rgba(74,144,226,0.10);
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.15s;
+    outline: none;
+    letter-spacing: 0.01em;
+    margin-top: 1.2em;
+    margin-bottom: 0.2em;
+    display: inline-block;
+}
+.save-btn:hover, .save-button:hover, .save-post:hover {
+    background: linear-gradient(90deg, #357abd 0%, #4a90e2 100%);
+    color: #fff;
+    box-shadow: 0 6px 24px rgba(74,144,226,0.18);
+    transform: translateY(-2px) scale(1.03);
 }
 
-.save-button:hover {
-    background-color: #0056b3;
-}
-
-.checkmark {
-    color: blue; /* 체크표시 색상 */
-    margin-left: 5px;
-}
-
-.memo-display {
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: #f9f9f9;
-}
-
-/* 기본 라이트 모드 */
-:root {
-    --bg-color: #ffffff;
-    --text-color: #000000;
-    --navbar-bg-color: #f8f9fa;
-    --navbar-text-color: #343a40;
-}
-
-/* 다크 모드 */
-[data-theme="dark"] {
-    --bg-color: #343a40;
-    --text-color: #ffffff;
-    --navbar-bg-color: #222831;
-    --navbar-text-color: #eeeeee;
-}
-
-.navbar {
-    background-color: var(--navbar-bg-color);
-    color: var(--navbar-text-color);
-}
-
-.theme-toggle-button {
-    position: absolute; /* Positioned relative to parent */
-    top: 10px; 
-    right: 10px; 
-    background-color: var(--navbar-text-color);
-    color: var(--navbar-bg-color);
+button, .view-topic-btn, .my-info-edit-button, .my-info-save-button, .my-info-file-select-button, .sync-button, .pagination-button, .login_button, .register_button {
+    background: #4a90e2;
+    color: #fff;
     border: none;
-    margin: 10px;
-    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    padding: 0.75em 1.5em;
+    font-weight: 600;
     cursor: pointer;
-    border-radius: 5px;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: none;
+}
+button:hover, .view-topic-btn:hover, .my-info-edit-button:hover, .my-info-save-button:hover, .my-info-file-select-button:hover, .sync-button:hover, .pagination-button:hover, .login_button:hover, .register_button:hover {
+    background: #357abd;
 }
 
-.theme-toggle-button:hover {
-    opacity: 0.8;   
+::-webkit-scrollbar {
+    width: 8px;
+    background: #f0f0f0;
+}
+::-webkit-scrollbar-thumb {
+    background: #e0e0e0;
+    border-radius: 8px;
+}
+[data-theme="dark"] ::-webkit-scrollbar {
+    background: #23272f;
+}
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: #444;
+}
+
+/* 여백 및 반응형 */
+@media (max-width: 900px) {
+    .App {
+        padding: 0 1rem;
+    }
+    .card, .memo-form, .memo-display, .all-memos-section, .topic-list-container, .topic-content-container, .user-statistics, .my-info-section, .memo-detail, .topic-content-detail {
+        padding: 1rem;
+    }
 }

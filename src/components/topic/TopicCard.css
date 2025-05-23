@@ -1,34 +1,32 @@
 /* topic-card 기본 스타일 */
 .topic-card {
-    background-color: #f9f9f9;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    padding: 12px 15px;
-    /* margin: 10px 0; */
+    background-color: #fff;
+    border: 1.5px solid #e0e6ed;
+    border-radius: 10px;
+    padding: 14px 18px;
     cursor: pointer;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    transition: background 0.13s, border 0.13s;
     box-sizing: border-box;
     display: flex;
-    justify-content: space-between; /* 양쪽 끝으로 배치 */
-    align-items: center; /* 수직 중앙 정렬 */
+    justify-content: space-between;
+    align-items: center;
     height: 80px;
+    font-family: 'Pretendard', 'Noto Sans KR', 'Inter', Arial, sans-serif;
+    box-shadow: none;
 }
 
 /* hover 효과 */
 .topic-card:hover {
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px); /* hover 시 살짝 들어 올림 */
+    background: #f0f4fa;
+    border-color: #2563eb;
 }
 
 /* 토픽 이름 스타일 */
 .topic-name {
-    max-width: 35%;
-    word-wrap: break-word; /* 긴 단어가 줄바꿈되도록 */
-    overflow-wrap: break-word;
-    font-size: 18px;
-    color: #007bff;
-    font-weight: bold;
-    margin-right: 10px; /* 제목과 오른쪽 컨텐츠 사이에 간격 추가 */
+    color: #222;
+    font-size: 1.08rem;
+    font-weight: 600;
+    font-family: inherit;
 }
 
 .topic {
@@ -50,8 +48,14 @@
 
 /* 다크 모드 스타일 */
 [data-theme="dark"] .topic-card {
-    background-color: #333;
-    border: 1px solid #444;
+    background-color: #23272f;
+    border: 1.5px solid #333;
+    color: #f5f5f5;
+}
+
+[data-theme="dark"] .topic-card:hover {
+    background: #2a3a4d;
+    border-color: #76c7c0;
 }
 
 [data-theme="dark"] .topic-card p {
@@ -59,7 +63,7 @@
 }
 
 [data-theme="dark"] .topic-name {
-    color: #66aaff;
+    color: #fff;
 }
 
 [data-theme="dark"] .content-count {

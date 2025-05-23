@@ -1,58 +1,167 @@
-.topic-content-name {
-    font-size: 1.75rem;
-    color: #2a2a2a;
-    margin: 10px 10px;
-}
-
 .topic-content-container {
     position: relative;
-    padding: 20px;
-    width: 80vh;
-    max-width: 800px;
-    margin: 80px auto;
-    background-color: #f7f7f7;
+    padding: 2.5rem 1.5rem;
+    width: 100%;
+    max-width: 900px;
+    margin: 100px auto 0 auto;
+    background: #fff;
     border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border: 1.5px solid #e0e6ed;
+    box-shadow: none;
+    font-family: 'Pretendard', 'Noto Sans KR', 'Inter', Arial, sans-serif;
+}
+
+.topic-content-name {
+    font-size: 1.5rem;
+    color: #222;
+    margin: 0 0 2rem 0;
+    font-weight: 700;
+    text-align: center;
 }
 
 .topic-title-search-input {
-    display: block; /* input 요소가 블록처럼 동작하도록 */
-    width: 90%;
-    max-width: 500px; /* 최대 너비 */
-    padding: 10px 15px;
-    margin: 10px auto; /* 수평 중앙 정렬 */
-    font-size: 16px;
-    border: 1px solid #e0e0e0; /* 기본 테두리 */
-    border-radius: 8px;
-    outline: none;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); /* 입력창 그림자 */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.topic-title-search-input:focus {
-    border-color: #007bff; /* 포커스 시 테두리 색상 */
-    box-shadow: 0px 4px 12px rgba(0, 123, 255, 0.3); /* 포커스 시 그림자 강조 */
-}
-
-[data-theme="dark"] .topic-title-search-input {
     display: block;
-    background-color: #333; /* 다크 모드 배경색 */
-    color: #e0e0e0; /* 다크 모드 텍스트 색상 */
-    border: 1px solid #555; /* 다크 모드 테두리 */
+    width: 100%;
+    max-width: 420px;
+    padding: 12px 16px;
+    margin: 0 auto 1.5rem auto;
+    font-size: 1rem;
+    border: 1.5px solid #e0e6ed;
+    border-radius: 10px;
+    background: #fafbfc;
+    color: #222;
+    box-shadow: none;
+    font-family: inherit;
+}
+.topic-title-search-input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 2px #e3f0fc;
 }
 
-
-[data-theme="dark"] .topic-title-search-input:focus {
-    border-color: #66aaff; /* 다크 모드 포커스 색상 */
-    box-shadow: 0px 4px 12px rgba(102, 170, 255, 0.3); /* 다크 모드 포커스 그림자 */
+.memos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    width: 100%;
+    margin: 0 auto 2rem auto;
 }
 
+.memo-card {
+    position: relative;
+    background: #f7faff;
+    border: 1.5px solid #e0e6ed;
+    border-radius: 14px;
+    padding: 1.3rem 1.1rem 1rem 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    transition: background 0.13s, border 0.13s;
+    cursor: pointer;
+    box-shadow: none;
+    font-family: inherit;
+}
+.memo-card:hover {
+    background: #e3f0fc;
+    border-color: #2563eb;
+}
+.memo-title {
+    font-weight: 600;
+    font-size: 1.08rem;
+    color: #222;
+    margin-bottom: 0.2rem;
+    font-family: inherit;
+}
+.memo-preview {
+    color: #555;
+    font-size: 0.98rem;
+    min-height: 2.2em;
+    font-family: inherit;
+}
+.memo-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.92rem;
+    color: #888;
+    font-family: inherit;
+}
+.delete-button {
+    background: #e0e6ed;
+    color: #357abd;
+    border: none;
+    border-radius: 8px;
+    padding: 7px 16px;
+    cursor: pointer;
+    font-size: 0.98rem;
+    font-weight: 600;
+    transition: background 0.13s, color 0.13s;
+    font-family: inherit;
+}
+.delete-button:hover {
+    background: #2563eb;
+    color: #fff;
+}
+.no-results {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    font-size: 1.05em;
+    color: #bbb;
+    font-family: inherit;
+}
+@media (max-width: 900px) {
+    .topic-content-container {
+        padding: 1rem;
+    }
+    .memos-grid {
+        gap: 14px;
+    }
+}
+@media (max-width: 600px) {
+    .topic-content-container {
+        padding: 0.5rem;
+    }
+    .memos-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+}
 [data-theme="dark"] .topic-content-container {
-    background-color: #444;
-    color: #e0e0e0;
-    border: 1px solid #555;
+    background: #23272f;
+    color: #f5f5f5;
+    border: 1.5px solid #333;
 }
-
 [data-theme="dark"] .topic-content-name {
+    color: #fff;
+}
+[data-theme="dark"] .topic-title-search-input {
+    background: #23272f;
+    color: #f5f5f5;
+    border: 1.5px solid #444;
+}
+[data-theme="dark"] .topic-title-search-input:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 0 2px #2a3a4d;
+}
+[data-theme="dark"] .memo-card {
+    background: #23272f;
+    border: 1.5px solid #333;
+    color: #f5f5f5;
+}
+[data-theme="dark"] .memo-card:hover {
+    background: #2a3a4d;
+    border-color: #76c7c0;
+}
+[data-theme="dark"] .memo-title {
+    color: #fff;
+}
+[data-theme="dark"] .memo-preview {
     color: #e0e0e0;
+}
+[data-theme="dark"] .memo-meta {
+    color: #bbb;
+}
+[data-theme="dark"] .delete-button:hover {
+    background: #76c7c0;
+    color: #23272f;
 }
