@@ -176,37 +176,6 @@
     color: #76c7c0;
 }
 
-@media (max-width: 927px) {
-    .user-note-section {
-        max-height: 420px;
-        min-height: 260px;
-        padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-    }
-    .note-editor-wrapper {
-        max-height: 220px;
-    }
-    .note-content, #editor {
-        max-height: 200px;
-    }
-}
-
-@media (max-width: 768px) {
-    .user-note-section {
-        max-height: 320px;
-        min-height: 180px;
-        padding: 0.5rem;
-        border-radius: 8px;
-        margin: 0 0.5rem;
-    }
-    .note-editor-wrapper {
-        max-height: 120px;
-    }
-    .note-content, #editor {
-        max-height: 100px;
-    }
-}
-
-
 /* 책갈피 */
 .note-tabs-row {
     width: 100%;
