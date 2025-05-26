@@ -87,14 +87,12 @@ const MemoApp = () => {
                     currentYear={currentYear}
                 />
             </div>
-            <div className="user-note-section">
-                <UserNote showNotification={showNotification} />
-                {notification && (
-                    <div className={`saved-notification show`}>
-                        {notification}
-                    </div>
-                )}
-            </div>
+            <UserNote showNotification={showNotification} />
+            {notification && (
+                <div className={`saved-notification show`}>
+                    {notification}
+                </div>
+            )}
         </div>
     );
 };
