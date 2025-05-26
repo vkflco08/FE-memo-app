@@ -30,7 +30,6 @@
 
 .memo-section, .user-note-section {
     flex: 1 1 0;
-    max-width: 480px;
     width: 100%;
     /* height: 100%; */
     background: #fff;
@@ -105,7 +104,6 @@
     }
     .memo-section, .user-note-section {
         flex: 1 1 48%;
-        max-width: 35vw;
         box-sizing: border-box;
     }
 }
@@ -131,32 +129,5 @@
     .memo-section, .user-note-section {
         font-size: 15px;
         padding: 1rem 0.5rem;
-    }
-}
-
-@media (max-width: 600px) {
-    .memo-app-container {
-        flex-direction: column;
-        gap: 8px;
-        padding: 0.2rem;
-        min-width: 0;
-        width: 100%;
-        overflow-x: auto;
-    }
-    .memo-section, .user-note-section {
-        min-width: 0;
-        width: 100%;
-        overflow-x: auto;
-    }
-}
-
-@media (max-width: 480px) {
-    .memo-app-container {
-        padding: 0.5rem;
-        gap: 10px;
-    }
-    .memo-section, .user-note-section {
-        padding: 0.5rem;
-        font-size: 14px;
     }
 }
